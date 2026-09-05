@@ -1,0 +1,16 @@
+{
+  "hero": "media/renders/hero.png",
+  "chapters": [
+    "docs/overview.md",
+    "docs/parts.md",
+    "docs/printing.md",
+    "cad/mechanical.md",
+    "electronics/architecture.md",
+    "docs/wiring_schedule.md",
+    "software/README.md",
+    "docs/validation_build.md",
+    "docs/media.md",
+    "docs/digital_validation.md"
+  ],
+  "append_pdfs": ["deliverables/LUMA_Engineering_Drawings.pdf"]
+}

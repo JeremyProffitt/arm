@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+media/.tools/
+software/.pio/
+software/display_firmware/.pio/
+software/vendor/
+cad/references/*.zip
+references/
+deliverables/*.zip
+deliverables/LUMA_Manual_Text.pdf

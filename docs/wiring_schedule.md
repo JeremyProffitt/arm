@@ -1,0 +1,57 @@
+# Point-to-point wiring schedule
+
+Use these connection names together with the electrical chapter. Physical Raspberry Pi header numbers and BCM GPIO numbers are explicitly distinguished. Disconnect the supplies while changing wiring.
+
+| Net | From → to | Cable / connection detail |
+| --- | --- | --- |
+| 3V3_LOGIC | Raspberry Pi4: physical1 3V3 → Mux5626: VIN | STEMMAQT upstream red. All I2C pullups stay3.3V |
+| GND_LOGIC | Raspberry Pi4: physical6 GND → Mux5626: GND | STEMMAQT upstream black. Connect DCSTARground also |
+| I2C_SDA | Raspberry Pi4: physical3 BCM2 → Mux5626: SDA | STEMMAQT upstream blue. I2C bus1 at100kHz |
+| I2C_SCL | Raspberry Pi4: physical5 BCM3 → Mux5626: SCL | STEMMAQT upstream yellow. I2C bus1 at100kHz |
+| TOF_FRONT | Mux5626: port0 → VL53L1X front: STEMMAQT4pin | 4conductor JSTSH. Address0x29 isolated on channel0 |
+| TOF_LEFT | Mux5626: port1 → VL53L1X left: STEMMAQT4pin | 4conductor JSTSH. Left as seen by lamp facing user |
+| TOF_RIGHT | Mux5626: port2 → VL53L1X right: STEMMAQT4pin | 4conductor JSTSH. No sensor shares mux channel |
+| TOF_REAR | Mux5626: port3 → VL53L1X rear: STEMMAQT4pin | 4conductor JSTSH. Leave sensor optical aperture clear |
+| TOF_DOWN | Mux5626: port4 → VL53L1X down: STEMMAQT4pin | 4conductor JSTSH. Nominal desk range must remain above100mm |
+| RGB_DATA3V3 | Raspberry Pi4: physical19 BCM10 MOSI → 74AHCT125: DIP2 1A | 26AWG. Do not connect SPI clock to ring |
+| RGB_DATA5V | 74AHCT125: DIP3 1Y → RGB ring quadrant1: DIN via330ohm | 26AWG. Resistor at first ring input |
+| RGB_CHAIN1 | RGB quadrant1: DOUT → RGB quadrant2: DIN | solder jumper. Connect common5V andGND at all quadrants |
+| RGB_CHAIN2 | RGB quadrant2: DOUT → RGB quadrant3: DIN | solder jumper. Mechanical backing supports solder joints |
+| RGB_CHAIN3 | RGB quadrant3: DOUT → RGB quadrant4: DIN | solder jumper. Do not connect lastDOUT back to firstDIN |
+| WHITE_DATA3V3 | Raspberry Pi4: physical12 BCM18 PWM0 → 74AHCT125: DIP5 2A | 26AWG. Disable onboard analog audio |
+| WHITE_DATA5V | 74AHCT125: DIP6 2Y → 24RGBW inner ring: DIN via330ohm | 26AWG. SeparateGRBW data stream |
+| SHIFT_ENABLE | DCstar: GND → 74AHCT125: DIP1 /1OE andDIP4 /2OE | 26AWG. Active outputs; tie both low |
+| SHIFT_UNUSED | 5VLED: +5V → 74AHCT125: DIP10 /3OE andDIP13 /4OE | 26AWG. Unused outputs disabled |
+| SHIFT_UNUSED_INPUT | DCstar: GND → 74AHCT125: DIP9 3A andDIP12 4A | 26AWG. UnusedDIP8 andDIP11 outputs unconnected |
+| SHIFT_SUPPLY | 5VLED: +5V → 74AHCT125: DIP14 VCC | 24AWG. 100nF betweenDIP14 andDIP7 |
+| SHIFT_GROUND | DCstar: GND → 74AHCT125: DIP7 GND | 24AWG. Shared reference toPi andboth rings |
+| PI_GROUND | Raspberry Pi4: physical9 GND → DCstar: GND | 22AWG. Common ground only; never tie5VLED toPi5V |
+| PI_POWER | Pi official supply: USB-C5.1V3A → Raspberry Pi4: USB-Cpower | factory cable. Independent from motor12V |
+| FACE_USB | Raspberry Pi4: USB-Aport1 → DisplaySKU28514: USB-C | data cable. Do not add a second5V power feed |
+| SERVO_USB | Raspberry Pi4: USB-Aport2 → BusAdapterA: USB | data cable. ST mode;USB bridge mode |
+| AUDIO_USB | Raspberry Pi4: USB-Aport3 → USB speaker3369: USB | captive cable. LimitUSB total current toPi specification |
+| DC_INPUT | MeanWellGST220A12: R7B+12V → Main15Afuse: input | 16AWG. Use correctparallel contacts from supply drawing |
+| DC_MAIN | Main15Afuse: output → DC12Vdistribution: +12V | 16AWG. Supply remains outside printed enclosure |
+| DC_RETURN | MeanWellGST220A12: R7Breturn → DCstar: GND | 16AWG. All high-current returns star here |
+| STOP_COIL_FEED | DC12Vdistribution: +12V → 0.5Afuse: input | 22AWG. Coil branch |
+| STOP_NC1 | 0.5Afuse: output → StopNC1: COM | 22AWG. NoPiGPIO in this branch |
+| STOP_COIL_PLUS | StopNC1: NC → Relay: coilpositive | 22AWG. Diodecathode stripe here |
+| STOP_COIL_MINUS | Relay: coilnegative → DCstar: GND | 22AWG. Diodeanode here |
+| MOTOR_RELAY_IN | DC12Vdistribution: +12V → Relay: COM highcurrent | 16AWG. NOcontact>=15A12VDC |
+| MOTOR_RELAY_OUT | Relay: NO highcurrent → Servo4way fusedstar: input | 16AWG. StopopensallmotorV+independentofsoftware |
+| SERVO_POWER1 | Servo3Afuse1: output → YawservoID1: V+ | 18AWG. Separatefeed not powered through adapter |
+| SERVO_POWER2 | Servo3Afuse2: output → ShoulderservoID2: V+ | 18AWG. Separatefeed |
+| SERVO_POWER3 | Servo3Afuse3: output → ElbowservoID3: V+ | 18AWG. Separatefeed |
+| SERVO_POWER4 | Servo3Afuse4: output → WristservoID4: V+ | 18AWG. Separatefeed |
+| SERVO_GROUNDS | Allfourservos: GND → DCstar: GND | 18AWG. One return per servo |
+| ADAPTER_POWER | DC12Vdistribution: +12V via1Afuse → BusAdapterA: DC5.5x2.1mm positive | 22AWG. Adapterpoweronly;detachV+ fromdataharness |
+| ADAPTER_GROUND | BusAdapterA: DCnegative/GND → DCstar: GND | 22AWG. ReferenceforDATA |
+| SERVO_DATA | BusAdapterA: STDATA → Servos1-4: DATA daisy-chain | 26AWG. Preservegroundreference;do not bridge separateV+ feeds |
+| STOP_SENSE | Raspberry Pi4: physical13 BCM27 → StopNC2: COM | 26AWG. External10kohm toPi3.3V |
+| STOP_SENSE_RETURN | StopNC2: NC → Raspberry Pi4: physical14 GND | 26AWG. Opencontact orbrokenwire readsstop |
+| BUCK_INPUT | DC12Vdistribution: +12V via2Afuse → PololuD24V50F5: VIN | 22AWG. ENleftunconnected |
+| BUCK_GND | PololuD24V50F5: GND → DCstar: GND | 22AWG. Shortreturn |
+| LED_FUSED | PololuD24V50F5: VOUT5V → 3Afuse: input | 22AWG. Verify5VbeforeconnectingLEDs |
+| LED_RGB_POWER | 3Afuse: output5V → Outer60RGB: 5V atoppositequadrants | 22AWG. 1000uF10Vcap at ring |
+| LED_WHITE_POWER | 3Afuse: output5V → Inner24RGBW: 5V | 22AWG. 1000uF10Vcap at ring |
+| LED_RETURNS | Bothrings: GND → DCstar: GND | 22AWG. KeepLEDreturnseparatefromI2Creturnuntilstar |

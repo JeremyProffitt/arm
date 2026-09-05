@@ -1,0 +1,36 @@
+ref,quantity,manufacturer,model,description,critical_spec,verification,source,budget_usd_each
+M01,1,Local metal supplier,Custom ballast disc,Steel ballast plate,"Mild steel diameter180 thickness6 mm; 4 holes diameter4.4 at XY(+/-45,+/-35); 4 holes diameter3.4 at XY(+/-26,-36/-8); deburr; approx1.19kg",Custom drawing geometry only,https://www.onlinemetals.com/,25
+M02,1,Generic,6808-2RS,Yaw support bearing,"40mm bore x52mm OD x7mm width; sealed deep groove",Measure fit coupon then ream printed seat as needed,https://www.skf.com/group/products/rolling-bearings/ball-bearings/deep-groove-ball-bearings,12
+M03,4,Generic,M4x25,Base and tray bolts,"M4 x25 socket head; steel plate6 + floor3 + spacer5 + tray3",Nominal stack specified,,0.25
+M04,4,Generic,M4x5 spacer,Tray standoffs,"Metal spacer5mm length; 4.3mm bore; OD8 minimum",Do not substitute compressible foam,,0.4
+M05,4,Generic,M4 nut,M4 lock nuts,ISO metric nyloc,, ,0.12
+M06,8,Generic,M4 washer,M4 load spreading washers,OD12 minimum,, ,0.06
+M07,4,Generic,M3x16,Yaw cradle through bolts,"Through printed cradle3 steel6 and base3; nuts below base; tray has7mm head access",Check underside clearance to desk,,0.16
+M08,2,Generic,M3x45,Yaw rear body clamp bolts,"Through bottom3 + body35 + keeper2.6; do not overtighten case",Body clamp avoids undocumented case threads,,0.3
+M09,2,Generic,M3x50,Shoulder clamp bolts,Clamp through44mm tower width plus nuts,, ,0.3
+M10,4,Generic,M3x16,Shoulder foot bolts,6mm tower foot plus6mm platform plus nuts,, ,0.16
+M11,8,Generic,M3x60,Arm rail cross bolts,"5+44+5mm stack plus nut; 4 per arm; include4 cassette ear positions",All threads clear rotating hardware,,0.4
+M12,24,Generic,M3x10 nominal,Pitch horn attachment screws,"Nominal M3; 5mm rail +3.3mm spacer leaves1.7mm horn engagement; confirm vendor horn thread",Measure purchased horn thread and screw bottoming before power,https://www.waveshare.net/wiki/ST3215_Servo,0.15
+M13,4,Generic,M3x6 nominal,Yaw horn attachment screws,"3mm web plus1mm washer leaves2mm engagement; confirm vendor horn thread",Do not allow tips to contact servo case,https://www.waveshare.net/wiki/ST3215_Servo,0.15
+M14,6,Generic,M3x12,Base lid screws,Into2.8mm plastic-thread-forming printed pilots,, ,0.15
+M15,4,Generic,M3x12,Head yoke screws,"6mm fork mounting face +3mm shell floor; nuts on inside",Check rear boss screw clearance,,0.15
+M16,8,Generic,M3x10,Outer bezel screws,"4mm bezel +1mm shim;2.8mm plastic-thread-forming pilot",Tighten evenly to avoid diffuser distortion,,0.15
+M17,4,Generic,M3x12,Central face screws,"4mm plate +1mm shim;2.8mm plastic-thread-forming pilot",Keep flange captured with0.2mm clearance,,0.15
+M18,4,Generic,M3x10,White ring carrier screws,"2mm carrier on dedicated radius45 bosses at z32.5",No shared LCD post intersections,,0.15
+M19,4,Generic,M3x25,LCD cradle and retaining plate screws,"3mm retainer +15mm cradle; thread into head pillar at z14",Use foam only on PCB edges; avoid display glass pressure,,0.2
+M20,16,Generic,M3x1 shim,Precision axial shims,"M3 bore; thickness1mm; 12 underface/bezel plus4 yawhorn washers",Thickness controls axial stack,,0.12
+M21,10,Generic,M3x10,Sensor pod attachment bolts,2 per pod through shell or frontplate,, ,0.15
+M22,10,Generic,M2x14,Sensor edge frame screws,2 per pod; pilot2.2 through holes; nuts,, ,0.15
+M23,10,Generic,M2 nut,Sensor retainer nuts,ISO metric M2,, ,0.08
+M24,30,Generic,M3 nut,General M3 nuts,Include spare quantities for clamps sensorpods and platform,, ,0.1
+M25,50,Generic,M3 washer,General M3 flat washers,Nominal0.5mm; not replacement for1mm axial shims,, ,0.05
+M26,4,Generic,M2.5x6,Raspberry Pi fasteners,"Pi4 four mounting holes; printed standoffs may be tappedM2.5",Do not force screws against board components,,0.12
+M27,4,Generic,Rubber feet,Adhesive anti slip feet,"20mm diameter x5mm high minimum; place radius90",Provides underside fastener clearance,,0.4
+M28,1,Generic,Translucent PETG,Frosted optical printing filament,"Natural/translucent; approximately60g including trials; solid1.2mm optical skin",Sand600-1000grit and test diffusion,,20
+M29,1,Generic,PETG,Structural filament,"Approx1kg roll; actual slicer mass varies;6 walls on arm rails",Do not substitute brittle resin on structural joints,,22
+M30,1,Generic,Neutral cure silicone,Small adhesive tube,"3 small removable dots for inner diffuser and edgefoam; electronics compatible",Do not cover ToF optical aperture,,6
+M31,1,Generic,Thin PCB foam,Closed cell foam tape,"0.5 and1mm thickness; LCD edge preload only",Set LCD stack with measured sample,,4
+M32,1,Generic,LED retaining tape,Electronics compatible thin adhesive strips,Attach LED ring PCB on support posts without covering LED optics,, ,3
+M33,1,Generic,Desk clamp,Optional commercial padded desk clamp,"Use only if assembly reach/mass exceeds validated stable envelope; not a printed load bearing clamp",Clamp base rim without crushing printed walls,,12
+M34,12,Generic,M2.5x12,Optional harness clip screws,For6 printed cable saddles; use selftapped pilots or cableties,, ,0.12
+M35,10,Generic,Soft closed-cell foam strip,Required ToF edge preload strips,"18x2x6mm each; compress gently to5.4mm between PCB edge and retaining frame;2 per sensor",Keep clear of centered sensor optics and side QT connectors,,0.2

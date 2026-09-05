@@ -1,0 +1,37 @@
+ref,quantity,manufacturer,model,description,critical_spec,verification,source,budget_usd_each
+E01,1,Raspberry Pi,Raspberry Pi 4 Model B 4GB,Master controller,40-pin GPIO and four USB ports,Vendor documented,https://www.raspberrypi.com/products/raspberry-pi-4-model-b/,60
+E02,1,Raspberry Pi,15W USB-C Power Supply,Separate Pi supply,5.1V 3A USB-C,Vendor documented,https://www.raspberrypi.com/products/type-c-power-supply/,12
+E03,1,Reputable flash vendor,32GB or larger microSD A1,Operating system card,High endurance preferred,Specification selection,,12
+E04,1,Waveshare,ESP32-S3-Touch-LCD-1.85 SKU28514,Central face display,55x55mm;360x360 ST77916 QSPI;USB-C;no B/C suffix,Vendor documented,https://docs.waveshare.com/ESP32-S3-Touch-LCD-1.85,35
+E05,5,Adafruit,3967 VL53L1X STEMMA QT,Five interaction ranging sensors,25.5x17.5x4.6mm;I2C0x29,Vendor documented,https://www.adafruit.com/product/3967,14.95
+E06,1,Adafruit,5626 PCA9548 STEMMA QT,Mux for five same-address sensors,TCA9548A-compatible;40.6x20.2x4.8mm;0x70,Vendor documented,https://www.adafruit.com/product/5626,6.95
+E07,5,Adafruit,STEMMA QT JST-SH4 cable,One separate cable per sensor,Length selected to assembled routing;100-300mm nominal,Measure route before buying,https://www.adafruit.com/category/619,2
+E08,1,Adafruit,STEMMA QT to female header cable,Pi to mux upstream connector,3.3V logic only,Specification selection,https://www.adafruit.com/category/619,2
+E09,4,Adafruit,1768 quarter NeoPixel60 ring,Outer RGB emotion halo,15RGB per quadrant;four form OD157.5mm ID144.8mm ring,Vendor documented,https://www.adafruit.com/product/1768,9.95
+E10,1,Adafruit,2862 NeoPixel24 RGBW natural white,Inner white lamp ring,24RGBW;OD65.5mm;only W channel used;4500K nominal,Vendor documented,https://www.adafruit.com/product/2862,24.95
+E11,1,Adafruit,1787 74AHCT125 DIP14,Two data level shifters,5V VCC;3.3V logic accepted;AHCT required,Vendor documented,https://www.adafruit.com/product/1787,1.50
+E12,2,Generic,330ohm 0.25W resistor,LED input series resistors,One per independent data line,Design choice,,0.10
+E13,2,Generic,1000uF 10V electrolytic,LED ring supply reservoir,Observe polarity;one each ring,Design choice,,1
+E14,1,Generic,100nF ceramic,74AHCT125 decoupling,Across DIP14 and DIP7 at socket,Design choice,,0.10
+E15,1,Pololu,D24V50F5 item2851,LED5V buck converter,5V5A typical thermal-limited;17.8x20.3x8.8mm,Vendor documented,https://www.pololu.com/product/2851,32.95
+E16,4,Waveshare,ST3215 30kg.cm@12V,Four joint bus servos,12V version;4096ticks/rev;2.7A stall each;1Mbps default,Vendor documented,https://www.waveshare.com/product/modules/st3215-servo.htm,22
+E17,1,Waveshare,Bus Servo Adapter A SKU25514,USB to TTL half-duplex bus adapter,ST selected;USB mode;separate low-current12V branch,Vendor documented,https://docs.waveshare.com/Bus_Servo_Adapter_A,10
+E18,1,Mean Well,GST220A12-R7B,External enclosed motor/LED supply,12V15A model;R7B powerDIN;keep outside printed enclosure,Vendor documented,https://www.meanwell.com/Upload/PDF/GST220A/GST220A-SPEC.PDF,95
+E19,1,Generic,Matching R7B powerDIN harness,DC supply breakout,Correct polarity;all specified parallel contacts;15A aggregate rated,Must match selected supply connector drawing,,15
+E20,1,Generic,IEC C13 mains cord,External supply cord,Local approved cord;earth conductor intact,Specification selection,,7
+E21,1,Generic,Latching mushroom stop two NC contacts,Motor stop plus isolated Pi sense,NC1 interrupts12V relay coil;NC2 connects BCM27 to GND,Specify contact blocks before purchase,,15
+E22,1,Generic,12VDC coil relay with30A DC NO contact and socket,Hardware motor supply disconnect,Coil<=200mA;NO contacts>=15A at12VDC;socket16AWG,Specify actual DC rating before purchase,,12
+E23,1,Generic,1N4007 diode,Relay coil flyback,Stripe/cathode to coil positive,Design choice,,0.10
+E24,1,Generic,15A DC fuse and holder,Main12V input branch,Holder and connector rated>=15A,Design choice,,3
+E25,4,Generic,3A time-delay DC fuse and holder,Individual servoV+ feeds,18AWG star feeds;one fuse per servo,Design choice,,3
+E26,1,Generic,2A DC fuse and holder,Buck12V input branch,LED firmware capped20percent,Design choice,,3
+E27,1,Generic,1A DC fuse and holder,Bus adapter power branch,Do not run servo group current through adapter jack,Design choice,,3
+E28,1,Generic,0.5A DC fuse and holder,Relay coil branch,NC1 switches coil only,Design choice,,3
+E29,1,Generic,3A DC fuse and holder,5V LED output branch,ProtectsLED18-22AWG harness,Design choice,,3
+E30,1,Adafruit,3369 mini USB speaker,Spoken Hi,USB audio;84x43x32mm;73.6g;keep volume modest,Vendor documented,https://www.adafruit.com/product/3369,12.50
+E31,1,Generic,USB-A to right-angle USB-C data cable,Pi to display,Flexible cable;strain relief;15mm rear plug envelope assumed,Measure selected cable,,7
+E32,1,Generic,USB data cable matching adapter,Pi to bus adapter,Use actual adapter USB connector type,Measure selected revision,,5
+E33,1,Generic,16AWG /18AWG silicone wire and rated distribution terminals,Power harness,16AWG trunk;18AWG motor branches;22AWGLED branches,Lengths from routing,,20
+E34,1,Generic,Small perfboard and DIP14 socket,Level shifter assembly,Insulate underside;strain relief all wires,Design choice,,5
+E35,1,Generic,Pi4 heatsink and ventilation hardware,Thermal management,Check CPU temperature after assembled operation,Specification selection,,7
+E36,1,Generic,10kohm resistor,External E-stop sense pullup,BCM27 to3.3V;open NC2 means asserted,Design choice,,0.10

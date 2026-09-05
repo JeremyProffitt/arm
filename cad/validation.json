@@ -1,0 +1,731 @@
+[
+  {
+    "id": "base_tub",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -108.0,
+        -108.0,
+        0.0
+      ],
+      [
+        108.0,
+        108.0,
+        50.0
+      ]
+    ],
+    "size_mm": [
+      216.0,
+      216.0,
+      50.0
+    ],
+    "volume_cm3": 243.869,
+    "triangles": 9040,
+    "fits_220_bed": true
+  },
+  {
+    "id": "base_lid",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -108.0,
+        -108.0,
+        0.0
+      ],
+      [
+        108.0,
+        108.0,
+        14.0
+      ]
+    ],
+    "size_mm": [
+      216.0,
+      216.0,
+      14.0
+    ],
+    "volume_cm3": 181.508,
+    "triangles": 4832,
+    "fits_220_bed": true
+  },
+  {
+    "id": "electronics_tray",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -84.5,
+        -45.0,
+        0.0
+      ],
+      [
+        83.0,
+        45.0,
+        9.0
+      ]
+    ],
+    "size_mm": [
+      167.5,
+      90.0,
+      9.0
+    ],
+    "volume_cm3": 35.986,
+    "triangles": 7600,
+    "fits_220_bed": true
+  },
+  {
+    "id": "yaw_mount",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -32.0,
+        -45.0,
+        0.0
+      ],
+      [
+        32.0,
+        1.0,
+        38.0
+      ]
+    ],
+    "size_mm": [
+      64.0,
+      46.0,
+      38.0
+    ],
+    "volume_cm3": 15.048,
+    "triangles": 2972,
+    "fits_220_bed": true
+  },
+  {
+    "id": "yaw_cap",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -23.5,
+        -38.0,
+        0.0
+      ],
+      [
+        23.5,
+        -22.0,
+        2.6
+      ]
+    ],
+    "size_mm": [
+      47.0,
+      16.0,
+      2.6
+    ],
+    "volume_cm3": 1.888,
+    "triangles": 1172,
+    "fits_220_bed": true
+  },
+  {
+    "id": "turntable",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -41.0,
+        -41.0,
+        0.0
+      ],
+      [
+        41.0,
+        41.0,
+        20.2
+      ]
+    ],
+    "size_mm": [
+      82.0,
+      82.0,
+      20.2
+    ],
+    "volume_cm3": 42.319,
+    "triangles": 5024,
+    "fits_220_bed": true
+  },
+  {
+    "id": "shoulder_tower",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -32.0,
+        -25.0,
+        0.0
+      ],
+      [
+        32.0,
+        25.0,
+        34.0
+      ]
+    ],
+    "size_mm": [
+      64.0,
+      50.0,
+      34.0
+    ],
+    "volume_cm3": 49.04,
+    "triangles": 2764,
+    "fits_220_bed": true
+  },
+  {
+    "id": "shoulder_cap",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -23.0,
+        -14.0,
+        0.0
+      ],
+      [
+        23.0,
+        14.0,
+        4.0
+      ]
+    ],
+    "size_mm": [
+      46.0,
+      28.0,
+      4.0
+    ],
+    "volume_cm3": 5.048,
+    "triangles": 1172,
+    "fits_220_bed": true
+  },
+  {
+    "id": "upper_rail",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -15.0,
+        -23.0,
+        0.0
+      ],
+      [
+        122.5,
+        23.0,
+        5.0
+      ]
+    ],
+    "size_mm": [
+      137.5,
+      46.0,
+      5.0
+    ],
+    "volume_cm3": 19.784,
+    "triangles": 4112,
+    "fits_220_bed": true
+  },
+  {
+    "id": "forearm_rail",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -15.0,
+        -23.0,
+        0.0
+      ],
+      [
+        102.5,
+        23.0,
+        5.0
+      ]
+    ],
+    "size_mm": [
+      117.5,
+      46.0,
+      5.0
+    ],
+    "volume_cm3": 17.584,
+    "triangles": 4112,
+    "fits_220_bed": true
+  },
+  {
+    "id": "servo_cassette",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -39.4,
+        -23.0,
+        0.0
+      ],
+      [
+        -13.4,
+        23.0,
+        39.8
+      ]
+    ],
+    "size_mm": [
+      26.0,
+      46.0,
+      39.8
+    ],
+    "volume_cm3": 25.323,
+    "triangles": 1208,
+    "fits_220_bed": true
+  },
+  {
+    "id": "cassette_cap",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -39.4,
+        -23.0,
+        0.0
+      ],
+      [
+        -13.4,
+        23.0,
+        4.2
+      ]
+    ],
+    "size_mm": [
+      26.0,
+      46.0,
+      4.2
+    ],
+    "volume_cm3": 4.914,
+    "triangles": 1172,
+    "fits_220_bed": true
+  },
+  {
+    "id": "cross_spacer",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -6.0,
+        -6.0,
+        0.0
+      ],
+      [
+        6.0,
+        6.0,
+        44.0
+      ]
+    ],
+    "size_mm": [
+      12.0,
+      12.0,
+      44.0
+    ],
+    "volume_cm3": 4.574,
+    "triangles": 768,
+    "fits_220_bed": true
+  },
+  {
+    "id": "horn_spacer",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -10.0,
+        -10.0,
+        0.0
+      ],
+      [
+        10.0,
+        10.0,
+        3.3
+      ]
+    ],
+    "size_mm": [
+      20.0,
+      20.0,
+      3.3
+    ],
+    "volume_cm3": 0.814,
+    "triangles": 2320,
+    "fits_220_bed": true
+  },
+  {
+    "id": "head_yoke",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -33.0,
+        -22.0,
+        0.0
+      ],
+      [
+        33.0,
+        22.0,
+        36.0
+      ]
+    ],
+    "size_mm": [
+      66.0,
+      44.0,
+      36.0
+    ],
+    "volume_cm3": 23.319,
+    "triangles": 5980,
+    "fits_220_bed": true
+  },
+  {
+    "id": "head_shell",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -88.0,
+        -88.0,
+        0.0
+      ],
+      [
+        88.0,
+        88.0,
+        36.0
+      ]
+    ],
+    "size_mm": [
+      176.0,
+      176.0,
+      36.0
+    ],
+    "volume_cm3": 168.483,
+    "triangles": 33324,
+    "fits_220_bed": true
+  },
+  {
+    "id": "outer_bezel",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -88.0,
+        -88.0,
+        0.0
+      ],
+      [
+        88.0,
+        88.0,
+        7.0
+      ]
+    ],
+    "size_mm": [
+      176.0,
+      176.0,
+      7.0
+    ],
+    "volume_cm3": 18.889,
+    "triangles": 5088,
+    "fits_220_bed": true
+  },
+  {
+    "id": "face_center",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -71.3,
+        -71.3,
+        0.0
+      ],
+      [
+        71.3,
+        71.3,
+        4.0
+      ]
+    ],
+    "size_mm": [
+      142.6,
+      142.6,
+      4.0
+    ],
+    "volume_cm3": 47.741,
+    "triangles": 3868,
+    "fits_220_bed": true
+  },
+  {
+    "id": "white_carrier",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -51.0,
+        -51.0,
+        0.0
+      ],
+      [
+        51.0,
+        51.0,
+        2.0
+      ]
+    ],
+    "size_mm": [
+      102.0,
+      102.0,
+      2.0
+    ],
+    "volume_cm3": 4.443,
+    "triangles": 3072,
+    "fits_220_bed": true
+  },
+  {
+    "id": "lcd_cradle",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -38.5,
+        -38.5,
+        0.0
+      ],
+      [
+        38.5,
+        38.5,
+        15.0
+      ]
+    ],
+    "size_mm": [
+      77.0,
+      77.0,
+      15.0
+    ],
+    "volume_cm3": 19.678,
+    "triangles": 3572,
+    "fits_220_bed": true
+  },
+  {
+    "id": "lcd_retainer",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -38.5,
+        -38.5,
+        0.0
+      ],
+      [
+        38.5,
+        38.5,
+        3.0
+      ]
+    ],
+    "size_mm": [
+      77.0,
+      77.0,
+      3.0
+    ],
+    "volume_cm3": 6.118,
+    "triangles": 2336,
+    "fits_220_bed": true
+  },
+  {
+    "id": "outer_diffuser",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -82.5,
+        -82.5,
+        0.0
+      ],
+      [
+        82.5,
+        82.5,
+        6.2
+      ]
+    ],
+    "size_mm": [
+      165.0,
+      165.0,
+      6.2
+    ],
+    "volume_cm3": 9.739,
+    "triangles": 3584,
+    "fits_220_bed": true
+  },
+  {
+    "id": "inner_diffuser",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -34.0,
+        -34.0,
+        0.0
+      ],
+      [
+        34.0,
+        34.0,
+        5.9
+      ]
+    ],
+    "size_mm": [
+      68.0,
+      68.0,
+      5.9
+    ],
+    "volume_cm3": 3.909,
+    "triangles": 1920,
+    "fits_220_bed": true
+  },
+  {
+    "id": "sensor_pod",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -20.0,
+        -15.0,
+        0.0
+      ],
+      [
+        20.0,
+        15.0,
+        10.0
+      ]
+    ],
+    "size_mm": [
+      40.0,
+      30.0,
+      10.0
+    ],
+    "volume_cm3": 4.405,
+    "triangles": 2032,
+    "fits_220_bed": true
+  },
+  {
+    "id": "sensor_retainer",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -16.0,
+        -12.0,
+        0.0
+      ],
+      [
+        16.0,
+        12.0,
+        2.0
+      ]
+    ],
+    "size_mm": [
+      32.0,
+      24.0,
+      2.0
+    ],
+    "volume_cm3": 0.665,
+    "triangles": 1576,
+    "fits_220_bed": true
+  },
+  {
+    "id": "cable_clip",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -9.0,
+        -6.0,
+        0.0
+      ],
+      [
+        9.0,
+        6.0,
+        8.0
+      ]
+    ],
+    "size_mm": [
+      18.0,
+      12.0,
+      8.0
+    ],
+    "volume_cm3": 1.248,
+    "triangles": 1560,
+    "fits_220_bed": true
+  },
+  {
+    "id": "fit_coupon",
+    "watertight": true,
+    "winding_consistent": true,
+    "positive_volume": true,
+    "bodies": 1,
+    "bounds_mm": [
+      [
+        -34.0,
+        -15.0,
+        0.0
+      ],
+      [
+        34.0,
+        38.5,
+        5.0
+      ]
+    ],
+    "size_mm": [
+      68.0,
+      53.5,
+      5.0
+    ],
+    "volume_cm3": 6.911,
+    "triangles": 2728,
+    "fits_220_bed": true
+  }
+]

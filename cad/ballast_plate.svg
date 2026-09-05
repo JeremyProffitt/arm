@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250mm" height="230mm" viewBox="0 0 250 230">
+ <title>LUMA M01 steel ballast plate drill template, all dimensions in millimetres</title>
+ <rect width="250" height="230" fill="white"/>
+ <g stroke="#152e34" stroke-width="0.3" fill="none">
+  <circle cx="100" cy="105" r="90"/>
+  <circle cx="55" cy="70" r="2.2"/><circle cx="145" cy="70" r="2.2"/>
+  <circle cx="55" cy="140" r="2.2"/><circle cx="145" cy="140" r="2.2"/>
+  <circle cx="74" cy="141" r="1.7"/><circle cx="126" cy="141" r="1.7"/>
+  <circle cx="74" cy="113" r="1.7"/><circle cx="126" cy="113" r="1.7"/>
+  <path stroke-dasharray="4 1 1 1" stroke="#8a9fa2" d="M5 105H195M100 10V200"/>
+  <path d="M10 198V211M190 198V211M10 206H190M10 206l3 -1M10 206l3 1M190 206l-3 -1M190 206l-3 1"/>
+  <path d="M145 70L195 49H241M126 113L194 123H243"/>
+ </g>
+ <g font-family="Arial,sans-serif" fill="#152e34">
+  <text x="10" y="7" font-size="4.5">LUMA / M01 STEEL BALLAST / REV A</text>
+  <text x="92" y="204" font-size="4">Ø180</text>
+  <text x="195" y="46" font-size="3.5">4 × Ø4.4 through</text>
+  <text x="195" y="52" font-size="3">XY (±45, ±35)</text>
+  <text x="194" y="120" font-size="3.5">4 × Ø3.4 through</text>
+  <text x="194" y="127" font-size="3">X = ±26</text>
+  <text x="194" y="132" font-size="3">Y = -36 and -8</text>
+  <text x="104" y="101" font-size="3">(0, 0)</text>
+  <text x="104" y="18" font-size="3">+Y / front</text>
+  <text x="10" y="218" font-size="3.5">Mild steel, thickness 6.0 mm. Deburr all edges. No center hole.</text>
+  <text x="10" y="224" font-size="3">Nominal 1:1 geometry at actual-size print; page 250 × 230 mm. Confirm Ø180 with ruler.</text>
+ </g>
+</svg>

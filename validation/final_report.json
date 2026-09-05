@@ -1,0 +1,466 @@
+{
+  "release": "LUMA Rev A",
+  "scope": "Digital asset checks only; no physical prototype available.",
+  "display_firmware": {
+    "cross_compile_verified": false,
+    "binary_included": false,
+    "reason": "Required compiler downloads did not complete; see software/VERIFICATION.md."
+  },
+  "physical_validation": {
+    "performed": false,
+    "required": "Fit, wiring, supported motion, stop behavior, stability, optics and thermal tests."
+  },
+  "host_tests": {
+    "exit_code": 0,
+    "log": "test_duration_rejects_nonfinite_and_out_of_bounds (test_bench.BenchTests.test_duration_rejects_nonfinite_and_out_of_bounds) ... ok\ntest_missing_invalid_stale_and_near_are_explicit (test_bench.BenchTests.test_missing_invalid_stale_and_near_are_explicit) ... ok\ntest_snapshot_preserves_physical_channel_order (test_bench.BenchTests.test_snapshot_preserves_physical_channel_order) ... ok\ntest_all_scenes_respect_limits_and_speed (test_control.ControllerTests.test_all_scenes_respect_limits_and_speed) ... ok\ntest_each_sensor_is_required (test_control.ControllerTests.test_each_sensor_is_required) ... ok\ntest_estop_display_and_servo_faults (test_control.ControllerTests.test_estop_display_and_servo_faults) ... ok\ntest_fault_latches_and_freezes (test_control.ControllerTests.test_fault_latches_and_freezes) ... ok\ntest_hi_speaks_once (test_control.ControllerTests.test_hi_speaks_once) ... ok\ntest_large_scheduler_gap_freezes (test_control.ControllerTests.test_large_scheduler_gap_freezes) ... ok\ntest_nan_none_and_stale_are_not_clear_space (test_control.ControllerTests.test_nan_none_and_stale_are_not_clear_space) ... ok\ntest_unarmed_never_moves (test_control.ControllerTests.test_unarmed_never_moves) ... ok\ntest_checked_response (test_control.ProtocolTests.test_checked_response) ... ok\ntest_config_refuses_uncalibrated_motion (test_control.ProtocolTests.test_config_refuses_uncalibrated_motion) ... ok\ntest_hold_falls_back_to_last_feedback_on_read_failure (test_control.ProtocolTests.test_hold_falls_back_to_last_feedback_on_read_failure) ... ok\ntest_hold_reads_actual_pose_before_command (test_control.ProtocolTests.test_hold_reads_actual_pose_before_command) ... ok\ntest_inner_ring_only_white_and_capped (test_control.ProtocolTests.test_inner_ring_only_white_and_capped) ... ok\ntest_known_read_request (test_control.ProtocolTests.test_known_read_request) ... ok\ntest_stop_uses_physical_level_not_active_low_gpiozero_value (test_control.ProtocolTests.test_stop_uses_physical_level_not_active_low_gpiozero_value) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 0.012s\n\nOK\n"
+  },
+  "manual": {
+    "pages": 62,
+    "bookmarks": 45,
+    "bytes": 14163531,
+    "text_outside_page": [],
+    "suspiciously_empty_pages": []
+  },
+  "videos": [
+    {
+      "file": "media\\videos\\01_wink.mp4",
+      "bytes": 1024277,
+      "decode_exit_code": 0,
+      "duration": "00:00:09.00",
+      "decoded_frames": 216,
+      "video": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 760 kb/s, 24 fps, 24 tbr, 12288 tbn (default)",
+      "audio": "Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 142 kb/s (default)"
+    },
+    {
+      "file": "media\\videos\\02_hi.mp4",
+      "bytes": 1291267,
+      "decode_exit_code": 0,
+      "duration": "00:00:09.00",
+      "decoded_frames": 216,
+      "video": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 1017 kb/s, 24 fps, 24 tbr, 12288 tbn (default)",
+      "audio": "Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 123 kb/s (default)"
+    },
+    {
+      "file": "media\\videos\\03_happy.mp4",
+      "bytes": 1547539,
+      "decode_exit_code": 0,
+      "duration": "00:00:09.00",
+      "decoded_frames": 216,
+      "video": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 1193 kb/s, 24 fps, 24 tbr, 12288 tbn (default)",
+      "audio": "Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 175 kb/s (default)"
+    }
+  ],
+  "static_assembly": {
+    "scope": "Static indexed-neutral printed-part intersections only. Not a dynamic collision, fastener, cable or physical-fit certification.",
+    "parts": [
+      {
+        "id": "base_tub",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 243.869,
+        "connected_bodies": 1,
+        "size_mm": [
+          216.0,
+          216.0,
+          50.0
+        ],
+        "triangles": 9040,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "base_lid",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 181.508,
+        "connected_bodies": 1,
+        "size_mm": [
+          216.0,
+          216.0,
+          14.0
+        ],
+        "triangles": 4832,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "electronics_tray",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 35.986,
+        "connected_bodies": 1,
+        "size_mm": [
+          167.5,
+          90.0,
+          9.0
+        ],
+        "triangles": 7600,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "yaw_mount",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 15.048,
+        "connected_bodies": 1,
+        "size_mm": [
+          64.0,
+          46.0,
+          38.0
+        ],
+        "triangles": 2972,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "yaw_cap",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 1.888,
+        "connected_bodies": 1,
+        "size_mm": [
+          47.0,
+          16.0,
+          2.6
+        ],
+        "triangles": 1172,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "turntable",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 42.319,
+        "connected_bodies": 1,
+        "size_mm": [
+          82.0,
+          82.0,
+          20.2
+        ],
+        "triangles": 5024,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "shoulder_tower",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 49.04,
+        "connected_bodies": 1,
+        "size_mm": [
+          64.0,
+          50.0,
+          34.0
+        ],
+        "triangles": 2764,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "shoulder_cap",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 5.048,
+        "connected_bodies": 1,
+        "size_mm": [
+          46.0,
+          28.0,
+          4.0
+        ],
+        "triangles": 1172,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "upper_rail",
+        "quantity": 2,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 19.784,
+        "connected_bodies": 1,
+        "size_mm": [
+          137.5,
+          46.0,
+          5.0
+        ],
+        "triangles": 4112,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "forearm_rail",
+        "quantity": 2,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 17.584,
+        "connected_bodies": 1,
+        "size_mm": [
+          117.5,
+          46.0,
+          5.0
+        ],
+        "triangles": 4112,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "servo_cassette",
+        "quantity": 2,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 25.323,
+        "connected_bodies": 1,
+        "size_mm": [
+          26.0,
+          46.0,
+          39.8
+        ],
+        "triangles": 1208,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "cassette_cap",
+        "quantity": 2,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 4.914,
+        "connected_bodies": 1,
+        "size_mm": [
+          26.0,
+          46.0,
+          4.2
+        ],
+        "triangles": 1172,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "cross_spacer",
+        "quantity": 4,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 4.574,
+        "connected_bodies": 1,
+        "size_mm": [
+          12.0,
+          12.0,
+          44.0
+        ],
+        "triangles": 768,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "horn_spacer",
+        "quantity": 6,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 0.814,
+        "connected_bodies": 1,
+        "size_mm": [
+          20.0,
+          20.0,
+          3.3
+        ],
+        "triangles": 2320,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "head_yoke",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 23.319,
+        "connected_bodies": 1,
+        "size_mm": [
+          66.0,
+          44.0,
+          36.0
+        ],
+        "triangles": 5980,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "head_shell",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 168.483,
+        "connected_bodies": 1,
+        "size_mm": [
+          176.0,
+          176.0,
+          36.0
+        ],
+        "triangles": 33324,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "outer_bezel",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 18.889,
+        "connected_bodies": 1,
+        "size_mm": [
+          176.0,
+          176.0,
+          7.0
+        ],
+        "triangles": 5088,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "face_center",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 47.741,
+        "connected_bodies": 1,
+        "size_mm": [
+          142.6,
+          142.6,
+          4.0
+        ],
+        "triangles": 3868,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "white_carrier",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 4.443,
+        "connected_bodies": 1,
+        "size_mm": [
+          102.0,
+          102.0,
+          2.0
+        ],
+        "triangles": 3072,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "lcd_cradle",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 19.678,
+        "connected_bodies": 1,
+        "size_mm": [
+          77.0,
+          77.0,
+          15.0
+        ],
+        "triangles": 3572,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "lcd_retainer",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 6.118,
+        "connected_bodies": 1,
+        "size_mm": [
+          77.0,
+          77.0,
+          3.0
+        ],
+        "triangles": 2336,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "outer_diffuser",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 9.739,
+        "connected_bodies": 1,
+        "size_mm": [
+          165.0,
+          165.0,
+          6.2
+        ],
+        "triangles": 3584,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "inner_diffuser",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 3.909,
+        "connected_bodies": 1,
+        "size_mm": [
+          68.0,
+          68.0,
+          5.9
+        ],
+        "triangles": 1920,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "sensor_pod",
+        "quantity": 5,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 4.405,
+        "connected_bodies": 1,
+        "size_mm": [
+          40.0,
+          30.0,
+          10.0
+        ],
+        "triangles": 2032,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "sensor_retainer",
+        "quantity": 5,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 0.665,
+        "connected_bodies": 1,
+        "size_mm": [
+          32.0,
+          24.0,
+          2.0
+        ],
+        "triangles": 1576,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "cable_clip",
+        "quantity": 6,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 1.248,
+        "connected_bodies": 1,
+        "size_mm": [
+          18.0,
+          12.0,
+          8.0
+        ],
+        "triangles": 1560,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "fit_coupon",
+        "quantity": 1,
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 6.911,
+        "connected_bodies": 1,
+        "size_mm": [
+          68.0,
+          53.5,
+          5.0
+        ],
+        "triangles": 2728,
+        "fits_220_bed_xy": true
+      }
+    ],
+    "printed_instances": 45,
+    "intersections": []
+  },
+  "failures": []
+}
