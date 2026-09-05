@@ -174,9 +174,11 @@ class Assembly:
                 tri=tri+np.asarray(off)
             meshes.append((tri,p['material']))
         if not exploded:
-            fm=self.group_matrix('head',angles)@self.face_matrix()
+            disc=self.group_matrix('head',angles)@self.face_matrix()
             # The circle is the active display area; enclosure geometry comes from CAD.
-            meshes.append((transform(cylinder(self.face.get('radius_mm',22.84),.5),fm),'screen'))
+            meshes.append((transform(cylinder(self.face.get('radius_mm',22.84),.5),disc),'screen'))
+            # Face graphics are authored for the 45.68 mm screen and scale with the active radius.
+            fm=disc@np.diag([self.face.get('radius_mm',22.84)/22.84]*2+[1,1])
             if clip=='happy':
                 for x in [-8,8]:
                     pts=[(x+5*math.cos(a),3+5*math.sin(a)) for a in np.linspace(.1,math.pi-.1,20)]
@@ -469,17 +471,19 @@ def build_video(assembly,clip,fps=24,duration=9):
     if proc.wait()!=0:raise RuntimeError('FFmpeg encoding failed')
     return path
 
-def stills(assembly,views=None):
+def stills(assembly,views=None,suffix=''):
     paths=[]
+    variant=assembly.data.get('variant','standard')
+    tag='LUMA / OPTIONAL 4-INCH DSI HEAD' if variant!='standard' else 'LUMA'
     for view in views or ['hero','exploded','front','side','top']:
         size=(1800,1600) if view in ('hero','exploded') else (1500,1300)
         r=make_renderer(*size,light=True,view=view,product_only=True)
         img=r.render(assembly.triangles('hero',0,view=='exploded'))
         d=ImageDraw.Draw(img)
-        labels={'hero':'LUMA / FINISHED ASSEMBLY','exploded':'LUMA / EXPLODED ASSEMBLY','front':'FRONT VIEW','side':'RIGHT VIEW','top':'TOP VIEW'}
+        labels={'hero':tag+' / FINISHED ASSEMBLY','exploded':tag+' / EXPLODED ASSEMBLY','front':'FRONT VIEW','side':'RIGHT VIEW','top':'TOP VIEW'}
         d.text((62,48),labels[view],font=font(25),fill=(62,86,91))
         d.text((62,size[1]-57),'CAD-BASED PROTOTYPE VISUALIZATION · DIMENSIONS IN THE BUILD MANUAL',font=font(17),fill=(101,122,125))
-        path=OUT/'renders'/f'{view}.png';img.save(path);paths.append(str(path))
+        path=OUT/'renders'/f'{view}{suffix}.png';img.save(path);paths.append(str(path))
         print('Saved',path,flush=True)
     return paths
 
@@ -499,10 +503,12 @@ def main():
     ap=argparse.ArgumentParser();ap.add_argument('--manifest',default=str(ROOT/'cad'/'assembly.json'))
     ap.add_argument('--stills',action='store_true');ap.add_argument('--clip',choices=['wink','hi','happy','all'])
     ap.add_argument('--fps',type=int,default=24);ap.add_argument('--contact',action='store_true')
+    ap.add_argument('--suffix',default='',help='appended to still file names, e.g. _dsi for the optional head assembly')
+    ap.add_argument('--views',nargs='*',help='subset of hero exploded front side top')
     a=ap.parse_args();(OUT/'renders').mkdir(parents=True,exist_ok=True)
     if a.contact:contact_sheet();return
     assembly=Assembly(a.manifest)
-    if a.stills:stills(assembly)
+    if a.stills:stills(assembly,a.views or None,a.suffix)
     if a.clip:
         for clip in ['wink','hi','happy'] if a.clip=='all' else [a.clip]:build_video(assembly,clip,a.fps)
         contact_sheet()

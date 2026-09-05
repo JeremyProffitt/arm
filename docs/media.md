@@ -20,4 +20,6 @@ Open `START_HERE.html` in a browser after extracting the archive to play all thr
 
 ![Exploded view of the prototype. Explode distances expose components and do not prescribe insertion travel.](../media/renders/exploded.png)
 
+![Optional 4-inch DSI head, rendered from `cad/assembly_dsi.json` with the same enclosed arm and base.](../media/renders/hero_dsi.png)
+
 The engineering sheets at the back of the manual are the dimensional references. The rendered images explain appearance and assembly relationships; use the numbered assembly sequence for fasteners, wiring and the optical stack.

@@ -73,6 +73,39 @@ python -m platformio device monitor --port YOUR_SERIAL_PORT --baud 115200
 
 Commands are newline-delimited ASCII. `PING` replies `PONG`. `FACE idle`, `FACE wink`, `FACE hi`, `FACE happy`, and `FACE fault` reply `OK <name>`. Startup announces `READY LUMA1`. Invalid or overlong commands reply `ERR`. After1.5seconds without a host command/heartbeat the display shows WAITING. The host sends heartbeat every250ms and latches a motion hold if replies stop. No touch/audio/SD/battery functions are enabled on the display board; speech is generated on the Pi and played by the USB speaker.
 
+## Optional 4-inch DSI head (Pi-rendered face)
+
+Instead of the ESP32 face board, LUMA can use a Waveshare 4inch DSI LCD (C) — a round720x720 panel wired directly to the Pi's DSI port. There is no coprocessor for this head: the Pi itself renders the face every frame with `luma/face.py`, which reproduces `paint()` from `display_firmware/src/main.cpp` in Python (same colors, same shapes, same scene timing) scaled from the firmware's360x360 canvas up to the panel's720x720 resolution.
+
+Select this head by setting `"display_kind": "dsi"` in `config.json` (leave `display_port` alone; it is ignored for this kind). Install the extra dependency alongside the existing hardware group:
+
+```console
+.venv/bin/pip install -e '.[hardware,dsi]'
+```
+
+Add these lines to `/boot/firmware/config.txt` for the Waveshare4inch DSI LCD(C):
+
+```
+dtoverlay=WS_xinchDSI_Screen,SCREEN_type=10,I2C_bus=10
+dtoverlay=WS_xinchDSI_Touch,I2C_bus=10
+```
+
+Both overlays are the vendor's documented setup; LUMA's software never reads touch events — the lamp has no touch-driven behavior. If the picture is upside down for the mounted orientation (connectors at the bottom), rotate it with the vendor's documented `display_lcd_rotate`/Wayland rotation setting rather than in LUMA.
+
+Running outside a desktop session (the normal case for an unattended lamp) needs pygame's KMS/DRM backend. `sudo` drops environment variables, so pass the driver through `env`:
+
+```console
+sudo env SDL_VIDEODRIVER=kmsdrm .venv/bin/python -m luma.app --hardware --scene hi --seconds 6
+```
+
+Bench-check the head on its own, the same way as the USB face board:
+
+```console
+.venv/bin/python -m luma.bench display --kind dsi --scene all --seconds 10
+```
+
+`--port` is not required (and is ignored) when `--kind dsi`; it stays required for the default `--kind usb_serial`. There is no serial heartbeat to a coprocessor for this head, so `Hardware`/`bench.display`'s notion of "heartbeat" becomes "a frame was drawn within the last1.5seconds" — `DsiDisplay.update()` returns that boolean the same way `Display.update()` returns the USB PONG heartbeat, so the rest of the control/fault-latching logic in `luma/control.py` is unaffected by which head is attached.
+
 ## Source/verification notes
 
 `luma/servo_bus.py` implements only checked position reads and volatile sync writes; no runtime EEPROM changes. Register addresses and little-endian packet arrangement were compared with the [Waveshare ST/SC Python SDK](https://files.waveshare.com/wiki/Bus-Servo-Adapter-(A)/STServo_Python.zip), `scservo_sdk/sms_sts.py` and `protocol_packet_handler.py`. Controller tests cover all scene travel/speed envelopes, five-sensor requirements, stale/NaN/no-return data, obstruction hold, stop/display/servo faults, speech event debouncing and malformed servo packets. Hardware paths have not been exercised on a physical Pi/arm.

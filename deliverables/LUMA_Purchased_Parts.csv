@@ -35,6 +35,9 @@ E33,1,Generic,16AWG /18AWG silicone wire and rated distribution terminals,Power 
 E34,1,Generic,Small perfboard and DIP14 socket,Level shifter assembly,Insulate underside;strain relief all wires,Design choice,,5
 E35,1,Generic,Pi4 heatsink and ventilation hardware,Thermal management,Check CPU temperature after assembled operation,Specification selection,,7
 E36,1,Generic,10kohm resistor,External E-stop sense pullup,BCM27 to3.3V;open NC2 means asserted,Design choice,,0.10
+D01,1,Waveshare,4inch DSI LCD (C),Optional head display,Round720x720 IPS DSI;126mm outline;101.52mm active;6mm case;four M4 rear bosses on75x75;includes two50mm 15-pin FPC,Vendor documented,https://www.waveshare.com/4inch-dsi-lcd-c.htm,45
+D02,1,Generic,15-pin 1.0mm pitch FFC type A 800mm,Pi DSI to optional head,Same-side contacts;0.3mm thick;800mm nominal from Pi DSI connector through both arm cable ports;bench-verify signal integrity before closing the arm,Measure route before buying,,8
+D03,1,Generic,2-conductor 22AWG silicone lead with2.0mm pitch 4-pin plug,Optional head5V feed,Pi header5V/GND to LCD HP2.0 4-pin;SDA/SCL contacts left empty;800mm,Match plug to purchased LCD connector,,4
 M01,1,Local metal supplier,Custom ballast disc,Steel ballast plate,"Mild steel diameter180 thickness6 mm; 4 holes diameter4.4 at XY(+/-45,+/-35); 4 holes diameter3.4 at XY(+/-26,-36/-8); deburr; approx1.19kg",Custom drawing geometry only,https://www.onlinemetals.com/,25
 M02,1,Generic,6808-2RS,Yaw support bearing,40mm bore x52mm OD x7mm width; sealed deep groove,Measure fit coupon then ream printed seat as needed,https://www.skf.com/group/products/rolling-bearings/ball-bearings/deep-groove-ball-bearings,12
 M03,4,Generic,M4x25,Base and tray bolts,M4 x25 socket head; steel plate6 + floor3 + spacer5 + tray3,Nominal stack specified,,0.25
@@ -45,8 +48,8 @@ M07,4,Generic,M3x16,Yaw cradle through bolts,Through printed cradle3 steel6 and 
 M08,2,Generic,M3x45,Yaw rear body clamp bolts,Through bottom3 + body35 + keeper2.6; do not overtighten case,Body clamp avoids undocumented case threads,,0.3
 M09,2,Generic,M3x50,Shoulder clamp bolts,Clamp through44mm tower width plus nuts,, ,0.3
 M10,4,Generic,M3x16,Shoulder foot bolts,6mm tower foot plus6mm platform plus nuts,, ,0.16
-M11,8,Generic,M3x60,Arm rail cross bolts,5+44+5mm stack plus nut; 4 per arm; include4 cassette ear positions,All threads clear rotating hardware,,0.4
-M12,24,Generic,M3x10 nominal,Pitch horn attachment screws,Nominal M3; 5mm rail +3.3mm spacer leaves1.7mm horn engagement; confirm vendor horn thread,Measure purchased horn thread and screw bottoming before power,https://www.waveshare.net/wiki/ST3215_Servo,0.15
+M11,6,Generic,M3x60,Arm link through bolts,5+44+5mm stack plus nut; 3 per link: proximal boss at X35 and the two servo block ears; the halves clamp the servo,All threads clear rotating hardware,,0.4
+M12,24,Generic,M3x10 nominal,Pitch horn attachment screws,Nominal M3; 5mm link plate +3.3mm spacer leaves1.7mm horn engagement; confirm vendor horn thread,Measure purchased horn thread and screw bottoming before power,https://www.waveshare.net/wiki/ST3215_Servo,0.15
 M13,4,Generic,M3x6 nominal,Yaw horn attachment screws,3mm web plus1mm washer leaves2mm engagement; confirm vendor horn thread,Do not allow tips to contact servo case,https://www.waveshare.net/wiki/ST3215_Servo,0.15
 M14,6,Generic,M3x12,Base lid screws,Into2.8mm plastic-thread-forming printed pilots,, ,0.15
 M15,4,Generic,M3x12,Head yoke screws,6mm fork mounting face +3mm shell floor; nuts on inside,Check rear boss screw clearance,,0.15
@@ -63,10 +66,15 @@ M25,50,Generic,M3 washer,General M3 flat washers,Nominal0.5mm; not replacement f
 M26,4,Generic,M2.5x6,Raspberry Pi fasteners,Pi4 four mounting holes; printed standoffs may be tappedM2.5,Do not force screws against board components,,0.12
 M27,4,Generic,Rubber feet,Adhesive anti slip feet,20mm diameter x5mm high minimum; place radius90,Provides underside fastener clearance,,0.4
 M28,1,Generic,Translucent PETG,Frosted optical printing filament,Natural/translucent; approximately60g including trials; solid1.2mm optical skin,Sand600-1000grit and test diffusion,,20
-M29,1,Generic,PETG,Structural filament,Approx1kg roll; actual slicer mass varies;6 walls on arm rails,Do not substitute brittle resin on structural joints,,22
+M29,1,Generic,PETG,Structural filament,Approx1kg roll; actual slicer mass varies;6 walls on the arm link halves,Do not substitute brittle resin on structural joints,,22
 M30,1,Generic,Neutral cure silicone,Small adhesive tube,3 small removable dots for inner diffuser and edgefoam; electronics compatible,Do not cover ToF optical aperture,,6
 M31,1,Generic,Thin PCB foam,Closed cell foam tape,0.5 and1mm thickness; LCD edge preload only,Set LCD stack with measured sample,,4
 M32,1,Generic,LED retaining tape,Electronics compatible thin adhesive strips,Attach LED ring PCB on support posts without covering LED optics,, ,3
 M33,1,Generic,Desk clamp,Optional commercial padded desk clamp,Use only if assembly reach/mass exceeds validated stable envelope; not a printed load bearing clamp,Clamp base rim without crushing printed walls,,12
 M34,12,Generic,M2.5x12,Optional harness clip screws,For6 printed cable saddles; use selftapped pilots or cableties,, ,0.12
 M35,10,Generic,Soft closed-cell foam strip,Required ToF edge preload strips,18x2x6mm each; compress gently to5.4mm between PCB edge and retaining frame;2 per sensor,Keep clear of centered sensor optics and side QT connectors,,0.2
+D10,4,Generic,M4x8,Optional LCD carrier to display screws,Through5mm carrier pad into the4mm deep M4 case bosses; longer screws bottom out,Do not exceed8mm; check engagement on the purchased display,,0.15
+D11,4,Generic,M3x8,Optional carrier to shell screws,"Into2.8mm printed pilots at(+/-55,+/-38) top20.5",Accessible from the front with the display fitted,,0.15
+D12,4,Generic,M3x12,Optional face ring screws,4mm ring +1mm shim;2.8mm pilots at radius67.8,Keep flange captured with0.2mm clearance,,0.15
+D13,2,Generic,M3x10,Optional brow bracket bolts,Through3mm bracket base +3mm shell wall; nuts inside the shell,Uses the fourth wall pod mount at the top of the DSI shell,,0.15
+D14,1,Generic,Thin closed cell foam tape,Optional LCD rim preload,0.5mm between the display case rim and the face ring; also under the carrier pads if the boss ends are not coplanar,Set with the purchased display,,2

@@ -21,7 +21,12 @@ def validate_config(config, arm):
         raise ValueError("Inner white brightness must be between0 and1")
     if arm and config.get("calibrated") is not True:
         raise ValueError("Complete unloaded joint calibration before setting calibrated=true")
+    display_kind = config.get("display_kind", "usb_serial")
+    if display_kind not in ("usb_serial", "dsi"):
+        raise ValueError(f"display_kind must be usb_serial or dsi, got {display_kind!r}")
     for key in ("servo_port", "display_port"):
+        if key == "display_port" and display_kind != "usb_serial":
+            continue
         if "SET_TO_" in config[key]:
             raise ValueError(f"Set {key} to the actual /dev/serial/by-id device")
 
@@ -137,7 +142,11 @@ class Hardware:
         self.cleanup.callback(self._blank, self.inner, (0,0,0,0))
         self.outer.fill((0,0,0)); self.outer.show()
         self.inner.fill((0,0,0,0)); self.inner.show()
-        self.display = Display(config["display_port"])
+        if config.get("display_kind", "usb_serial") == "dsi":
+            from .face import DsiDisplay
+            self.display = DsiDisplay()
+        else:
+            self.display = Display(config["display_port"])
         self.cleanup.callback(self.display.close)
         self.bus = ServoBus(config["servo_port"])
         self.cleanup.callback(self.bus.close)

@@ -35,3 +35,6 @@ E33,1,Generic,16AWG /18AWG silicone wire and rated distribution terminals,Power 
 E34,1,Generic,Small perfboard and DIP14 socket,Level shifter assembly,Insulate underside;strain relief all wires,Design choice,,5
 E35,1,Generic,Pi4 heatsink and ventilation hardware,Thermal management,Check CPU temperature after assembled operation,Specification selection,,7
 E36,1,Generic,10kohm resistor,External E-stop sense pullup,BCM27 to3.3V;open NC2 means asserted,Design choice,,0.10
+D01,1,Waveshare,4inch DSI LCD (C),Optional head display,Round720x720 IPS DSI;126mm outline;101.52mm active;6mm case;four M4 rear bosses on75x75;includes two50mm 15-pin FPC,Vendor documented,https://www.waveshare.com/4inch-dsi-lcd-c.htm,45
+D02,1,Generic,15-pin 1.0mm pitch FFC type A 800mm,Pi DSI to optional head,Same-side contacts;0.3mm thick;800mm nominal from Pi DSI connector through both arm cable ports;bench-verify signal integrity before closing the arm,Measure route before buying,,8
+D03,1,Generic,2-conductor 22AWG silicone lead with2.0mm pitch 4-pin plug,Optional head5V feed,Pi header5V/GND to LCD HP2.0 4-pin;SDA/SCL contacts left empty;800mm,Match plug to purchased LCD connector,,4

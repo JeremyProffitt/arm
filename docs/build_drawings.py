@@ -49,7 +49,7 @@ def border(c,title,number,subtitle=""):
     text(c,40,63,"UNITS mm  ·  THIRD-ANGLE PART VIEWS  ·  NUMERICAL DIMENSIONS CONTROL",8,"Luma-Bold")
     text(c,40,47,"Views fitted to sheet. Do not measure this PDF. Digital prototype; check physical fit before batch printing.",7.4,color=MUTED)
     text(c,W-246,62,number,15,"Luma-Bold")
-    text(c,W-246,43,"REV A  |  04 SEP 2026  |  A3",8,color=MUTED)
+    text(c,W-246,43,"REV B  |  05 SEP 2026  |  A3",8,color=MUTED)
     c.bookmarkPage(number);c.addOutlineEntry(f"{number} — {title}",number,0,False)
 
 
@@ -193,6 +193,18 @@ def main():
              "The four outer ring PCB quarters require continuous mechanical support. Solder joints are electrical connections only.",
              "Refer to the head assembly chapter for screw order, spacers, wire relief and board retention. Purchased LEDs are not printable parts."],y=164)
     c.showPage()
+    dsi=json.loads((CAD/"assembly_dsi.json").read_text())
+    border(c,"Optional 4-inch DSI head / indexed neutral pose","G03","Same base, arm links and fork as G01. Head shell, carrier, face ring and brow bracket are the optional-variant parts; the display envelope is measured from the vendor STEP.")
+    dsi_full=assembly_mesh(dsi)
+    project(c,dsi_full,face_view,(55,225,390,475),"FRONT / LCD FACING VIEW")
+    project(c,dsi_full,VIEWS["RIGHT / YZ"],(450,225,350,475),"RIGHT SIDE / NEUTRAL POSE")
+    dsi_head=assembly_mesh(dsi,"head",True)
+    project(c,dsi_head,head_iso,(820,300,305,400),"EXPLODED DSI HEAD",dimensions=False,shaded=True)
+    notes(c,["Waveshare 4inch DSI LCD (C): Ø126 case, 6 mm thick, four M4 bosses on a 75 × 75 pattern. Rim front at head Z35.5; carrier plate Z20.5–23.5 with pads to the boss ends at Z25.5.",
+             "Face ring opening Ø108 chamfered to Ø116 leaves a 3 mm black rim around the Ø101.5 active area. Outer 60-RGB halo, bezel, diffuser, fork and pods are shared with the standard head.",
+             "No inner white ring on this head: the halo provides the white lamp function at its capped brightness. The front ToF pod sits on the brow bracket above the rim, facing forward.",
+             "Cables: 15-pin DSI FFC plus 5 V/GND leave through the 26 × 8 slot in the shell floor and fork plate, then run inside the enclosed links through their wall ports."],y=164)
+    c.showPage()
     schematic=ROOT/'electronics/wiring_overview.svg'
     schematic_count=0
     if schematic.exists():
@@ -238,7 +250,8 @@ def main():
     for index,part in enumerate(manifest,1):
         mesh=mesh_for(part["file"])
         code=f"P{index:02d}"
-        border(c,part["name"],code,f'{part["id"]}.stl  |  PRINT QUANTITY {part["qty"]}  |  {part["material"]}')
+        variant="  |  OPTIONAL 4-INCH DSI HEAD ONLY" if part.get("variant")=="dsi-head" else ""
+        border(c,part["name"],code,f'{part["id"]}.stl  |  PRINT QUANTITY {part["qty"]}  |  {part["material"]}{variant}')
         project(c,mesh,VIEWS["TOP / XY"],(65,445,440,265),"TOP / XY")
         project(c,mesh,VIEWS["FRONT / XZ"],(65,245,440,175),"FRONT / XZ")
         project(c,mesh,VIEWS["RIGHT / YZ"],(625,245,440,175),"RIGHT / YZ")
@@ -252,7 +265,7 @@ def main():
         c.showPage()
         print(f"Drawing {code}: {part['id']}",flush=True)
     c.save()
-    print(f"{3+schematic_count+len(manifest)} vector sheets -> {target}")
+    print(f"{4+schematic_count+len(manifest)} vector sheets -> {target}")
 
 
 if __name__=="__main__":main()

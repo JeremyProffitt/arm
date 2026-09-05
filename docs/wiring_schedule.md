@@ -1,6 +1,6 @@
 # Point-to-point wiring schedule
 
-Use these connection names together with the electrical chapter. Physical Raspberry Pi header numbers and BCM GPIO numbers are explicitly distinguished. Disconnect the supplies while changing wiring.
+Use these connection names together with the electrical chapter. Physical Raspberry Pi header numbers and BCM GPIO numbers are explicitly distinguished. Disconnect the supplies while changing wiring. Nets starting with `DSI_` apply only to the optional 4-inch DSI head and replace `FACE_USB`.
 
 | Net | From → to | Cable / connection detail |
 | --- | --- | --- |
@@ -55,3 +55,6 @@ Use these connection names together with the electrical chapter. Physical Raspbe
 | LED_RGB_POWER | 3Afuse: output5V → Outer60RGB: 5V atoppositequadrants | 22AWG. 1000uF10Vcap at ring |
 | LED_WHITE_POWER | 3Afuse: output5V → Inner24RGBW: 5V | 22AWG. 1000uF10Vcap at ring |
 | LED_RETURNS | Bothrings: GND → DCstar: GND | 22AWG. KeepLEDreturnseparatefromI2Creturnuntilstar |
+| DSI_DATA | Raspberry Pi4: DSI connector → 4inch DSI LCD (C): 15-pin DSI FPC | 15-pin1.0mm FFC800mm type A. Optional head only;replaces FACE_USB;route through both arm cable ports with a service loop at each joint |
+| DSI_POWER | Raspberry Pi4: physical4 5V → 4inch DSI LCD (C): HP2.0 4-pin 5V | 22AWG. Optional head only;display draws from the Pi supply in place of the USB display |
+| DSI_GROUND | Raspberry Pi4: physical39 GND → 4inch DSI LCD (C): HP2.0 4-pin GND | 22AWG. Optional head only;SDA and SCL contacts of this plug stay empty;touch and backlight use the DSI connector I2C bus10 |

@@ -162,7 +162,7 @@ class Manual(BaseDocTemplate):
         c.setFont("Luma-Bold",8); c.setFillColor(INK)
         c.drawString(18*mm,PAGE_H-13*mm,"LUMA  /  BUILD MANUAL")
         c.setFont("Luma",7); c.setFillColor(MUTED)
-        c.drawRightString(PAGE_W-18*mm,PAGE_H-13*mm,"REV A · 04 SEP 2026")
+        c.drawRightString(PAGE_W-18*mm,PAGE_H-13*mm,"REV B · 05 SEP 2026")
         c.setStrokeColor(LINE); c.line(18*mm,13*mm,PAGE_W-18*mm,13*mm)
         c.drawString(18*mm,8.5*mm,"Digital prototype · dimensions in mm · physical validation required")
         c.drawRightString(PAGE_W-18*mm,8.5*mm,f"{doc.page:02d}")
@@ -241,8 +241,8 @@ def main():
     hero=ROOT/cfg["hero"]
     if not hero.exists(): raise FileNotFoundError(hero)
     story.extend([picture(hero,330),Spacer(1,14),Paragraph("Illustrated assembly manual + engineering drawings",s["H2L"]),
-       Paragraph("Raspberry Pi 4 · four moving joints · round animated LCD · five distance sensors · white light + RGB halo",s["BodyL"]),
-       Paragraph("Revision A / September 2026 / Digital prototype release",s["SmallL"]),PageBreak(),
+       Paragraph("Raspberry Pi 4 · four moving joints in enclosed arms · round animated LCD (1.85-inch, or optional 4-inch DSI head) · five distance sensors · white light + RGB halo",s["BodyL"]),
+       Paragraph("Revision B / September 2026 / Digital prototype release",s["SmallL"]),PageBreak(),
        Paragraph("Inside the build",s["H1L"])])
     toc=TableOfContents(); toc.levelStyles=[s["TOCL"]]; story.extend([toc,PageBreak()])
     for i,p in enumerate(chapters):
@@ -268,7 +268,7 @@ def main():
         toc.append([1,"Engineering drawings",start+1])
         for level,title,page in extra.get_toc(): toc.append([min(level+1,2),title,start+page])
         extra.close()
-    merged.set_toc(toc); merged.set_metadata({"title":"LUMA — Complete assembly manual and drawings","author":"LUMA project","subject":"Revision A digital prototype"})
+    merged.set_toc(toc); merged.set_metadata({"title":"LUMA — Complete assembly manual and drawings","author":"LUMA project","subject":"Revision B digital prototype"})
     merged.save(OUT/"LUMA_Assembly_Manual.pdf",garbage=4,deflate=True)
     pages=merged.page_count; merged.close()
     print(f"Manual: {pages} pages -> deliverables/LUMA_Assembly_Manual.pdf")

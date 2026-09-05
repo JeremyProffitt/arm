@@ -1,4 +1,14 @@
 {
-  "scope": "Static neutral conservative rectangular servo and LCD board envelopes only; excludes horns, screws, connectors, glass projection and moving cables. Zero result is not physical fit proof.",
+  "scope": "Static neutral conservative servo and LCD envelopes only (rectangular ST3215 boxes, the 55 mm board box, and the 4inch DSI LCD (C) case/PCB/connector envelope measured from the vendor STEP); excludes horns, screws, cables, glass projection and moving cables. Zero result is not physical fit proof.",
+  "assemblies": {
+    "standard": {
+      "file": "assembly.json",
+      "intersections": []
+    },
+    "dsi_head": {
+      "file": "assembly_dsi.json",
+      "intersections": []
+    }
+  },
   "intersections": []
 }

@@ -1,6 +1,7 @@
-/* LUMA revision A / millimetres / 2026-09-04
+/* LUMA revision B / millimetres / 2026-09-05
    Original parametric mechanical prototype. Vendor metal horns remain installed.
-   Select part with -D 'part="upper_rail"'. STL coordinates are print coordinates.
+   Revision B: enclosed tapered clamshell arm links; optional head for the Waveshare 4inch DSI LCD (C).
+   Select part with -D 'part="upper_arm_left"'. STL coordinates are print coordinates.
    See mechanical.md for assembly and fit checks. */
 $fn=96;
 part="assembly_preview";
@@ -9,6 +10,7 @@ clearance=0.35; m3=3.4; horn_pcd=14; servo_back=35.11;
 module hole(d,h=100){translate([0,0,-1]) cylinder(d=d,h=h);}
 module ring(od,id,h){difference(){cylinder(d=od,h=h);hole(id,h+2);}}
 module rr(w,h,t,r=3){linear_extrude(t) hull() for(x=[-w/2+r,w/2-r],y=[-h/2+r,h/2-r]) translate([x,y])circle(r=r,$fn=24);}
+module rr2(w,h,r=4){hull() for(x=[-w/2+r,w/2-r],y=[-h/2+r,h/2-r]) translate([x,y])circle(r=r,$fn=32);}
 module screw4(x,y,d=m3,h=100){for(a=[-x,x],b=[-y,y])translate([a,b,0])hole(d,h);}
 module hornholes(h=20){hole(6.5,h);for(a=[0:90:270])rotate(a)translate([horn_pcd/2,0,0])hole(3.3,h);}
 module capsule(l,w,t){hull(){cylinder(d=w,h=t);translate([l,0,0])cylinder(d=w,h=t);}}
@@ -22,16 +24,32 @@ module yaw_cap(){difference(){translate([0,-30,0])rr(47,16,2.6);for(x=[-18.5,18.
 module turntable(){difference(){union(){translate([0,0,14.2])ring(82,22,6);ring(39.75,22,14.3);translate([0,0,0.5])cylinder(d=24,h=3);}hornholes(8);screw4(26,18,3.4,24);}}
 module shoulder_tower(){difference(){union(){rr(64,50,6);translate([-22,-23,6])cube([44,46,28]);}translate([-17.8,-12.7,11.4])cube([50,25.4,38]);translate([17.8,-24,6])cube([10,48,40]);screw4(26,18,m3,10);for(y=[-18.5,18.5])translate([-25,y,23])rotate([0,90,0])cylinder(d=m3,h=60);}}
 module shoulder_cap(){difference(){rr(46,28,4);for(x=[-18.5,18.5])translate([x,0,0])hole(m3,8);}}
-// Rails terminate behind distal servo horns. A rear-body cassette holds each servo.
-module rail(l){difference(){union(){capsule(l-38,30,5);translate([l-28,0,0])rr(21,46,5);}hornholes(8);translate([l-25,0,0])for(y=[-18.5,18.5])translate([0,y,0])hole(m3,10);for(x=[35,l-52])translate([x,0,0])hole(m3,10);translate([44,-4,-1])cube([max(2,l-103),8,8]);}}
-module cassette(){difference(){translate([-26.4,0,0])rr(26,46,39.8);translate([-35.5,-12.7,4.2])cube([30,25.4,45]);for(y=[-18.5,18.5])translate([-25,y,0])hole(m3,50);translate([-40,-9,12])cube([10,18,18]);}}
-module cassette_cap(){difference(){translate([-26.4,0,0])rr(26,46,4.2);for(y=[-18.5,18.5])translate([-25,y,0])hole(m3,7);}}
-module cross_spacer(){difference(){cylinder(d=12,h=44);hole(m3,47);}}
-module horn_spacer(){difference(){cylinder(d=20,h=3.3);hornholes(6);}}
-module head_yoke(){difference(){union(){translate([0,0,30])rr(66,44,6);for(x=[-27,22])translate([x,0,15])rotate([0,90,0])linear_extrude(5)hull(){circle(r=15);translate([-15,0])square([15,30],center=true);}}for(x=[-30,20])translate([x,0,15])rotate([0,90,0])hornholes(15);translate([0,0,29])screw4(27,15,m3,10);translate([-50,-50,36])cube([100,100,10]);translate([-18.2,-9,29.8])cube([36.4,18,2]);}}
 
+// ---- Revision B enclosed links. Each link is two mirror-image channel halves printed plate-down.
+// Half = 5 plate + 2.4 walls 22 deep, meeting the other half at the link mid-plane (44 inside width, unchanged).
+// Proximal clevis (x<28) stays open so the previous joint's servo body and block can rotate through it.
+// The distal block is the integral servo pocket half (replaces the separate cassette and cap).
+plate_t=5; wall_t=2.4; half_w=22; wall_start=28;
+module link_profile(l){hull(){circle(r=16);translate([l-29.75,0])rr2(24.5,46,4);}}
+module arm_half(l){difference(){union(){
+  linear_extrude(plate_t)link_profile(l);
+  translate([0,0,plate_t])linear_extrude(half_w)intersection(){difference(){link_profile(l);offset(r=-wall_t)link_profile(l);}translate([wall_start,-40])square([l,80]);}
+  translate([35,0,plate_t])cylinder(d=8,h=half_w);
+  translate([l-29.75,0,plate_t])linear_extrude(half_w)rr2(24.5,46,4);}
+ hornholes(8);
+ translate([35,0,0])hole(m3,40);
+ for(y=[-18.5,18.5])translate([l-25,y,0])hole(m3,40);
+ translate([l-35.5,-12.7,plate_t+4.2])cube([30,25.4,40]);
+ translate([l-43,-9,plate_t+12])cube([13,18,20]);
+ translate([l-53,-40,plate_t+half_w])rotate([-90,0,0])hull(){for(x=[-6,6])translate([x,0,0])cylinder(d=9,h=40);}}}
+module arm_right(l){mirror([0,1,0])arm_half(l);}
+module horn_spacer(){difference(){cylinder(d=20,h=3.3);hornholes(6);}}
+module head_yoke(){difference(){union(){translate([0,0,30])rr(66,44,6);for(x=[-27,22])translate([x,0,15])rotate([0,90,0])linear_extrude(5)hull(){circle(r=15);translate([-15,0])square([15,30],center=true);}}for(x=[-30,20])translate([x,0,15])rotate([0,90,0])hornholes(15);translate([0,0,29])screw4(27,15,m3,10);translate([-50,-50,36])cube([100,100,10]);translate([-18.2,-9,29.8])cube([36.4,18,2]);translate([0,0,28])rr(26,8,10);}}
+
+// ---- Head shells. shell_shared() carries everything both variants have in common; children() adds the variant bosses.
+module shell_shared(pods,vents){difference(){union(){cylinder(d=head_d,h=3);ring(head_d,head_d-6,36);children();for(a=[0:90:270])rotate(a)translate([82,-18,0])cube([6,36,26]);for(a=[0:45:315])rotate(a)translate([76,0,3])cylinder(d=8,h=21);for(a=[22.5:45:337.5])rotate(a)translate([83,0,3])cylinder(d=9,h=32);}for(a=[22.5:45:337.5])rotate(a)translate([83,0,0])hole(2.8,44);translate([0,0,-1])rr(26,8,8);for(x=[-27,27],y=[-15,15])translate([x,y,0])hole(m3,12);translate([0,54,0]){hole(12,7);for(x=[-17,17])translate([x,0,0])hole(m3,6);}for(a=pods)rotate(a)translate([84,0,14])rotate([0,90,0]){cylinder(d=12,h=12,center=true);for(y=[-17,17])translate([0,y,0])cylinder(d=m3,h=12,center=true);}for(a=vents)rotate(a)translate([65,0,0])hull(){hole(3.5,6);translate([8,0,0])hole(3.5,6);}}}
 module head_mount_bosses(){for(a=[45:90:315])rotate(a)translate([60,0,2])difference(){cylinder(d=10,h=33);hole(2.8,39);}for(a=[0:90:270])rotate(a)translate([45,0,2])difference(){cylinder(d=8,h=30.5);hole(2.8,35);}for(x=[-34,34],y=[-34,34])translate([x,y,2])difference(){cylinder(d=8,h=12);hole(2.8,16);}for(x=[-27,27],y=[-15,15])translate([x,y,0])difference(){cylinder(d=9,h=9);hole(2.8,12);}}
-module head_shell(){difference(){union(){cylinder(d=head_d,h=3);ring(head_d,head_d-6,36);head_mount_bosses();for(a=[0:90:270])rotate(a)translate([82,-18,0])cube([6,36,26]);for(a=[0:45:315])rotate(a)translate([76,0,3])cylinder(d=8,h=21);for(a=[22.5:45:337.5])rotate(a)translate([83,0,3])cylinder(d=9,h=32);}for(a=[22.5:45:337.5])rotate(a)translate([83,0,0])hole(2.8,44);translate([0,0,0])hole(12,6);for(x=[-27,27],y=[-15,15])translate([x,y,0])hole(m3,12);translate([0,54,0]){hole(12,7);for(x=[-17,17])translate([x,0,0])hole(m3,6);}for(a=[0,180,270])rotate(a)translate([84,0,14])rotate([0,90,0]){cylinder(d=12,h=12,center=true);for(y=[-17,17])translate([0,y,0])cylinder(d=m3,h=12,center=true);}for(a=[200:10:340])rotate(a)translate([65,0,0])hull(){hole(3.5,6);translate([8,0,0])hole(3.5,6);}}}
+module head_shell(){shell_shared([0,180,270],[200:10:340])head_mount_bosses();}
 module outer_bezel(){difference(){union(){ring(176,160.5,4);translate([0,0,0])ring(171.5,165.6,7);}translate([0,0,-0.1])cylinder(d=165.5,h=1.5);for(a=[22.5:45:337.5])rotate(a)translate([83,0,0])hole(m3,10);}}
 module face_center(){difference(){cylinder(d=142.6,h=4);hole(68.6,8);translate([0,0,-0.1])ring(145,140.5,1.5);for(a=[45:90:315])rotate(a)translate([60,0,0])hole(m3,8);translate([0,54,0]){hole(12,8);for(x=[-17,17])translate([x,0,0])hole(m3,8);}}}
 module white_carrier(){difference(){union(){ring(68,51,2);for(a=[0:90:270])rotate(a)translate([39.5,0,0])rr(23,10,2);}for(a=[0:90:270])rotate(a)translate([45,0,0])hole(m3,6);}}
@@ -44,6 +62,19 @@ module sensor_retainer(){difference(){rr(32,24,2);rr(24.9,16.9,4,1);for(x=[-13.7
 module cable_clip(){difference(){rr(18,12,8);translate([0,0,4])rotate([90,0,0])cylinder(d=6,h=15,center=true);for(x=[-6,6])translate([x,0,0])hole(2.5,12);}}
 module fit_coupon(){difference(){rr(68,30,3);for(i=[0:3])translate([-24+i*16,0,0])hole(3.0+0.2*i,7);}translate([0,26,0])difference(){cylinder(d=25,h=5);hole(19.2+clearance,9);}}
 
+// ---- Revision B optional head for the Waveshare 4inch DSI LCD (C): Ø126 case, 6 thick, four M4 bosses
+// Ø7.1 x4 at (±37.5,±37.5) on the rear, PCB 85.5 x65 offset toward -Y, components to 8.2 behind the boss ends.
+// Head Z datums: LCD rim front 35.5; case rear plate 29.5; boss ends 25.5; carrier plate 20.5-23.5 with pads to 25.5.
+lcd4_bosses=[[-37.5,-37.5],[37.5,-37.5],[-37.5,37.5],[37.5,37.5]];
+carrier_bosses=[[-55,-38],[55,-38],[-55,38],[55,38]];
+face_boss_r=67.8;
+module head_mount_bosses_dsi(){for(a=[45:90:315])rotate(a)translate([face_boss_r,0,2])difference(){cylinder(d=7.5,h=33);hole(2.8,39);}for(p=carrier_bosses)translate([p[0],p[1],2])difference(){cylinder(d=7,h=18.5);hole(2.8,24);}for(x=[-27,27],y=[-15,15])translate([x,y,0])difference(){cylinder(d=9,h=9);hole(2.8,12);}}
+module head_shell_dsi(){shell_shared([0,90,180,270],[200,230,240,250,260,270,280,290,300,310,340])head_mount_bosses_dsi();}
+module lcd4_carrier(){difference(){union(){cylinder(d=140,h=3);for(p=lcd4_bosses)translate([p[0],p[1],0])cylinder(d=8,h=5);}translate([6,-1.5,-1])rr(100,63,8,4);translate([-10.5,-36,-1])rr(43,10,8,3);for(p=lcd4_bosses)translate([p[0],p[1],0])hole(4.4,8);for(p=carrier_bosses)translate([p[0],p[1],0])hole(m3,8);for(a=[45:90:315])rotate(a)translate([face_boss_r,0,0])hole(8.5,8);}}
+module face_ring_dsi(){difference(){cylinder(d=142.6,h=4);translate([0,0,-1])cylinder(d1=106,d2=118,h=6);translate([0,0,-0.1])ring(145,140.5,1.5);for(a=[45:90:315])rotate(a)translate([face_boss_r,0,0])hole(m3,8);}}
+// Brow bracket: base plate against the shell top wall (holes match the wall pod mount at Z14), front plate carries the forward ToF pod.
+module brow_bracket(){difference(){union(){translate([-20,0,0])cube([40,30,3]);translate([-20,30,0])cube([40,3,30]);for(x=[-20,17])hull(){translate([x,0,0])cube([3,30,0.01]);translate([x,29.99,0])cube([3,0.01,30]);}}for(x=[-17,17])translate([x,15,0])hole(m3,5);translate([0,19.5,-1])rr(12,21,5,4);for(x=[-17,17])translate([x,29,15])rotate([-90,0,0])hole(m3,6);translate([0,29,15])rotate([-90,0,0])rr(21,12,6,1);}}
+
 if(part=="base_tub")base_tub();
 else if(part=="base_lid")translate([0,0,2])base_lid();
 else if(part=="electronics_tray")electronics_tray();
@@ -52,11 +83,10 @@ else if(part=="yaw_cap")yaw_cap();
 else if(part=="turntable")turntable();
 else if(part=="shoulder_tower")shoulder_tower();
 else if(part=="shoulder_cap")shoulder_cap();
-else if(part=="upper_rail")rail(upper_pitch);
-else if(part=="forearm_rail")rail(forearm_pitch);
-else if(part=="servo_cassette")cassette();
-else if(part=="cassette_cap")cassette_cap();
-else if(part=="cross_spacer")cross_spacer();
+else if(part=="upper_arm_left")arm_half(upper_pitch);
+else if(part=="upper_arm_right")arm_right(upper_pitch);
+else if(part=="forearm_left")arm_half(forearm_pitch);
+else if(part=="forearm_right")arm_right(forearm_pitch);
 else if(part=="horn_spacer")horn_spacer();
 else if(part=="head_yoke")head_yoke();
 else if(part=="head_shell")head_shell();
@@ -71,4 +101,8 @@ else if(part=="sensor_pod")sensor_pod();
 else if(part=="sensor_retainer")sensor_retainer();
 else if(part=="cable_clip")cable_clip();
 else if(part=="fit_coupon")fit_coupon();
+else if(part=="head_shell_dsi")head_shell_dsi();
+else if(part=="lcd4_carrier")lcd4_carrier();
+else if(part=="face_ring_dsi")face_ring_dsi();
+else if(part=="brow_bracket")brow_bracket();
 else {base_tub();translate([0,0,50])base_lid();translate([0,0,58])turntable();translate([0,0,71])shoulder_tower();}

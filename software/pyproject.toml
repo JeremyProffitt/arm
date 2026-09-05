@@ -20,6 +20,9 @@ hardware = [
   "rpi-ws281x>=5,<6",
   "gpiozero>=2,<3"
 ]
+dsi = [
+  "pygame-ce>=2.5,<3"
+]
 
 [project.scripts]
 luma = "luma.app:main"

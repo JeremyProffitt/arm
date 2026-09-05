@@ -1,28 +1,31 @@
-﻿drawing,quantity,stl,name,material,orientation,layer_mm,walls,infill_percent
-P01,1,stl/base_tub.stl,Weighted base enclosure,PETG,floor down,0.2,4,25
-P02,1,stl/base_lid.stl,Vented base lid and yaw bearing seat,PETG,flat annulus down,0.2,4,25
-P03,1,stl/electronics_tray.stl,Universal electronics tray with Pi4 standoffs,PETG,plate down,0.2,4,25
-P04,1,stl/yaw_mount.stl,Yaw servo rear body cradle,PETG,base down,0.2,4,25
-P05,1,stl/yaw_cap.stl,Yaw clamp keeper,PETG,flat down,0.2,4,25
-P06,1,stl/turntable.stl,Bearing supported yaw turntable,PETG,neck down,0.2,4,25
-P07,1,stl/shoulder_tower.stl,Shoulder servo body tower,PETG,foot down,0.2,4,25
-P08,1,stl/shoulder_cap.stl,Shoulder clamp keeper,PETG,flat down,0.2,4,25
-P09,2,stl/upper_rail.stl,140 mm upper arm side rail,PETG,broad face down,0.2,6,40
-P10,2,stl/forearm_rail.stl,120 mm forearm side rail,PETG,broad face down,0.2,6,40
-P11,2,stl/servo_cassette.stl,Elbow/wrist rear servo body cassette,PETG,closed side down,0.2,4,25
-P12,2,stl/cassette_cap.stl,Servo body cassette keeper,PETG,flat down,0.2,4,25
-P13,4,stl/cross_spacer.stl,Arm through bolt spacer,PETG,cylinder upright,0.2,4,25
-P14,6,stl/horn_spacer.stl,Metal horn to rail stand off,PETG,flat down,0.2,4,25
-P15,1,stl/head_yoke.stl,Head tilt fork and rear mount,PETG,rear mounting plate on bed; rotate180X,0.2,4,25
-P16,1,stl/head_shell.stl,Optical head rear enclosure,PETG,rear disc down,0.2,4,25
-P17,1,stl/outer_bezel.stl,Outer RGB diffuser retaining bezel,PETG,front lip down,0.2,4,25
-P18,1,stl/face_center.stl,Central optical baffle plate,black PETG,flat front down,0.2,4,25
-P19,1,stl/white_carrier.stl,White ring carrier and mounting arms,PETG,flat down,0.2,4,25
-P20,1,stl/lcd_cradle.stl,55 mm LCD edge cradle,PETG,flat base down,0.2,4,25
-P21,1,stl/lcd_retainer.stl,LCD PCB corner retaining plate,black PETG,flat down,0.2,4,25
-P22,1,stl/outer_diffuser.stl,Frosted outer RGB annular diffuser,natural/translucent PETG,smooth optical face on bed,0.15,3,100
-P23,1,stl/inner_diffuser.stl,Frosted inner RGBW light diffuser,natural/translucent PETG,smooth optical face on bed,0.15,3,100
-P24,5,stl/sensor_pod.stl,Open optical ToF sensor body,PETG,rear flange down,0.2,4,25
-P25,5,stl/sensor_retainer.stl,ToF board edge retaining frame,PETG,flat down,0.2,4,25
-P26,6,stl/cable_clip.stl,Harness saddle clip,PETG,flat down,0.2,4,25
-P27,1,stl/fit_coupon.stl,Horn and bolt clearance coupons,PETG,flat down,0.2,4,25
+﻿drawing,quantity,variant,stl,name,material,orientation,layer_mm,walls,infill_percent
+P01,1,standard,stl/base_tub.stl,Weighted base enclosure,PETG,floor down,0.2,4,25
+P02,1,standard,stl/base_lid.stl,Vented base lid and yaw bearing seat,PETG,flat annulus down,0.2,4,25
+P03,1,standard,stl/electronics_tray.stl,Universal electronics tray with Pi4 standoffs,PETG,plate down,0.2,4,25
+P04,1,standard,stl/yaw_mount.stl,Yaw servo rear body cradle,PETG,base down,0.2,4,25
+P05,1,standard,stl/yaw_cap.stl,Yaw clamp keeper,PETG,flat down,0.2,4,25
+P06,1,standard,stl/turntable.stl,Bearing supported yaw turntable,PETG,neck down,0.2,4,25
+P07,1,standard,stl/shoulder_tower.stl,Shoulder servo body tower,PETG,foot down,0.2,4,25
+P08,1,standard,stl/shoulder_cap.stl,Shoulder clamp keeper,PETG,flat down,0.2,4,25
+P09,1,standard,stl/upper_arm_left.stl,"Upper arm enclosed link, left half",PETG,plate down,0.2,6,40
+P10,1,standard,stl/upper_arm_right.stl,"Upper arm enclosed link, right half",PETG,plate down,0.2,6,40
+P11,1,standard,stl/forearm_left.stl,"Forearm enclosed link, left half",PETG,plate down,0.2,6,40
+P12,1,standard,stl/forearm_right.stl,"Forearm enclosed link, right half",PETG,plate down,0.2,6,40
+P13,6,standard,stl/horn_spacer.stl,Metal horn to link stand off,PETG,flat down,0.2,4,25
+P14,1,standard,stl/head_yoke.stl,Head tilt fork and rear mount,PETG,rear mounting plate on bed; rotate180X,0.2,4,25
+P15,1,standard,stl/head_shell.stl,Optical head rear enclosure,PETG,rear disc down,0.2,4,25
+P16,1,standard,stl/outer_bezel.stl,Outer RGB diffuser retaining bezel,PETG,front lip down,0.2,4,25
+P17,1,standard,stl/face_center.stl,Central optical baffle plate,black PETG,flat front down,0.2,4,25
+P18,1,standard,stl/white_carrier.stl,White ring carrier and mounting arms,PETG,flat down,0.2,4,25
+P19,1,standard,stl/lcd_cradle.stl,55 mm LCD edge cradle,PETG,flat base down,0.2,4,25
+P20,1,standard,stl/lcd_retainer.stl,LCD PCB corner retaining plate,black PETG,flat down,0.2,4,25
+P21,1,standard,stl/outer_diffuser.stl,Frosted outer RGB annular diffuser,natural/translucent PETG,smooth optical face on bed,0.15,3,100
+P22,1,standard,stl/inner_diffuser.stl,Frosted inner RGBW light diffuser,natural/translucent PETG,smooth optical face on bed,0.15,3,100
+P23,5,standard,stl/sensor_pod.stl,Open optical ToF sensor body,PETG,rear flange down,0.2,4,25
+P24,5,standard,stl/sensor_retainer.stl,ToF board edge retaining frame,PETG,flat down,0.2,4,25
+P25,6,standard,stl/cable_clip.stl,Harness saddle clip,PETG,flat down,0.2,4,25
+P26,1,standard,stl/fit_coupon.stl,Horn and bolt clearance coupons,PETG,flat down,0.2,4,25
+P27,1,dsi-head,stl/head_shell_dsi.stl,Optional DSI head rear enclosure,PETG,rear disc down,0.2,4,25
+P28,1,dsi-head,stl/lcd4_carrier.stl,Optional 4 inch LCD carrier plate,PETG,flat down,0.2,4,25
+P29,1,dsi-head,stl/face_ring_dsi.stl,Optional DSI face ring,black PETG,flat front down,0.2,4,25
+P30,1,dsi-head,stl/brow_bracket.stl,Optional forward sensor brow bracket,PETG,base plate down,0.2,4,25

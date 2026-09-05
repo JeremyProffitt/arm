@@ -17,6 +17,8 @@ Connect each motor individually to set its unique ID. Confirm the servo voltage 
 | Stability | Base secured as specified; verify measured mass and center of gravity at the maximum allowed reach. |
 | Head mass | Weigh the completed head and replace assumed mass in the torque calculation. |
 | Horns | Metal horns secured with the servo's correct center screw; no printed spline substitutes. |
+| Enclosed links | Servo seated on the pocket floor with its rear connector in the notch; halves meet at the mid-plane without crushing the case; harness passes the wall port with slack; open clevis clears the previous block and keeper through the commissioned travel. |
+| Optional DSI head | Carrier pads bear on all four display bosses; face ring bears on the foam rim only, never on the glass; FFC bend radius above 10 mm at every turn; picture stable at full backlight for 30 minutes with the arm closed. |
 
 ## Electrical and motion acceptance
 

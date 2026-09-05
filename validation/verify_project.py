@@ -12,7 +12,7 @@ ROOT=Path(__file__).resolve().parents[1]
 
 
 def main():
-    report={"release":"LUMA Rev A","scope":"Digital asset checks only; no physical prototype available."}
+    report={"release":"LUMA Rev B","scope":"Digital asset checks only; no physical prototype available. Static checks cover the standard assembly and the optional 4-inch DSI head assembly."}
     report["display_firmware"]={"cross_compile_verified":False,"binary_included":False,
                                 "reason":"Required compiler downloads did not complete; see software/VERIFICATION.md."}
     report["physical_validation"]={"performed":False,

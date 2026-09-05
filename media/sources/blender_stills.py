@@ -51,11 +51,16 @@ def area(name,location,energy,color,size,target):
     light=bpy.data.lights.new(name,'AREA');light.energy=energy;light.color=color;light.shape='DISK';light.size=size
     ob=bpy.data.objects.new(name,light);bpy.context.collection.objects.link(ob);ob.location=location;point(ob,target)
 
+def option(name,default):
+    argv=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else sys.argv
+    return argv[argv.index(name)+1] if name in argv and argv.index(name)+1<len(argv) else default
+
 def main():
     bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
-    a=Assembly(ROOT/'cad'/'assembly.json'); mats={n:material(n) for n in PALETTE}
+    manifest=ROOT/option('--manifest','cad/assembly.json');suffix=option('--suffix','')
+    a=Assembly(manifest); mats={n:material(n) for n in PALETTE}
     scene=bpy.context.scene;scene.render.engine='CYCLES';scene.cycles.samples=24
-    scene['assembly_manifest_sha256']=hashlib.sha256((ROOT/'cad'/'assembly.json').read_bytes()).hexdigest()
+    scene['assembly_manifest_sha256']=hashlib.sha256(manifest.read_bytes()).hexdigest()
     scene['prototype_visualization']=True
     scene.cycles.use_denoising=True;scene.render.threads_mode='FIXED';scene.render.threads=6
     scene.render.resolution_x=1800;scene.render.resolution_y=1600;scene.render.resolution_percentage=50 if '--preview' in sys.argv else 100
@@ -84,8 +89,8 @@ def main():
         target=(0,.065 if view=='hero' else .095,.190 if view=='hero' else .205)
         cob.location=(.53,.86,.43) if view=='hero' else (1.0,.65,.54);point(cob,target)
         cam.ortho_scale=.56 if view=='hero' else .65
-        scene.render.filepath=str(output/f'{view}_cycles.png')
-        bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'media'/'sources'/f'luma_{view}.blend'))
+        scene.render.filepath=str(output/f'{view}{suffix}_cycles.png')
+        if not suffix:bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'media'/'sources'/f'luma_{view}.blend'))
         bpy.ops.render.render(write_still=True)
         for ob in items:
             mesh=ob.data;bpy.data.objects.remove(ob,do_unlink=True);bpy.data.meshes.remove(mesh)

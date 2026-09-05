@@ -1,6 +1,6 @@
 # Parts and purchasing
 
-Planning allowance for the purchased items below: **US $778.78** before shipping and tax. Figures are budgeting allowances, not checked-out prices. Filament and any workshop tools are included only where explicitly listed. Reuse of existing supplies can change the total substantially.
+Planning allowance for the standard build below: **US $777.98** before shipping and tax. The optional 4-inch DSI head adds **US $61.10** of purchased parts and removes the 1.85-inch display, the inner RGBW ring and their fasteners (about US $68.35). Figures are budgeting allowances, not checked-out prices. Filament and any workshop tools are included only where explicitly listed. Reuse of existing supplies can change the total substantially.
 
 Order the exact display and voltage variant specified. Generic fasteners, connector harnesses, relay contacts and wire must meet the listed dimensions and electrical ratings. Buy the servo horns and their screws with the servos; verify their actual thread and engagement before ordering extras.
 
@@ -59,8 +59,8 @@ Order the exact display and voltage variant specified. Generic fasteners, connec
 | M08 / 2 | Generic M3x45 | Yaw rear body clamp bolts. Through bottom3 + body35 + keeper2.6; do not overtighten case | $0.30 |
 | M09 / 2 | [Generic M3x50]( ) | Shoulder clamp bolts. Clamp through44mm tower width plus nuts | $0.30 |
 | M10 / 4 | [Generic M3x16]( ) | Shoulder foot bolts. 6mm tower foot plus6mm platform plus nuts | $0.16 |
-| M11 / 8 | Generic M3x60 | Arm rail cross bolts. 5+44+5mm stack plus nut; 4 per arm; include4 cassette ear positions | $0.40 |
-| M12 / 24 | [Generic M3x10 nominal](https://www.waveshare.net/wiki/ST3215_Servo) | Pitch horn attachment screws. Nominal M3; 5mm rail +3.3mm spacer leaves1.7mm horn engagement; confirm vendor horn thread | $0.15 |
+| M11 / 6 | Generic M3x60 | Arm link through bolts. 5+44+5mm stack plus nut; 3 per link: proximal boss at X35 and the two servo block ears; the halves clamp the servo | $0.40 |
+| M12 / 24 | [Generic M3x10 nominal](https://www.waveshare.net/wiki/ST3215_Servo) | Pitch horn attachment screws. Nominal M3; 5mm link plate +3.3mm spacer leaves1.7mm horn engagement; confirm vendor horn thread | $0.15 |
 | M13 / 4 | [Generic M3x6 nominal](https://www.waveshare.net/wiki/ST3215_Servo) | Yaw horn attachment screws. 3mm web plus1mm washer leaves2mm engagement; confirm vendor horn thread | $0.15 |
 | M14 / 6 | [Generic M3x12]( ) | Base lid screws. Into2.8mm plastic-thread-forming printed pilots | $0.15 |
 | M15 / 4 | Generic M3x12 | Head yoke screws. 6mm fork mounting face +3mm shell floor; nuts on inside | $0.15 |
@@ -77,7 +77,7 @@ Order the exact display and voltage variant specified. Generic fasteners, connec
 | M26 / 4 | Generic M2.5x6 | Raspberry Pi fasteners. Pi4 four mounting holes; printed standoffs may be tappedM2.5 | $0.12 |
 | M27 / 4 | Generic Rubber feet | Adhesive anti slip feet. 20mm diameter x5mm high minimum; place radius90 | $0.40 |
 | M28 / 1 | Generic Translucent PETG | Frosted optical printing filament. Natural/translucent; approximately60g including trials; solid1.2mm optical skin | $20.00 |
-| M29 / 1 | Generic PETG | Structural filament. Approx1kg roll; actual slicer mass varies;6 walls on arm rails | $22.00 |
+| M29 / 1 | Generic PETG | Structural filament. Approx1kg roll; actual slicer mass varies;6 walls on the arm link halves | $22.00 |
 | M30 / 1 | Generic Neutral cure silicone | Small adhesive tube. 3 small removable dots for inner diffuser and edgefoam; electronics compatible | $6.00 |
 | M31 / 1 | Generic Thin PCB foam | Closed cell foam tape. 0.5 and1mm thickness; LCD edge preload only | $4.00 |
 | M32 / 1 | [Generic LED retaining tape]( ) | Electronics compatible thin adhesive strips. Attach LED ring PCB on support posts without covering LED optics | $3.00 |
@@ -85,9 +85,24 @@ Order the exact display and voltage variant specified. Generic fasteners, connec
 | M34 / 12 | [Generic M2.5x12]( ) | Optional harness clip screws. For6 printed cable saddles; use selftapped pilots or cableties | $0.12 |
 | M35 / 10 | Generic Soft closed-cell foam strip | Required ToF edge preload strips. 18x2x6mm each; compress gently to5.4mm between PCB edge and retaining frame;2 per sensor | $0.20 |
 
+## Optional 4-inch DSI head (not in the standard total)
+
+Buy these only for the optional head described in the mechanical chapter. With this head, do not buy E04 (1.85-inch display), E10 (24-pixel RGBW ring), E31 (display USB cable), M18 (white ring carrier screws) or M19 (LCD cradle screws).
+
+| Ref / qty | Item | Required specification | Budget / each |
+| --- | --- | --- | --- |
+| D01 / 1 | [Waveshare 4inch DSI LCD (C)](https://www.waveshare.com/4inch-dsi-lcd-c.htm) | Optional head display. Round720x720 IPS DSI;126mm outline;101.52mm active;6mm case;four M4 rear bosses on75x75;includes two50mm 15-pin FPC | $45.00 |
+| D02 / 1 | Generic 15-pin 1.0mm pitch FFC type A 800mm | Pi DSI to optional head. Same-side contacts;0.3mm thick;800mm nominal from Pi DSI connector through both arm cable ports;bench-verify signal integrity before closing the arm | $8.00 |
+| D03 / 1 | Generic 2-conductor 22AWG silicone lead with2.0mm pitch 4-pin plug | Optional head5V feed. Pi header5V/GND to LCD HP2.0 4-pin;SDA/SCL contacts left empty;800mm | $4.00 |
+| D10 / 4 | Generic M4x8 | Optional LCD carrier to display screws. Through5mm carrier pad into the4mm deep M4 case bosses; longer screws bottom out | $0.15 |
+| D11 / 4 | Generic M3x8 | Optional carrier to shell screws. Into2.8mm printed pilots at(+/-55,+/-38) top20.5 | $0.15 |
+| D12 / 4 | Generic M3x12 | Optional face ring screws. 4mm ring +1mm shim;2.8mm pilots at radius67.8 | $0.15 |
+| D13 / 2 | Generic M3x10 | Optional brow bracket bolts. Through3mm bracket base +3mm shell wall; nuts inside the shell | $0.15 |
+| D14 / 1 | Generic Thin closed cell foam tape | Optional LCD rim preload. 0.5mm between the display case rim and the face ring; also under the carrier pads if the boss ends are not coplanar | $2.00 |
+
 ## Printable part schedule
 
-27 unique STL files; 52 printed pieces including the fit coupon and optional cable clips. Quantities control the print run. The drawing index uses the same part order.
+26 unique STL files; 44 printed pieces for the standard build, including the fit coupon and optional cable clips. Quantities control the print run. The drawing index uses the same part order.
 
 | Drawing / qty | STL identifier | Material / print orientation |
 | --- | --- | --- |
@@ -99,22 +114,31 @@ Order the exact display and voltage variant specified. Generic fasteners, connec
 | P06 / 1 | `turntable` | PETG; neck down |
 | P07 / 1 | `shoulder_tower` | PETG; foot down |
 | P08 / 1 | `shoulder_cap` | PETG; flat down |
-| P09 / 2 | `upper_rail` | PETG; broad face down |
-| P10 / 2 | `forearm_rail` | PETG; broad face down |
-| P11 / 2 | `servo_cassette` | PETG; closed side down |
-| P12 / 2 | `cassette_cap` | PETG; flat down |
-| P13 / 4 | `cross_spacer` | PETG; cylinder upright |
-| P14 / 6 | `horn_spacer` | PETG; flat down |
-| P15 / 1 | `head_yoke` | PETG; rear mounting plate on bed; rotate180X |
-| P16 / 1 | `head_shell` | PETG; rear disc down |
-| P17 / 1 | `outer_bezel` | PETG; front lip down |
-| P18 / 1 | `face_center` | black PETG; flat front down |
-| P19 / 1 | `white_carrier` | PETG; flat down |
-| P20 / 1 | `lcd_cradle` | PETG; flat base down |
-| P21 / 1 | `lcd_retainer` | black PETG; flat down |
-| P22 / 1 | `outer_diffuser` | natural/translucent PETG; smooth optical face on bed |
-| P23 / 1 | `inner_diffuser` | natural/translucent PETG; smooth optical face on bed |
-| P24 / 5 | `sensor_pod` | PETG; rear flange down |
-| P25 / 5 | `sensor_retainer` | PETG; flat down |
-| P26 / 6 | `cable_clip` | PETG; flat down |
-| P27 / 1 | `fit_coupon` | PETG; flat down |
+| P09 / 1 | `upper_arm_left` | PETG; plate down |
+| P10 / 1 | `upper_arm_right` | PETG; plate down |
+| P11 / 1 | `forearm_left` | PETG; plate down |
+| P12 / 1 | `forearm_right` | PETG; plate down |
+| P13 / 6 | `horn_spacer` | PETG; flat down |
+| P14 / 1 | `head_yoke` | PETG; rear mounting plate on bed; rotate180X |
+| P15 / 1 | `head_shell` | PETG; rear disc down |
+| P16 / 1 | `outer_bezel` | PETG; front lip down |
+| P17 / 1 | `face_center` | black PETG; flat front down |
+| P18 / 1 | `white_carrier` | PETG; flat down |
+| P19 / 1 | `lcd_cradle` | PETG; flat base down |
+| P20 / 1 | `lcd_retainer` | black PETG; flat down |
+| P21 / 1 | `outer_diffuser` | natural/translucent PETG; smooth optical face on bed |
+| P22 / 1 | `inner_diffuser` | natural/translucent PETG; smooth optical face on bed |
+| P23 / 5 | `sensor_pod` | PETG; rear flange down |
+| P24 / 5 | `sensor_retainer` | PETG; flat down |
+| P25 / 6 | `cable_clip` | PETG; flat down |
+| P26 / 1 | `fit_coupon` | PETG; flat down |
+
+The optional 4-inch DSI head prints 4 additional files (4 pieces) and omits `head_shell`, `face_center`, `white_carrier`, `inner_diffuser`, `lcd_cradle`, `lcd_retainer` from the list above.
+
+| Drawing / qty | STL identifier | Material / print orientation |
+| --- | --- | --- |
+| P27 / 1 | `head_shell_dsi` | PETG; rear disc down |
+| P28 / 1 | `lcd4_carrier` | PETG; flat down |
+| P29 / 1 | `face_ring_dsi` | black PETG; flat front down |
+| P30 / 1 | `brow_bracket` | PETG; base plate down |
+

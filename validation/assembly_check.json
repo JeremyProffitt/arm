@@ -1,9 +1,10 @@
 {
-  "scope": "Static indexed-neutral printed-part intersections only. Not a dynamic collision, fastener, cable or physical-fit certification.",
+  "scope": "Static indexed-neutral printed-part intersections only, for the standard and the optional DSI-head assemblies. Not a dynamic collision, fastener, cable or physical-fit certification.",
   "parts": [
     {
       "id": "base_tub",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 243.869,
@@ -19,6 +20,7 @@
     {
       "id": "base_lid",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 181.508,
@@ -34,6 +36,7 @@
     {
       "id": "electronics_tray",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 35.986,
@@ -49,6 +52,7 @@
     {
       "id": "yaw_mount",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 15.048,
@@ -64,6 +68,7 @@
     {
       "id": "yaw_cap",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 1.888,
@@ -79,6 +84,7 @@
     {
       "id": "turntable",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 42.319,
@@ -94,6 +100,7 @@
     {
       "id": "shoulder_tower",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 49.04,
@@ -109,6 +116,7 @@
     {
       "id": "shoulder_cap",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 5.048,
@@ -122,83 +130,73 @@
       "fits_220_bed_xy": true
     },
     {
-      "id": "upper_rail",
-      "quantity": 2,
+      "id": "upper_arm_left",
+      "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
-      "volume_cm3": 19.784,
+      "volume_cm3": 49.136,
       "connected_bodies": 1,
       "size_mm": [
-        137.5,
+        138.5,
         46.0,
-        5.0
+        27.0
       ],
-      "triangles": 4112,
+      "triangles": 4028,
       "fits_220_bed_xy": true
     },
     {
-      "id": "forearm_rail",
-      "quantity": 2,
+      "id": "upper_arm_right",
+      "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
-      "volume_cm3": 17.584,
+      "volume_cm3": 49.136,
       "connected_bodies": 1,
       "size_mm": [
-        117.5,
+        138.5,
         46.0,
-        5.0
+        27.0
       ],
-      "triangles": 4112,
+      "triangles": 4028,
       "fits_220_bed_xy": true
     },
     {
-      "id": "servo_cassette",
-      "quantity": 2,
+      "id": "forearm_left",
+      "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
-      "volume_cm3": 25.323,
+      "volume_cm3": 43.124,
       "connected_bodies": 1,
       "size_mm": [
-        26.0,
+        118.5,
         46.0,
-        39.8
+        27.0
       ],
-      "triangles": 1208,
+      "triangles": 4028,
       "fits_220_bed_xy": true
     },
     {
-      "id": "cassette_cap",
-      "quantity": 2,
+      "id": "forearm_right",
+      "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
-      "volume_cm3": 4.914,
+      "volume_cm3": 43.124,
       "connected_bodies": 1,
       "size_mm": [
-        26.0,
+        118.5,
         46.0,
-        4.2
+        27.0
       ],
-      "triangles": 1172,
-      "fits_220_bed_xy": true
-    },
-    {
-      "id": "cross_spacer",
-      "quantity": 4,
-      "watertight": true,
-      "positive_volume": true,
-      "volume_cm3": 4.574,
-      "connected_bodies": 1,
-      "size_mm": [
-        12.0,
-        12.0,
-        44.0
-      ],
-      "triangles": 768,
+      "triangles": 4028,
       "fits_220_bed_xy": true
     },
     {
       "id": "horn_spacer",
       "quantity": 6,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 0.814,
@@ -214,36 +212,39 @@
     {
       "id": "head_yoke",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
-      "volume_cm3": 23.319,
+      "volume_cm3": 22.479,
       "connected_bodies": 1,
       "size_mm": [
         66.0,
         44.0,
         36.0
       ],
-      "triangles": 5980,
+      "triangles": 6096,
       "fits_220_bed_xy": true
     },
     {
       "id": "head_shell",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
-      "volume_cm3": 168.483,
+      "volume_cm3": 168.222,
       "connected_bodies": 1,
       "size_mm": [
         176.0,
         176.0,
         36.0
       ],
-      "triangles": 33324,
+      "triangles": 33052,
       "fits_220_bed_xy": true
     },
     {
       "id": "outer_bezel",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 18.889,
@@ -259,6 +260,7 @@
     {
       "id": "face_center",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 47.741,
@@ -274,6 +276,7 @@
     {
       "id": "white_carrier",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 4.443,
@@ -289,6 +292,7 @@
     {
       "id": "lcd_cradle",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 19.678,
@@ -304,6 +308,7 @@
     {
       "id": "lcd_retainer",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 6.118,
@@ -319,6 +324,7 @@
     {
       "id": "outer_diffuser",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 9.739,
@@ -334,6 +340,7 @@
     {
       "id": "inner_diffuser",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 3.909,
@@ -349,6 +356,7 @@
     {
       "id": "sensor_pod",
       "quantity": 5,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 4.405,
@@ -364,6 +372,7 @@
     {
       "id": "sensor_retainer",
       "quantity": 5,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 0.665,
@@ -379,6 +388,7 @@
     {
       "id": "cable_clip",
       "quantity": 6,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 1.248,
@@ -394,6 +404,7 @@
     {
       "id": "fit_coupon",
       "quantity": 1,
+      "variant": "standard",
       "watertight": true,
       "positive_volume": true,
       "volume_cm3": 6.911,
@@ -405,8 +416,84 @@
       ],
       "triangles": 2728,
       "fits_220_bed_xy": true
+    },
+    {
+      "id": "head_shell_dsi",
+      "quantity": 1,
+      "variant": "dsi-head",
+      "watertight": true,
+      "positive_volume": true,
+      "volume_cm3": 158.515,
+      "connected_bodies": 1,
+      "size_mm": [
+        176.0,
+        176.0,
+        36.0
+      ],
+      "triangles": 29864,
+      "fits_220_bed_xy": true
+    },
+    {
+      "id": "lcd4_carrier",
+      "quantity": 1,
+      "variant": "dsi-head",
+      "watertight": true,
+      "positive_volume": true,
+      "volume_cm3": 25.712,
+      "connected_bodies": 1,
+      "size_mm": [
+        140.0,
+        140.0,
+        5.0
+      ],
+      "triangles": 6240,
+      "fits_220_bed_xy": true
+    },
+    {
+      "id": "face_ring_dsi",
+      "quantity": 1,
+      "variant": "dsi-head",
+      "watertight": true,
+      "positive_volume": true,
+      "volume_cm3": 23.643,
+      "connected_bodies": 1,
+      "size_mm": [
+        142.6,
+        142.6,
+        4.0
+      ],
+      "triangles": 3088,
+      "fits_220_bed_xy": true
+    },
+    {
+      "id": "brow_bracket",
+      "quantity": 1,
+      "variant": "dsi-head",
+      "watertight": true,
+      "positive_volume": true,
+      "volume_cm3": 7.786,
+      "connected_bodies": 1,
+      "size_mm": [
+        40.0,
+        33.0,
+        30.0
+      ],
+      "triangles": 1840,
+      "fits_220_bed_xy": true
     }
   ],
-  "printed_instances": 45,
+  "assemblies": {
+    "standard": {
+      "file": "assembly.json",
+      "printed_instances": 37,
+      "intersections": []
+    },
+    "dsi_head": {
+      "file": "assembly_dsi.json",
+      "printed_instances": 35,
+      "intersections": []
+    }
+  },
+  "printed_instances": 37,
   "intersections": []
 }

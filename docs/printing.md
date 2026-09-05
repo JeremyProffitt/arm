@@ -8,9 +8,11 @@ The part manifest gives quantities, material and orientation. The STL orientatio
 
 ## Structural material
 
-Use PETG for the first functional build. For arm links and load-carrying brackets, start with 0.20 mm layers, five perimeters, six top/bottom layers and 40% gyroid infill. Increase local solid infill around fasteners if your slicer supports modifier volumes. Print link plates flat so their length lies in the XY plane.
+Use PETG for the first functional build. For the four enclosed arm link halves and load-carrying brackets, start with 0.20 mm layers, six perimeters, six top/bottom layers and 40% gyroid infill. Increase local solid infill around fasteners if your slicer supports modifier volumes. Print each link half with its 5 mm plate on the bed so the length lies in the XY plane; the 22 mm walls, the servo block and the through-bolt boss then print vertically without support, and the small cable port and connector notch are short self-supporting bridges. Left and right halves are mirror images and are separate STL files; print one of each per link.
 
 For non-load-bearing covers, start with four perimeters, 0.20 mm layers and 20% infill. Use the orientation and support notes specific to each part. Remove supports without gouging bearing seats or the surfaces that locate circuit boards.
+
+The optional 4-inch DSI head adds four files: `head_shell_dsi` (rear disc down, like the standard shell), `lcd4_carrier` and `face_ring_dsi` (flat), and `brow_bracket` (base plate down; its two gussets are 45° overhangs that need no support). Print them only if you build that head, and leave out the six standard-head parts the schedule lists as omitted.
 
 PLA can be useful for quick dimension checks, but warm motors, LED boards and sustained joint loads make it a poor default for the final load-carrying structure. A material change also changes shrinkage and fit; repeat the coupon.
 

@@ -14,6 +14,12 @@ Pi BCM18 PWM0    ─ 74AHCT125 +330Ω ─ 24RGBW inner ring (white only)
 Pi BCM27        ─ isolated NC stop contact ─ GND
 ```
 
+## Optional 4-inch DSI head
+
+The optional head replaces the USB display with a **Waveshare 4inch DSI LCD (C)** (round 720 × 720 IPS, DSI, 126 mm case). The Raspberry Pi drives it directly from its DSI connector and renders the face itself with the `display_kind: "dsi"` software path; there is no coprocessor, no USB link and no serial heartbeat. The display needs three connections: the 15-pin 1.0 mm DSI FPC (data, plus the DSI connector's I2C for touch and backlight control, `I2C_bus=10` in the vendor overlay), and 5 V/GND to its HP2.0 4-pin socket from Pi header pins 4 and 39. Leave the socket's SDA/SCL contacts empty so the display's touch controller never shares the sensor mux bus. Touch is not used.
+
+The FPC runs about 800 mm from the tray through the turntable aperture, the two enclosed links and the fork slot. MIPI DSI over an 800 mm unshielded FFC is outside the length the vendor supplies (50 mm cables are included; 150 mm is sold for compute modules) and must be proven on the bench before the arm is closed: a display that blanks, tears or shows a shifted image is a cable problem before it is a software problem. Keep the FFC away from the servo power leads inside the links. The display's backlight draws from the Pi's 5 V rail in place of the USB display, so the Pi supply budget is unchanged in kind; measure the actual current at full backlight. This head has no 24-pixel RGBW ring: `WHITE_DATA5V` and `LED_WHITE_POWER` are left unconnected and the software's white-channel output goes nowhere, while the halo provides white light at its capped brightness. [Vendor page](https://www.waveshare.com/4inch-dsi-lcd-c.htm).
+
 ## Power and physical wiring
 
 Use the official Pi 5.1 V/3 A USB-C supply. Use an external enclosed Mean Well GST220A12-R7B 12 V/15 A supply for the actuators and the LED buck converter. All grounds share one DC star point; the Pi 5 V rail and LED 5 V rail are never joined. The enclosure contains DC only. The chosen supply uses a locking R7B power DIN, not a standard small barrel plug. Order a correctly rated mating harness and wire all parallel contacts exactly as the supply drawing specifies. [Mean Well specification](https://www.meanwell.com/Upload/PDF/GST220A/GST220A-SPEC.PDF).

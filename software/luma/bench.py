@@ -60,8 +60,12 @@ def sensors(seconds):
         ranging.close()
 
 
-def display(port, seconds, scene):
-    screen = Display(port)
+def display(port, seconds, scene, kind="usb_serial"):
+    if kind == "dsi":
+        from .face import DsiDisplay
+        screen = DsiDisplay()
+    else:
+        screen = Display(port)
     try:
         start = time.monotonic()
         next_report = start
@@ -79,20 +83,30 @@ def display(port, seconds, scene):
         screen.close()
 
 
-def main(argv=None):
+def build_parser():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     sensor_parser = commands.add_parser("sensors", help="Poll all five mux channels without motors or LED rings")
     sensor_parser.add_argument("--seconds", type=duration, default=10.0)
-    display_parser = commands.add_parser("display", help="Check USB heartbeat and request animated faces")
-    display_parser.add_argument("--port", required=True, help="Actual USB serial device; /dev/serial/by-id/... on Pi")
+    display_parser = commands.add_parser("display", help="Check display heartbeat and request animated faces")
+    display_parser.add_argument("--port", default=None,
+        help="Actual USB serial device; /dev/serial/by-id/... on Pi. Required unless --kind dsi")
+    display_parser.add_argument("--kind", choices=("usb_serial", "dsi"), default="usb_serial",
+        help="usb_serial talks to the ESP32 face board; dsi renders locally on the Waveshare panel")
     display_parser.add_argument("--seconds", type=duration, default=10.0)
     display_parser.add_argument("--scene", choices=("all", *SCENES, "fault"), default="all")
+    return parser
+
+
+def main(argv=None):
+    parser = build_parser()
     args = parser.parse_args(argv)
+    if args.command == "display" and args.kind == "usb_serial" and not args.port:
+        parser.error("--port is required when --kind usb_serial")
     try:
         if args.command == "sensors":
             return sensors(args.seconds)
-        return display(args.port, args.seconds, args.scene)
+        return display(args.port, args.seconds, args.scene, args.kind)
     except KeyboardInterrupt:
         return 130
     except Exception as exc:
