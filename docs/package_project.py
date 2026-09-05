@@ -45,7 +45,7 @@ def main():
         sha = hashlib.sha256(path.read_bytes()).hexdigest()
         inventory.append({"file": rel, "bytes": path.stat().st_size, "sha256": sha})
     invpath = OUT / "package_inventory.json"
-    invpath.write_text(json.dumps({"revision": "A", "files": inventory}, indent=2), encoding="utf-8")
+    invpath.write_text(json.dumps({"revision": "B", "files": inventory}, indent=2), encoding="utf-8")
     sums = OUT / "SHA256SUMS.txt"
     sums.write_text("\n".join(f'{r["sha256"]}  {r["file"]}' for r in inventory)+"\n", encoding="utf-8")
     target = OUT / "LUMA_Complete_Project.zip"

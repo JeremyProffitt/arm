@@ -1,6 +1,6 @@
 {
-  "release": "LUMA Rev A",
-  "scope": "Digital asset checks only; no physical prototype available.",
+  "release": "LUMA Rev B",
+  "scope": "Digital asset checks only; no physical prototype available. Static checks cover the standard assembly and the optional 4-inch DSI head assembly.",
   "display_firmware": {
     "cross_compile_verified": false,
     "binary_included": false,
@@ -12,50 +12,51 @@
   },
   "host_tests": {
     "exit_code": 0,
-    "log": "test_duration_rejects_nonfinite_and_out_of_bounds (test_bench.BenchTests.test_duration_rejects_nonfinite_and_out_of_bounds) ... ok\ntest_missing_invalid_stale_and_near_are_explicit (test_bench.BenchTests.test_missing_invalid_stale_and_near_are_explicit) ... ok\ntest_snapshot_preserves_physical_channel_order (test_bench.BenchTests.test_snapshot_preserves_physical_channel_order) ... ok\ntest_all_scenes_respect_limits_and_speed (test_control.ControllerTests.test_all_scenes_respect_limits_and_speed) ... ok\ntest_each_sensor_is_required (test_control.ControllerTests.test_each_sensor_is_required) ... ok\ntest_estop_display_and_servo_faults (test_control.ControllerTests.test_estop_display_and_servo_faults) ... ok\ntest_fault_latches_and_freezes (test_control.ControllerTests.test_fault_latches_and_freezes) ... ok\ntest_hi_speaks_once (test_control.ControllerTests.test_hi_speaks_once) ... ok\ntest_large_scheduler_gap_freezes (test_control.ControllerTests.test_large_scheduler_gap_freezes) ... ok\ntest_nan_none_and_stale_are_not_clear_space (test_control.ControllerTests.test_nan_none_and_stale_are_not_clear_space) ... ok\ntest_unarmed_never_moves (test_control.ControllerTests.test_unarmed_never_moves) ... ok\ntest_checked_response (test_control.ProtocolTests.test_checked_response) ... ok\ntest_config_refuses_uncalibrated_motion (test_control.ProtocolTests.test_config_refuses_uncalibrated_motion) ... ok\ntest_hold_falls_back_to_last_feedback_on_read_failure (test_control.ProtocolTests.test_hold_falls_back_to_last_feedback_on_read_failure) ... ok\ntest_hold_reads_actual_pose_before_command (test_control.ProtocolTests.test_hold_reads_actual_pose_before_command) ... ok\ntest_inner_ring_only_white_and_capped (test_control.ProtocolTests.test_inner_ring_only_white_and_capped) ... ok\ntest_known_read_request (test_control.ProtocolTests.test_known_read_request) ... ok\ntest_stop_uses_physical_level_not_active_low_gpiozero_value (test_control.ProtocolTests.test_stop_uses_physical_level_not_active_low_gpiozero_value) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 0.012s\n\nOK\n"
+    "log": "test_duration_rejects_nonfinite_and_out_of_bounds (test_bench.BenchTests.test_duration_rejects_nonfinite_and_out_of_bounds) ... ok\ntest_missing_invalid_stale_and_near_are_explicit (test_bench.BenchTests.test_missing_invalid_stale_and_near_are_explicit) ... ok\ntest_snapshot_preserves_physical_channel_order (test_bench.BenchTests.test_snapshot_preserves_physical_channel_order) ... ok\ntest_all_scenes_respect_limits_and_speed (test_control.ControllerTests.test_all_scenes_respect_limits_and_speed) ... ok\ntest_each_sensor_is_required (test_control.ControllerTests.test_each_sensor_is_required) ... ok\ntest_estop_display_and_servo_faults (test_control.ControllerTests.test_estop_display_and_servo_faults) ... ok\ntest_fault_latches_and_freezes (test_control.ControllerTests.test_fault_latches_and_freezes) ... ok\ntest_hi_speaks_once (test_control.ControllerTests.test_hi_speaks_once) ... ok\ntest_large_scheduler_gap_freezes (test_control.ControllerTests.test_large_scheduler_gap_freezes) ... ok\ntest_nan_none_and_stale_are_not_clear_space (test_control.ControllerTests.test_nan_none_and_stale_are_not_clear_space) ... ok\ntest_unarmed_never_moves (test_control.ControllerTests.test_unarmed_never_moves) ... ok\ntest_checked_response (test_control.ProtocolTests.test_checked_response) ... ok\ntest_config_refuses_uncalibrated_motion (test_control.ProtocolTests.test_config_refuses_uncalibrated_motion) ... ok\ntest_hold_falls_back_to_last_feedback_on_read_failure (test_control.ProtocolTests.test_hold_falls_back_to_last_feedback_on_read_failure) ... ok\ntest_hold_reads_actual_pose_before_command (test_control.ProtocolTests.test_hold_reads_actual_pose_before_command) ... ok\ntest_inner_ring_only_white_and_capped (test_control.ProtocolTests.test_inner_ring_only_white_and_capped) ... ok\ntest_known_read_request (test_control.ProtocolTests.test_known_read_request) ... ok\ntest_stop_uses_physical_level_not_active_low_gpiozero_value (test_control.ProtocolTests.test_stop_uses_physical_level_not_active_low_gpiozero_value) ... ok\ntest_dsi_kind_does_not_require_port (test_face.BenchArgumentTests.test_dsi_kind_does_not_require_port) ... ok\ntest_usb_serial_kind_without_port_is_rejected (test_face.BenchArgumentTests.test_usb_serial_kind_without_port_is_rejected) ... usage: python.exe -m unittest [-h] {sensors,display} ...\npython.exe -m unittest: error: --port is required when --kind usb_serial\nok\ntest_fault_shows_alert_bars (test_face.DrawFaceTests.test_fault_shows_alert_bars) ... ok\ntest_happy_uses_arcs_not_eye_rects (test_face.DrawFaceTests.test_happy_uses_arcs_not_eye_rects) ... ok\ntest_hi_mouth_circle (test_face.DrawFaceTests.test_hi_mouth_circle) ... ok\ntest_idle_blush (test_face.DrawFaceTests.test_idle_blush) ... ok\ntest_idle_shows_open_eyes_on_black (test_face.DrawFaceTests.test_idle_shows_open_eyes_on_black) ... ok\ntest_offline_overrides_face_with_alert (test_face.DrawFaceTests.test_offline_overrides_face_with_alert) ... ok\ntest_wink_closes_right_eye_mid_cycle (test_face.DrawFaceTests.test_wink_closes_right_eye_mid_cycle) ... ok\ntest_wink_eye_open_outside_wink_window (test_face.DrawFaceTests.test_wink_eye_open_outside_wink_window) ... ok\ntest_close_does_not_raise (test_face.DsiDisplayTests.test_close_does_not_raise) ... ok\ntest_update_returns_true_and_redraws_on_new_frame (test_face.DsiDisplayTests.test_update_returns_true_and_redraws_on_new_frame) ... ok\ntest_importing_hardware_does_not_import_pygame (test_face.HardwareImportTests.test_importing_hardware_does_not_import_pygame) ... ok\ntest_absent_display_kind_still_requires_real_display_port (test_face.ValidateConfigDisplayKindTests.test_absent_display_kind_still_requires_real_display_port) ... ok\ntest_dsi_kind_does_not_require_real_display_port (test_face.ValidateConfigDisplayKindTests.test_dsi_kind_does_not_require_real_display_port) ... ok\ntest_unknown_display_kind_rejected (test_face.ValidateConfigDisplayKindTests.test_unknown_display_kind_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 34 tests in 0.201s\n\nOK\n"
   },
   "manual": {
-    "pages": 62,
-    "bookmarks": 45,
-    "bytes": 14163531,
+    "pages": 73,
+    "bookmarks": 49,
+    "bytes": 21327746,
     "text_outside_page": [],
     "suspiciously_empty_pages": []
   },
   "videos": [
     {
       "file": "media\\videos\\01_wink.mp4",
-      "bytes": 1024277,
+      "bytes": 999773,
       "decode_exit_code": 0,
       "duration": "00:00:09.00",
       "decoded_frames": 216,
-      "video": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 760 kb/s, 24 fps, 24 tbr, 12288 tbn (default)",
+      "video": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 739 kb/s, 24 fps, 24 tbr, 12288 tbn (default)",
       "audio": "Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 142 kb/s (default)"
     },
     {
       "file": "media\\videos\\02_hi.mp4",
-      "bytes": 1291267,
+      "bytes": 1237149,
       "decode_exit_code": 0,
       "duration": "00:00:09.00",
       "decoded_frames": 216,
-      "video": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 1017 kb/s, 24 fps, 24 tbr, 12288 tbn (default)",
+      "video": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 969 kb/s, 24 fps, 24 tbr, 12288 tbn (default)",
       "audio": "Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 123 kb/s (default)"
     },
     {
       "file": "media\\videos\\03_happy.mp4",
-      "bytes": 1547539,
+      "bytes": 1480930,
       "decode_exit_code": 0,
       "duration": "00:00:09.00",
       "decoded_frames": 216,
-      "video": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 1193 kb/s, 24 fps, 24 tbr, 12288 tbn (default)",
+      "video": "Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 1133 kb/s, 24 fps, 24 tbr, 12288 tbn (default)",
       "audio": "Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 175 kb/s (default)"
     }
   ],
   "static_assembly": {
-    "scope": "Static indexed-neutral printed-part intersections only. Not a dynamic collision, fastener, cable or physical-fit certification.",
+    "scope": "Static indexed-neutral printed-part intersections only, for the standard and the optional DSI-head assemblies. Not a dynamic collision, fastener, cable or physical-fit certification.",
     "parts": [
       {
         "id": "base_tub",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 243.869,
@@ -71,6 +72,7 @@
       {
         "id": "base_lid",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 181.508,
@@ -86,6 +88,7 @@
       {
         "id": "electronics_tray",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 35.986,
@@ -101,6 +104,7 @@
       {
         "id": "yaw_mount",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 15.048,
@@ -116,6 +120,7 @@
       {
         "id": "yaw_cap",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 1.888,
@@ -131,6 +136,7 @@
       {
         "id": "turntable",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 42.319,
@@ -146,6 +152,7 @@
       {
         "id": "shoulder_tower",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 49.04,
@@ -161,6 +168,7 @@
       {
         "id": "shoulder_cap",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 5.048,
@@ -174,83 +182,73 @@
         "fits_220_bed_xy": true
       },
       {
-        "id": "upper_rail",
-        "quantity": 2,
+        "id": "upper_arm_left",
+        "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
-        "volume_cm3": 19.784,
+        "volume_cm3": 49.136,
         "connected_bodies": 1,
         "size_mm": [
-          137.5,
+          138.5,
           46.0,
-          5.0
+          27.0
         ],
-        "triangles": 4112,
+        "triangles": 4028,
         "fits_220_bed_xy": true
       },
       {
-        "id": "forearm_rail",
-        "quantity": 2,
+        "id": "upper_arm_right",
+        "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
-        "volume_cm3": 17.584,
+        "volume_cm3": 49.136,
         "connected_bodies": 1,
         "size_mm": [
-          117.5,
+          138.5,
           46.0,
-          5.0
+          27.0
         ],
-        "triangles": 4112,
+        "triangles": 4028,
         "fits_220_bed_xy": true
       },
       {
-        "id": "servo_cassette",
-        "quantity": 2,
+        "id": "forearm_left",
+        "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
-        "volume_cm3": 25.323,
+        "volume_cm3": 43.124,
         "connected_bodies": 1,
         "size_mm": [
-          26.0,
+          118.5,
           46.0,
-          39.8
+          27.0
         ],
-        "triangles": 1208,
+        "triangles": 4028,
         "fits_220_bed_xy": true
       },
       {
-        "id": "cassette_cap",
-        "quantity": 2,
+        "id": "forearm_right",
+        "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
-        "volume_cm3": 4.914,
+        "volume_cm3": 43.124,
         "connected_bodies": 1,
         "size_mm": [
-          26.0,
+          118.5,
           46.0,
-          4.2
+          27.0
         ],
-        "triangles": 1172,
-        "fits_220_bed_xy": true
-      },
-      {
-        "id": "cross_spacer",
-        "quantity": 4,
-        "watertight": true,
-        "positive_volume": true,
-        "volume_cm3": 4.574,
-        "connected_bodies": 1,
-        "size_mm": [
-          12.0,
-          12.0,
-          44.0
-        ],
-        "triangles": 768,
+        "triangles": 4028,
         "fits_220_bed_xy": true
       },
       {
         "id": "horn_spacer",
         "quantity": 6,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 0.814,
@@ -266,36 +264,39 @@
       {
         "id": "head_yoke",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
-        "volume_cm3": 23.319,
+        "volume_cm3": 22.479,
         "connected_bodies": 1,
         "size_mm": [
           66.0,
           44.0,
           36.0
         ],
-        "triangles": 5980,
+        "triangles": 6096,
         "fits_220_bed_xy": true
       },
       {
         "id": "head_shell",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
-        "volume_cm3": 168.483,
+        "volume_cm3": 168.222,
         "connected_bodies": 1,
         "size_mm": [
           176.0,
           176.0,
           36.0
         ],
-        "triangles": 33324,
+        "triangles": 33052,
         "fits_220_bed_xy": true
       },
       {
         "id": "outer_bezel",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 18.889,
@@ -311,6 +312,7 @@
       {
         "id": "face_center",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 47.741,
@@ -326,6 +328,7 @@
       {
         "id": "white_carrier",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 4.443,
@@ -341,6 +344,7 @@
       {
         "id": "lcd_cradle",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 19.678,
@@ -356,6 +360,7 @@
       {
         "id": "lcd_retainer",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 6.118,
@@ -371,6 +376,7 @@
       {
         "id": "outer_diffuser",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 9.739,
@@ -386,6 +392,7 @@
       {
         "id": "inner_diffuser",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 3.909,
@@ -401,6 +408,7 @@
       {
         "id": "sensor_pod",
         "quantity": 5,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 4.405,
@@ -416,6 +424,7 @@
       {
         "id": "sensor_retainer",
         "quantity": 5,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 0.665,
@@ -431,6 +440,7 @@
       {
         "id": "cable_clip",
         "quantity": 6,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 1.248,
@@ -446,6 +456,7 @@
       {
         "id": "fit_coupon",
         "quantity": 1,
+        "variant": "standard",
         "watertight": true,
         "positive_volume": true,
         "volume_cm3": 6.911,
@@ -457,9 +468,85 @@
         ],
         "triangles": 2728,
         "fits_220_bed_xy": true
+      },
+      {
+        "id": "head_shell_dsi",
+        "quantity": 1,
+        "variant": "dsi-head",
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 158.515,
+        "connected_bodies": 1,
+        "size_mm": [
+          176.0,
+          176.0,
+          36.0
+        ],
+        "triangles": 29864,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "lcd4_carrier",
+        "quantity": 1,
+        "variant": "dsi-head",
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 25.712,
+        "connected_bodies": 1,
+        "size_mm": [
+          140.0,
+          140.0,
+          5.0
+        ],
+        "triangles": 6240,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "face_ring_dsi",
+        "quantity": 1,
+        "variant": "dsi-head",
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 23.643,
+        "connected_bodies": 1,
+        "size_mm": [
+          142.6,
+          142.6,
+          4.0
+        ],
+        "triangles": 3088,
+        "fits_220_bed_xy": true
+      },
+      {
+        "id": "brow_bracket",
+        "quantity": 1,
+        "variant": "dsi-head",
+        "watertight": true,
+        "positive_volume": true,
+        "volume_cm3": 7.786,
+        "connected_bodies": 1,
+        "size_mm": [
+          40.0,
+          33.0,
+          30.0
+        ],
+        "triangles": 1840,
+        "fits_220_bed_xy": true
       }
     ],
-    "printed_instances": 45,
+    "assemblies": {
+      "standard": {
+        "file": "assembly.json",
+        "printed_instances": 37,
+        "intersections": []
+      },
+      "dsi_head": {
+        "file": "assembly_dsi.json",
+        "printed_instances": 35,
+        "intersections": []
+      }
+    },
+    "printed_instances": 37,
     "intersections": []
   },
   "failures": []
