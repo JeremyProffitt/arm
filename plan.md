@@ -1,78 +1,88 @@
-# LUMA revision B — enclosed arms and optional 4-inch DSI head
+# LUMA revision C - pedestal sensors and inventory servos
 
-Single source of truth for the revision B work. A fresh run must be able to resume from this file alone.
-Repository root: `C:\dev\arm`. Python: `C:\dev\arm\.venv\Scripts\python.exe` (3.13). OpenSCAD 2021.01 at `C:/Program Files/OpenSCAD/openscad.com`. Blender 4.5.9 at `C:\dev\arm\media\.tools\blender\blender-4.5.9-windows-x64\blender.exe`.
+Single source of truth for revision C. A fresh run must be able to resume from this file alone.
+
+Repository root: `C:\dev\arm`.
+Branch: `main`.
+Python: `C:\dev\arm\.venv\Scripts\python.exe` (3.13.14).
+OpenSCAD: `C:\Program Files\OpenSCAD\openscad.com` (2021.01).
+The repository has no Git remote, so this run commits locally and records that no push target exists.
 
 ## Locked decisions (user-confirmed; do not revisit)
 
-- 2026-09-05 — user: "this is great but the arms need to be more enclosed". The revision A ladder arms (two flat rails, cylindrical cross spacers, exposed servo cassette) are replaced by closed links.
-- 2026-09-05 — user: "add an optional head for this lcd https://www.waveshare.com/4inch-dsi-lcd-c.htm". The Waveshare 4inch DSI LCD (C) round 720×720 display gets an optional head variant. The revision A head with the 1.85-inch display stays the default build.
+- 2026-09-07 - user: "a number of things to fix and update, add holes for the VL53L1X adafuit board and mounting holes on the inside of the base to mount them.  change out the servos for the ones listed in inventory."
+- 2026-09-07 - user: "yes, the peddestal.  all 5 sensors should be in the wall"
+- 2026-09-07 - user: "use this board for pwm PCA9685"
+- 2026-09-07 - available positional-servo inventory includes eight `Miuzei DS3218MG` 20 kg digital servos with 270-degree control. The other listed inventory consists of two continuous-rotation `SPT5525LV-360`, four `MG996R`, four 180-degree `MG995`, and fifteen `SG90` servos.
+- Existing revision B decisions remain in force unless revision C explicitly changes them. Revision B is committed at `205a69b`.
 
-## Design decisions taken by the run (defaults; not user-confirmed; reported in the final summary)
+## Design decisions taken by the run (defaults; report at completion)
 
-- `arm-enclosure`: each link becomes two mirror-image channel halves (left and right) printed plate-down. Each half = 5 mm side plate + 2.4 mm perimeter walls 22 mm deep, meeting the other half at the link mid-plane. The side profile tapers from a Ø32 boss at the proximal pivot to a 46 mm tall block at the distal (servo) end. The servo pocket is integral (replaces `servo_cassette` + `cassette_cap`); through-bolt half-bosses are integral (replace `cross_spacer`). Horn interface (PCD 14, 3.3 mm spacer, plates at ±22..27 mm, 44 mm inside width), pivot pitches 140/120 mm, the M3x60 bolt stack and all kinematics stay identical, so `assembly.json` joints, software limits and torque calculations are unchanged. Walls start 28 mm from the proximal pivot; the proximal clevis stays open so the previous joint's servo body (which protrudes 10.11 mm past its shaft axis) and its block can rotate through it. One cable port (26 × 9 mm, rounded) sits on the −y wall behind the servo block; the service loop at each joint passes on the inside of the joint. Three M3x60 bolts per link (x=35 boss, two servo-block ears) instead of four.
-- `dsi-head`: the variant reuses `head_yoke`, `outer_bezel`, `outer_diffuser`, five `sensor_pod`/`sensor_retainer`, and the outer 60-RGB halo. New parts: `head_shell_dsi`, `lcd4_carrier`, `face_ring_dsi`, `brow_bracket`. Omitted on the variant: `face_center`, `white_carrier`, `inner_diffuser`, `lcd_cradle`, `lcd_retainer`, the 24-RGBW inner ring and the 1.85-inch display. The white lamp function on the variant comes from the outer halo at its capped brightness; this trade-off is documented. The front ToF pod moves to a forward-facing brow bracket on the top rim because the 126 mm display case leaves only 8.5 mm of face ring between it and the halo diffuser.
-- Head cable exit (both variants): a 26 × 8 mm slot through the yoke plate and the shell floor at the head centre replaces the Ø12 floor hole (the revision A yoke plate had no through-path).
-- `dsi-software`: `config.json` gains `display_kind`: `"usb_serial"` (default, ESP32 display over USB) or `"dsi"` (Pi renders the face with pygame-ce on the DSI framebuffer). `DsiDisplay` exposes the same `update(now, face) -> bool` contract as `Display`; a frame is "ok" if drawn within 1.5 s. Faces replicate the ESP32 firmware drawing at 2× scale (720 × 720).
-- Wiring (variant): 15-pin 1.0 mm pitch DSI FFC, same-side contacts, 800 mm, from the Pi DSI connector through the arm ports to the LCD; 5 V and GND from Pi header pins 4 and 39 to the LCD HP2.0 4-pin connector; SDA/SCL of that connector left unconnected (touch and backlight use the DSI connector I2C, `I2C_bus=10`).
-- Revision label becomes "Rev B / 05 Sep 2026" in the manual, drawings, README, START_HERE and package inventory.
-- Git: the folder had no repository. The run creates one (`git init`, default branch `main`) and commits at milestone boundaries. There is no remote, so nothing is pushed.
+- Use four matching Miuzei DS3218MG 270-degree positional servos, one for yaw, shoulder, elbow, and wrist. Do not use the continuous-rotation SPT5525LV-360 units because the joints require commanded positions. Do not mix MG995, MG996R, or SG90 units into the four-axis chain.
+- Use the user-selected PCA9685 board at I2C address `0x40`, upstream of the existing TCA9548A-compatible sensor mux at `0x70`. Use channels 0 through 3 for yaw through wrist and 50 Hz PWM.
+- Replace the 12 V ST3215 motor rail with a regulated 6 V rail. Four DS3218 units have a documented combined stall current of 8.8 A at 6.8 V; specify a 6 V regulator with at least 10 A continuous capability and retain one fused branch per servo. The existing 12 V external supply remains the upstream source.
+- The PCA9685 controls pulse position but provides no joint-position, current, or temperature feedback. Software must fail on PCA9685 communication errors and must not claim physical feedback. Physical commissioning must use supported motion, measured PWM calibration, restricted travel, the existing independent motor-power stop, and visual checks.
+- Put all five sensor boards behind the 216 mm pedestal wall. Use five equal 72-degree sectors, with the front sensor centered at `+Y`: front at 90 degrees, front-left at 162, rear-left at 234, rear-right at 306, and front-right at 18. This leaves the rear center at 270 degrees clear for the two existing cable ports.
+- Each Adafruit 3967 board mounts directly to four internal bosses through its documented 2.5 mm holes on a 20.32 x 12.70 mm pattern. The board outline is 25.40 x 17.78 mm. Each wall position gets one open optical aperture; no printed optical window is used.
+- Remove the external head sensor pods, their retainers, the DSI brow bracket, and all obsolete head pod holes. The existing head/display/light variants and arm pivot pitches remain otherwise unchanged.
+- Rename the five physical channels to `front`, `front_left`, `rear_left`, `rear_right`, and `front_right`. The rear gesture uses either rear sensor. The side gesture uses either front-side sensor. All five remain mandatory obstruction inputs.
+- Revision label becomes `Rev C / 07 Sep 2026` in source and generated deliverables.
 
-## Verified facts (confirmed by reading files, running commands, or vendor data)
+## Verified facts
 
-- Vendor drawing `https://www.waveshare.com/img/devkit/LCD/4inch-DSI-LCD-C/4inch-DSI-LCD-C-details-size.jpg` (saved to `cad/references/4inch-DSI-LCD-C-details-size.jpg`): outline Ø126.00; active area Ø101.52; case 6.00 thick; 17.00 overall depth; PCB 85.00 × 65.00; Pi standoff pattern 58.00 × 49.00; M4 case mounting holes.
-- Vendor STEP `https://files.waveshare.com/upload/d/db/4inch_DSI_LCD_%28C%29_3D.zip` (`4inch-DSI-LCD_C.stp`, saved to `cad/references/`), measured with trimesh after conversion with cascadio (LCD coordinates, +z toward the viewer): case disc Ø126 from z −2.17 (rear plate face) to 3.83 (rim front; glass surface 3.58); rear edge chamfered to r 62.17; four M4 tapped bosses Ø7.1 × 4.0 mm tall at (±37.5, ±37.5), ends at z −6.17; PCB 85.5 × 65 × 1.6 at x ±42.75, y −37..28, z −5.27..−3.67; components below the PCB down to z −14.37 (2.54 mm headers at x −17.6..−12.5, y −36..−33.5), Pi standoffs Ø5.5 at (−39.25, ±24.5) and (18.75, ±24.5) to z −13.27, HP2.0 4-pin power/touch connector x −30.5..−18.5, y −36..−27.8, z to −11.77, USB-C x −32.7..−23.7, y 21.4..29, panel FPC connector x ±9.5, y −36.8..−30.55, tallest general component layer to z −7.57. The DSI 15-pin FPC connector is on the PCB +x edge (vendor photo), cable exits toward +x.
-- Software setup (Waveshare guide via spotpear mirror): `dtoverlay=WS_xinchDSI_Screen,SCREEN_type=10,I2C_bus=10` and `dtoverlay=WS_xinchDSI_Touch,I2C_bus=10`; package includes two 50 mm 15-pin FPC cables; CM boards need `DSI-Cable-15cm`.
-- Revision A interfaces from `cad/luma.scad` and `cad/build.py`: plates at link z ∈ [−27,−22] ∪ [22,27]; rail profile capsule 30 wide ending 38 mm before the distal pivot, distal block 21 × 46 centred at l−28; cassette 26 × 46 × 39.8 with pocket 30 × 25.4 from floor 4.2; servo body 45.22 × 24.72 × 35 with shaft axis 10.11 mm from the front end (`servo_back=35.11`); cross bolts at x=35 and l−52; cassette bolts at (l−25, ±18.5); horn spacer 3.3 at z −22..−18.7 and 18.7..22; head transform `H = T(WR+[0,21,0]) R(180,z) R(90,x)`; shell bosses: yoke (±27,±15), LCD pillars (±34,±34) top 14, white carrier r45 top 32.5, face r60 (45+90n) top 35, bezel r83 (22.5+45n) top 35, RGB posts r76 Ø8 Z3–24, ribs r82–88 at 0/90/180/270, wall pod mounts at angles 0/180/270 Z14.
-- Toolchain: `C:\dev\arm\.venv` has trimesh 5.1.0, manifold3d 3.5.2, numpy 2.5.2, pillow 12.3.0, pymupdf 1.28.2, reportlab 5.0.1, svglib 2.2.0; installed today: pygame-ce 2.5.8, scipy, shapely, cascadio. `media/.tools/python` has moderngl 5.12.0 and imageio_ffmpeg 0.6.0. Blender 4.5.9 present. OpenSCAD 2021.01 present. Chrome extension not connected; waveshare.com blocks WebFetch (curl with a browser user agent works).
-- Existing checks: `python -m unittest discover -s tests -v` (software) passes 18 tests at revision A; `validation/check_assembly.py` reports 0 intersections at revision A.
+- 2026-09-07 - `git status --short --branch` returned only `## main`; the worktree was clean before revision C.
+- 2026-09-07 - `git remote -v` returned no rows. There is no configured push or CI target.
+- 2026-09-07 - drive C had 289,149,521,920 free bytes before work began.
+- 2026-09-07 - the Miuzei DS3218 product datasheet at `https://images-na.ssl-images-amazon.com/images/I/81Lbgu%2BnG6L.pdf` specifies a 40 x 20 x 40.5 mm body, 4.8-6.8 V operation, 18 kg-cm and 1.8 A stall at 5 V, 21.5 kg-cm and 2.2 A stall at 6.8 V, 500-2500 us PWM, 1500 us neutral, 50-330 Hz, and a 180- or 270-degree variant.
+- 2026-09-07 - the official Adafruit Eagle board file `Adafruit VL53L1X.brd` at `https://github.com/adafruit/Adafruit-VL53L1X-PCB` defines a 25.40 x 17.78 mm rounded board and four plated 2.5 mm mounting holes at `(2.54,2.54)`, `(22.86,2.54)`, `(2.54,15.24)`, and `(22.86,15.24)`, giving a 20.32 x 12.70 mm pattern centered on the board.
+- 2026-09-07 - Adafruit documents the PCA9685 as a 16-channel I2C PWM controller and requires separate servo V+ power. The board logic supply does not power the servos. Source: `https://learn.adafruit.com/16-channel-pwm-servo-driver/hooking-it-up`.
+- 2026-09-07 - Pololu D42V110F6 item 5673 is a documented 6 V, nominal 11 A regulator with a 6-60 V input range. Source: `https://www.pololu.com/product/5673`.
+- Revision B uses external printable `sensor_pod` and `sensor_retainer` parts, head-shell pod holes, a DSI `brow_bracket`, four Waveshare ST3215 serial bus servos, and `software/luma/servo_bus.py`. These paths are replaced, not retained in parallel.
+- Revision B checks passed at commit `205a69b`: 34 host tests, watertight printable meshes, and zero indexed-pose printed-part intersections for both head variants.
+
+## Preconditions
+
+- [x] Repository, branch, worktree state, disk space, Python, and OpenSCAD were checked with non-interactive commands.
+- [x] Primary-source dimensions for the Adafruit sensor board and Miuzei servo were checked.
+- [x] The operator selected the PCA9685 and confirmed all five sensors belong in the pedestal wall.
+- [x] No deployment, external audience, destructive data operation, or scheduled automation is part of this run.
 
 ## Stop conditions (only these)
 
-- An OpenSCAD export for one part fails deterministically after three geometry fixes.
-- Blender or the GL renderer cannot run at all on this machine (crash on start) after one retry.
-Anything else is worked around, marked `[!]`, and reported at the end.
+- An OpenSCAD export for a changed part fails deterministically after three geometry corrections.
+- The new single-output servo joints cannot be given a mechanically supported opposite-side pivot without changing the locked linkage pitches or head interface.
+- Required credentials or an external resource become necessary. There is currently no remote, deployment, or hardware bench in scope.
+
+All other failures are classified, changed before retry, capped as stated below, recorded in the execution log, and worked around while independent work continues.
 
 ## Workstreams
 
-### arm-enclosure — closed tapered clamshell links replacing the ladder rails
-- [x] arm-scad — `luma.scad` gains `arm_half(l)`, `upper_arm_left/right`, `forearm_left/right`; removes `upper_rail`, `forearm_rail`, `servo_cassette`, `cassette_cap`, `cross_spacer`. Done when `python cad/build.py` exits 0 and `cad/validation.json` shows all four arm parts watertight, one body, within the bed.
-- [x] arm-assembly — `build.py` places the four halves (right halves rotated 180° about x at z=27) and drops the cassette/cap/spacer instances; features/manifest text updated. Done when `python validation/check_assembly.py` prints 0 overlaps above 0.5 mm³ for `assembly.json`.
-- [x] arm-docs — `cad/mechanical.md` arm steps, `docs/printing.md`, `cad/bom_mechanical.csv` (M11 quantity 6), `cad/README.md`. Done when `python docs/build_bom.py` exits 0.
+### sensor-relocation - five direct-mounted boards in the pedestal wall
 
-### dsi-head — optional head variant for the Waveshare 4inch DSI LCD (C)
-depends on: arm-enclosure (shared `luma.scad`/`build.py`; sequential edits)
-- [x] dsi-scad — `head_shell_dsi`, `lcd4_carrier`, `face_ring_dsi`, `brow_bracket`; centre cable slot in `head_yoke` and both shells; `visual_only/lcd4_envelope.stl` built from the measured vendor geometry. Done when `python cad/build.py` exits 0 with the new parts watertight.
-- [x] dsi-assembly — `build.py` writes `assembly_dsi.json` and `assembly_dsi.scad` (head group swapped, front pod on the brow bracket, LCD envelope at head Z 31.67 offset); `validation/check_assembly.py`, `cad/check_purchased_fit.py` and `validation/verify_project.py` check both assemblies. Done when `python validation/check_assembly.py` and `python cad/check_purchased_fit.py` report 0 intersections for both assemblies.
-- [x] dsi-docs — `cad/mechanical.md` chapter "Optional 4-inch DSI head", `docs/parts.md` optional section (via `build_bom.py` handling refs starting with `D`), `electronics/wiring.csv` DSI rows, `electronics/architecture.md`, `docs/overview.md`, `docs/sources.json`, `docs/validation_build.md`. Done when `python docs/build_bom.py` exits 0 and the optional subtotal appears in `docs/parts.md`.
+- [~] pedestal-geometry - Add five wall apertures and four internal M2.5 pilot bosses per board to `cad/luma.scad`; remove conflicting wall vents while preserving lid ventilation and rear cable ports. Remove head pod apertures and obsolete pod/bracket parts. Definition of done: `python cad/build.py base_tub head_shell face_center head_shell_dsi` exits 0 and each changed mesh is watertight, positive-volume, one body, and within the 220 mm bed limit.
+- [ ] sensor-assembly - Place five visual-only board envelopes behind the pedestal wall in both assembly manifests and remove all head pod instances. Definition of done: `python cad/check_purchased_fit.py` reports no sensor/printed-part intersections except the intentional board-to-standoff contacts excluded by the checker, and `python validation/check_assembly.py` reports zero overlaps above 0.5 mm3.
+- [ ] sensor-docs - Update CAD, electronics, wiring, software channel names, assembly instructions, and validation text for the five perimeter directions. Definition of done: `python docs/build_bom.py` exits 0 and `rg -n "sensor_pod|sensor_retainer|TOF_DOWN|down sensor|downward sensor" cad docs electronics software README.md START_HERE.html` returns no live revision C instructions.
 
-### dsi-software — Pi-rendered face for the DSI head
-independent of the CAD workstreams
-- [x] face-renderer — `software/luma/face.py`: `draw_face(surface, face, t, offline)` and `DsiDisplay`; `hardware.py`/`bench.py`/`app.py` select by `display_kind`; `config.json` and `pyproject.toml` (`dsi` extra). Done when `python -m unittest discover -s tests -v` passes with the new face tests (run from `C:\dev\arm\software`).
-- [x] software-docs — `software/README.md` DSI section, `software/VERIFICATION.md` test count. Done when the README documents `display_kind`, the config.txt overlays and the SDL driver.
+### inventory-servo-conversion - four DS3218MG joints controlled by PCA9685
 
-### media-regen — renders and films from the revision B geometry
-depends on: arm-enclosure, dsi-head
-- [x] gl-stills — `python media/sources/render_media.py --stills` (standard) and `--manifest cad/assembly_dsi.json --suffix _dsi --stills` (variant). Done when `media/renders/hero.png`, `side.png`, `top.png`, `front.png`, `exploded.png`, `hero_dsi.png` are regenerated (timestamps today).
-- [x] cycles-stills — `blender -b -P media/sources/blender_stills.py` (hero + exploded) and `-- --manifest cad/assembly_dsi.json --suffix _dsi --hero-only`; copy `*_cycles.png` over the manual images. Restart policy: kill after 25 min, re-run once with `--preview`; if that fails, keep the GL stills and mark `[!]`.
-- [x] films — `python media/sources/render_media.py --clip all`; `python media/sources/validate_media.py`. Restart policy: kill after 40 min, re-run once per clip.
+- [ ] servo-mechanics - Replace ST3215 body clamps, dual-horn assumptions, horn interfaces, and purchased envelopes with DS3218 geometry plus an opposite-side supported pivot for each pitch joint; keep the existing 6808-supported yaw. Definition of done: focused CAD export exits 0, purchased-fit check reports zero unintended intersections, and assembly check reports zero printed-part overlaps above 0.5 mm3.
+- [ ] servo-electronics - Replace ST3215/Bus Adapter A rows and 12 V motor branches with four inventory DS3218MG units, PCA9685 control, regulated 6 V power, branch fusing, and required bulk capacitance. Definition of done: generated BOM and wiring schedule contain PCA9685/DS3218/6 V data and contain no live ST3215 or bus-adapter route.
+- [ ] servo-software - Replace the serial bus driver with a PCA9685 PWM driver; use config-defined channels, calibrated neutral pulses, pulse limits, and angle span; report controller communication health without claiming servo feedback. Extend the existing control tests. Definition of done: `C:\dev\arm\.venv\Scripts\python.exe -m unittest discover -s tests -v`, run in `C:\dev\arm\software`, exits 0.
 
-### deliverables — manual, drawings, archive
-depends on: all of the above
-- [x] drawings — `docs/build_drawings.py` adds sheet G03 (DSI head) and the Rev B header; `python docs/build_drawings.py` exits 0.
-- [x] manual — `python docs/build_manual.py` exits 0; `python validation/verify_project.py` exits 0 (failures list empty).
-- [x] package — `README.md`, `START_HERE.html`, `python docs/package_project.py` exits 0.
-- [x] commit — git commits at each milestone; final commit "LUMA revision B".
+### release-regeneration - revision C user-facing artifacts
+
+Depends on both workstreams above.
+
+- [ ] cad-release - Run the full CAD build and both geometry checks. Retry policy: classify each failure; correct geometry before rerun; maximum three focused corrections per changed part. Definition of done: `python cad/build.py`, `python cad/check_purchased_fit.py`, and `python validation/check_assembly.py` all exit 0.
+- [ ] media-release - Regenerate standard and DSI stills and the three clips so no obsolete external sensor pods or ST3215 envelopes remain. Watcher/restart policy: each foreground command reports nonzero exit; retry once only after a deterministic fix or once after a transient renderer failure. Definition of done: `python media/sources/validate_media.py` exits 0 and the standard and DSI hero images show pedestal apertures with clean heads.
+- [ ] document-release - Regenerate the BOM, engineering drawings, manual, index, and verification report with revision C labels. Definition of done: `python validation/verify_project.py` exits 0 with `failures: []`.
+- [ ] package-release - Rebuild both archives and hash inventory. Definition of done: `python docs/package_project.py` exits 0 and both ZIP integrity checks pass inside that command.
+- [ ] review-release - Run the repository code-review skill against revision B commit `205a69b`, fix in-scope findings, rerun focused verification, inspect the final diff, commit only revision C files, and attempt push only if a remote appears. Definition of done: clean `git status --short`, a focused revision C commit on `main`, and either a successful push or a logged confirmation that no remote exists.
 
 ## Execution log
 
-- 2026-09-05 09:40 — `git init` on `main`; baseline commit `0cd7e3b` "LUMA revision A baseline before revision B".
-- 2026-09-05 09:45 — Vendor LCD data measured (cascadio STEP→GLB, trimesh sections): bosses Ø7.1 at (±37.5,±37.5), case z −2.17..3.83, components to z −14.37. Saved `cad/references/4inch-DSI-LCD-C-details-size.jpg` and `cad/references/4inch_DSI_LCD_C_3D.zip`.
-- 2026-09-05 09:50 — `dsi-software` delegated to a general-purpose (sonnet) agent; result verified: `C:\dev\arm\.venv\Scripts\python.exe -m unittest discover -s tests -v` → `Ran 34 tests ... OK`; `python -m luma.app --scene hi --seconds 0.5` runs without pygame in the behaviour path. Files: `software/luma/face.py` (new), `hardware.py`, `bench.py`, `config.json`, `pyproject.toml`, `tests/test_face.py` (new), `README.md`, `VERIFICATION.md`. `face-renderer` and `software-docs` `[x]`.
-- 2026-09-05 09:53 — `luma.scad` rewritten (arm halves, DSI parts, cable slots); `build.py` rewritten (two assemblies, variant flag, LCD envelope from measured geometry, selective export); retired STLs removed. Partial export started: `python cad/build.py upper_arm_left upper_arm_right forearm_left forearm_right head_shell_dsi lcd4_carrier face_ring_dsi brow_bracket head_yoke head_shell`. Arm halves, carrier, face ring, bracket and yoke exported by 09:56; OpenSCAD previews inspected (walls, boss, pocket, port and notch present; carrier window and pads correct; bracket groove and opening correct).
-- 2026-09-05 10:05 — Docs drafted: `cad/mechanical.md` (rev B arm steps 9–13, DSI chapter steps 21–26, load note), `cad/README.md`, `docs/printing.md`, `docs/overview.md`, `docs/media.md`, `docs/validation_build.md`, `docs/sources.json` (S13), `electronics/architecture.md` (DSI section), BOM rows D01–D03 and D10–D14, wiring rows `DSI_*`, `docs/build_bom.py` (optional section + variant column), `docs/build_drawings.py` (G03 + Rev B), `docs/build_manual.py` (Rev B), `media/sources/render_media.py` (`--suffix`, `--views`, face scaling), `media/sources/blender_stills.py` (`--manifest`, `--suffix`), `README.md`, `START_HERE.html`, `validation/check_assembly.py` and `cad/check_purchased_fit.py` (both assemblies).
-- 2026-09-05 10:03 — Export finished: all 10 new/changed parts watertight, one body (`cad/validation.json`). `python validation/check_assembly.py` → "Checked 30 printable types; standard: 37 instances, 0 overlaps above0.5mm3; dsi_head: 35 instances, 0 overlaps above0.5mm3". `python cad/check_purchased_fit.py` → 0 intersections in both assemblies. Head-local extents verified: LCD envelope z 17.3–35.5, carrier 20.5–25.5, face ring 36–40, brow bracket y 88–118 z −1–32, front pod z 32–44; arm halves meet at world X=0. `python docs/build_bom.py` → "79 purchase lines, $777.98 standard + $61.10 optional DSI head; 26 standard and 4 optional printable types" (44 standard pieces). Milestones arm-scad, arm-assembly, arm-docs, dsi-scad, dsi-assembly, dsi-docs marked done.
-- 2026-09-05 10:20 — Commit `e3279b6` "Revision B: enclosed arm links, optional 4-inch DSI head CAD, checks and docs". GL stills regenerated for both assemblies (`media/renders/hero.png`, `exploded.png`, `front.png`, `side.png`, `top.png`, `hero_dsi.png`, `front_dsi.png`, `side_dsi.png`, `exploded_dsi.png`) and inspected: enclosed links, wall ports, DSI face ring and brow pod render as designed. Started in background: Blender Cycles stills (standard), the three films, and `docs/build_drawings.py`.
-- 2026-09-05 10:35 — Blender Cycles: `hero_cycles.png`, `exploded_cycles.png` (standard, ~2.5 min each) and `hero_dsi_cycles.png` (variant) rendered and copied over `hero.png`, `exploded.png`, `hero_dsi.png`. Films: `python media/sources/render_media.py --clip all` then `validate_media.py` → `{"films": 3, "all_decoded": true, "stills": 12}`. `python docs/build_drawings.py` → "35 vector sheets" (G03 optional-head sheet added). `python docs/build_manual.py` → "Manual: 73 pages"; optional-head chapter on page 19.
-- 2026-09-05 10:40 — `python validation/verify_project.py` → release "LUMA Rev B", failures `[]`, host tests exit 0 (`Ran 34 tests`), static assembly standard (37 instances, 0 overlaps) and dsi_head (35 instances, 0 overlaps). `python docs/package_project.py` → "Packaged 154 files, 79.1 MB" and "Printable-only archive: 30 STLs, 2.1 MB"; package inventory revision B.
-- Open items for the physical build (not blockers): DSI FPC connector position in the LCD envelope is from the vendor photograph; the 800 mm DSI cable run and the enclosed-servo temperature need bench proof; only the indexed pose is collision-checked.
+- 2026-09-07 - Read the implementation skill. It requires focused tests, a final full test run, code review, and a commit.
+- 2026-09-07 - Inspected `plan.md`, CAD source/build/fit checks, assembly checks, BOM and wiring sources, controller/config/tests, document generators, current renders, and revision B history. Confirmed the revision B implementation uses external head pods and ST3215 serial bus servos.
+- 2026-09-07 - Verified clean `main`, no Git remote, Python 3.13.14, OpenSCAD 2021.01, and 289,149,521,920 bytes free on drive C.
+- 2026-09-07 - Read the official Adafruit Eagle board geometry and Miuzei DS3218 datasheet. Selected four matching DS3218MG units and direct four-hole sensor mounting as the minimum coherent use of the confirmed inventory.
+- 2026-09-07 - User confirmed the 216 mm pedestal, all five sensors in its wall, and PCA9685 PWM control. Revision C plan started.
