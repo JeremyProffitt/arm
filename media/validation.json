@@ -6,8 +6,8 @@
   "films": [
     {
       "file": "media/videos/01_wink.mp4",
-      "bytes": 999773,
-      "sha256": "dc9da73b028520c08021267dfbb845c11884af5af02431f2bd2237aceb6875d3",
+      "bytes": 997365,
+      "sha256": "82b22166712a19fff47c569cf2513d008a97f3aad45d6453f7ff6aff40475dbe",
       "width": 1920,
       "height": 1080,
       "fps": 24.0,
@@ -15,12 +15,12 @@
       "decoded_video_frames": 216,
       "aac_audio": true,
       "full_audio_video_decode_passed": true,
-      "ffmpeg_report": "Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'C:\\dev\\arm\\media\\videos\\01_wink.mp4':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf61.7.100\n  Duration: 00:00:09.00, start: 0.000000, bitrate: 888 kb/s\n  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 739 kb/s, 24 fps, 24 tbr, 12288 tbn (default)\n      Metadata:\n        handler_name    : VideoHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 libx264\n  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 142 kb/s (default)\n      Metadata:\n        handler_name    : SoundHandler\n        vendor_id       : [0][0][0][0]\nStream mapping:\n  Stream #0:0 -> #0:0 (h264 (native) -> wrapped_avframe (native))\n  Stream #0:1 -> #0:1 (aac (native) -> pcm_s16le (native))\nPress [q] to stop, [?] for help\nOutput #0, null, to 'pipe:':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf61.7.100\n  Stream #0:0(und): Video: wrapped_avframe, yuv420p(progressive), 1920x1080, q=2-31, 200 kb/s, 24 fps, 24 tbn (default)\n      Metadata:\n        handler_name    : VideoHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 wrapped_avframe\n  Stream #0:1(und): Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s (default)\n      Metadata:\n        handler_name    : SoundHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 pcm_s16le\n[out#0/null @ 0000019d32663700] video:93KiB audio:1688KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown\nframe=  216 fps=0.0 q=-0.0 Lsize=N/A time=00:00:09.00 bitrate=N/A speed=42.5x    \n"
+      "ffmpeg_report": "Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'C:\\dev\\arm\\media\\videos\\01_wink.mp4':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf61.7.100\n  Duration: 00:00:09.00, start: 0.000000, bitrate: 886 kb/s\n  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 737 kb/s, 24 fps, 24 tbr, 12288 tbn (default)\n      Metadata:\n        handler_name    : VideoHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 libx264\n  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 142 kb/s (default)\n      Metadata:\n        handler_name    : SoundHandler\n        vendor_id       : [0][0][0][0]\nStream mapping:\n  Stream #0:0 -> #0:0 (h264 (native) -> wrapped_avframe (native))\n  Stream #0:1 -> #0:1 (aac (native) -> pcm_s16le (native))\nPress [q] to stop, [?] for help\nOutput #0, null, to 'pipe:':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf61.7.100\n  Stream #0:0(und): Video: wrapped_avframe, yuv420p(progressive), 1920x1080, q=2-31, 200 kb/s, 24 fps, 24 tbn (default)\n      Metadata:\n        handler_name    : VideoHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 wrapped_avframe\n  Stream #0:1(und): Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s (default)\n      Metadata:\n        handler_name    : SoundHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 pcm_s16le\n[out#0/null @ 000002581fab4b40] video:93KiB audio:1688KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown\nframe=  216 fps=0.0 q=-0.0 Lsize=N/A time=00:00:09.00 bitrate=N/A speed=84.9x    \n"
     },
     {
       "file": "media/videos/02_hi.mp4",
-      "bytes": 1237149,
-      "sha256": "50f76932148ac101895861bca469137d03ae4bd2e87abb040d7604da904253c3",
+      "bytes": 1242259,
+      "sha256": "9f95d18144bb60d7255884d6f3227c1cb960f435eef30cfe2000c35ca435491e",
       "width": 1920,
       "height": 1080,
       "fps": 24.0,
@@ -28,12 +28,12 @@
       "decoded_video_frames": 216,
       "aac_audio": true,
       "full_audio_video_decode_passed": true,
-      "ffmpeg_report": "Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'C:\\dev\\arm\\media\\videos\\02_hi.mp4':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf61.7.100\n  Duration: 00:00:09.00, start: 0.000000, bitrate: 1099 kb/s\n  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 969 kb/s, 24 fps, 24 tbr, 12288 tbn (default)\n      Metadata:\n        handler_name    : VideoHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 libx264\n  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 123 kb/s (default)\n      Metadata:\n        handler_name    : SoundHandler\n        vendor_id       : [0][0][0][0]\nStream mapping:\n  Stream #0:0 -> #0:0 (h264 (native) -> wrapped_avframe (native))\n  Stream #0:1 -> #0:1 (aac (native) -> pcm_s16le (native))\nPress [q] to stop, [?] for help\nOutput #0, null, to 'pipe:':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf61.7.100\n  Stream #0:0(und): Video: wrapped_avframe, yuv420p(progressive), 1920x1080, q=2-31, 200 kb/s, 24 fps, 24 tbn (default)\n      Metadata:\n        handler_name    : VideoHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 wrapped_avframe\n  Stream #0:1(und): Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s (default)\n      Metadata:\n        handler_name    : SoundHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 pcm_s16le\n[out#0/null @ 000002b690c564c0] video:93KiB audio:1688KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown\nframe=  216 fps=0.0 q=-0.0 Lsize=N/A time=00:00:09.00 bitrate=N/A speed=31.5x    \n"
+      "ffmpeg_report": "Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'C:\\dev\\arm\\media\\videos\\02_hi.mp4':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf61.7.100\n  Duration: 00:00:09.00, start: 0.000000, bitrate: 1104 kb/s\n  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 973 kb/s, 24 fps, 24 tbr, 12288 tbn (default)\n      Metadata:\n        handler_name    : VideoHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 libx264\n  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 123 kb/s (default)\n      Metadata:\n        handler_name    : SoundHandler\n        vendor_id       : [0][0][0][0]\nStream mapping:\n  Stream #0:0 -> #0:0 (h264 (native) -> wrapped_avframe (native))\n  Stream #0:1 -> #0:1 (aac (native) -> pcm_s16le (native))\nPress [q] to stop, [?] for help\nOutput #0, null, to 'pipe:':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf61.7.100\n  Stream #0:0(und): Video: wrapped_avframe, yuv420p(progressive), 1920x1080, q=2-31, 200 kb/s, 24 fps, 24 tbn (default)\n      Metadata:\n        handler_name    : VideoHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 wrapped_avframe\n  Stream #0:1(und): Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s (default)\n      Metadata:\n        handler_name    : SoundHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 pcm_s16le\n[out#0/null @ 0000028ce16b8180] video:93KiB audio:1688KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown\nframe=  216 fps=0.0 q=-0.0 Lsize=N/A time=00:00:09.00 bitrate=N/A speed=84.4x    \n"
     },
     {
       "file": "media/videos/03_happy.mp4",
-      "bytes": 1480930,
-      "sha256": "2d2c5cfe26f4245ce169f18fe8a0e50025f4f6f117ae3f8521242fedb132bada",
+      "bytes": 1485264,
+      "sha256": "6323215e0b6f4a59ed7de6bb0fe4fa7f4988e20ae12d53156b45d038807d4945",
       "width": 1920,
       "height": 1080,
       "fps": 24.0,
@@ -41,7 +41,7 @@
       "decoded_video_frames": 216,
       "aac_audio": true,
       "full_audio_video_decode_passed": true,
-      "ffmpeg_report": "Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'C:\\dev\\arm\\media\\videos\\03_happy.mp4':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf61.7.100\n  Duration: 00:00:09.00, start: 0.000000, bitrate: 1316 kb/s\n  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 1133 kb/s, 24 fps, 24 tbr, 12288 tbn (default)\n      Metadata:\n        handler_name    : VideoHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 libx264\n  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 175 kb/s (default)\n      Metadata:\n        handler_name    : SoundHandler\n        vendor_id       : [0][0][0][0]\nStream mapping:\n  Stream #0:0 -> #0:0 (h264 (native) -> wrapped_avframe (native))\n  Stream #0:1 -> #0:1 (aac (native) -> pcm_s16le (native))\nPress [q] to stop, [?] for help\nOutput #0, null, to 'pipe:':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf61.7.100\n  Stream #0:0(und): Video: wrapped_avframe, yuv420p(progressive), 1920x1080, q=2-31, 200 kb/s, 24 fps, 24 tbn (default)\n      Metadata:\n        handler_name    : VideoHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 wrapped_avframe\n  Stream #0:1(und): Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s (default)\n      Metadata:\n        handler_name    : SoundHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 pcm_s16le\n[out#0/null @ 00000278543064c0] video:93KiB audio:1688KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown\nframe=  216 fps=0.0 q=-0.0 Lsize=N/A time=00:00:09.00 bitrate=N/A speed=31.9x    \n"
+      "ffmpeg_report": "Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'C:\\dev\\arm\\media\\videos\\03_happy.mp4':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf61.7.100\n  Duration: 00:00:09.00, start: 0.000000, bitrate: 1320 kb/s\n  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, 1137 kb/s, 24 fps, 24 tbr, 12288 tbn (default)\n      Metadata:\n        handler_name    : VideoHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 libx264\n  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 175 kb/s (default)\n      Metadata:\n        handler_name    : SoundHandler\n        vendor_id       : [0][0][0][0]\nStream mapping:\n  Stream #0:0 -> #0:0 (h264 (native) -> wrapped_avframe (native))\n  Stream #0:1 -> #0:1 (aac (native) -> pcm_s16le (native))\nPress [q] to stop, [?] for help\nOutput #0, null, to 'pipe:':\n  Metadata:\n    major_brand     : isom\n    minor_version   : 512\n    compatible_brands: isomiso2avc1mp41\n    encoder         : Lavf61.7.100\n  Stream #0:0(und): Video: wrapped_avframe, yuv420p(progressive), 1920x1080, q=2-31, 200 kb/s, 24 fps, 24 tbn (default)\n      Metadata:\n        handler_name    : VideoHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 wrapped_avframe\n  Stream #0:1(und): Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s (default)\n      Metadata:\n        handler_name    : SoundHandler\n        vendor_id       : [0][0][0][0]\n        encoder         : Lavc61.19.100 pcm_s16le\n[out#0/null @ 0000015b0f8e4d00] video:93KiB audio:1688KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown\nframe=  216 fps=0.0 q=-0.0 Lsize=N/A time=00:00:09.00 bitrate=N/A speed=79.2x    \n"
     }
   ],
   "stills": [
@@ -124,6 +124,13 @@
     },
     {
       "file": "media/renders/top.png",
+      "size": [
+        1500,
+        1300
+      ]
+    },
+    {
+      "file": "media/renders/top_dsi.png",
       "size": [
         1500,
         1300
