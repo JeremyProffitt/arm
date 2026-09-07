@@ -1,5 +1,5 @@
 {
-  "scope": "Static neutral conservative servo and LCD envelopes only (rectangular ST3215 boxes, the 55 mm board box, and the 4inch DSI LCD (C) case/PCB/connector envelope measured from the vendor STEP); excludes horns, screws, cables, glass projection and moving cables. Zero result is not physical fit proof.",
+  "scope": "Static indexed-neutral purchased envelopes: four Miuzei DS3218MG case/tab envelopes, five Adafruit 3967 PCB/component envelopes in the pedestal, the 55 mm display board, and the 4inch DSI LCD (C) case/PCB/connector envelope. Excludes servo horns and splines, 625 bearings, screws, cables, glass projection and moving cables. Zero result is not physical fit proof.",
   "assemblies": {
     "standard": {
       "file": "assembly.json",
