@@ -14,8 +14,8 @@ E12,2,Generic,330ohm 0.25W resistor,LED input series resistors,One per independe
 E13,2,Generic,1000uF 10V electrolytic,LED ring supply reservoir,Observe polarity;one each ring,Design choice,,1
 E14,1,Generic,100nF ceramic,74AHCT125 decoupling,Across DIP14 and DIP7 at socket,Design choice,,0.10
 E15,1,Pololu,D24V50F5 item2851,LED5V buck converter,5V5A typical thermal-limited;17.8x20.3x8.8mm,Vendor documented,https://www.pololu.com/product/2851,32.95
-E16,4,Waveshare,ST3215 30kg.cm@12V,Four joint bus servos,12V version;4096ticks/rev;2.7A stall each;1Mbps default,Vendor documented,https://www.waveshare.com/product/modules/st3215-servo.htm,22
-E17,1,Waveshare,Bus Servo Adapter A SKU25514,USB to TTL half-duplex bus adapter,ST selected;USB mode;separate low-current12V branch,Vendor documented,https://docs.waveshare.com/Bus_Servo_Adapter_A,10
+E16,4,Miuzei,DS3218MG 20kg 270-degree,Four inventory joint servos,"4.8-6.8V; PWM500-2500us;1500us neutral;50-330Hz;2.2A stall and21.5kg-cm at6.8V;40x20x40.5mm",Vendor datasheet; operator has8,https://images-na.ssl-images-amazon.com/images/I/81Lbgu%2BnG6L.pdf,0
+E17,1,Generic,PCA9685 16-channel PWM board,Operator-selected four-servo controller,"I2C address0x40;50Hz;channels0-3;3.3V logic VCC;servo V+ supplied separately",Controller selected by operator; measure exact board before fastening,https://learn.adafruit.com/16-channel-pwm-servo-driver,0
 E18,1,Mean Well,GST220A12-R7B,External enclosed motor/LED supply,12V15A model;R7B powerDIN;keep outside printed enclosure,Vendor documented,https://www.meanwell.com/Upload/PDF/GST220A/GST220A-SPEC.PDF,95
 E19,1,Generic,Matching R7B powerDIN harness,DC supply breakout,Correct polarity;all specified parallel contacts;15A aggregate rated,Must match selected supply connector drawing,,15
 E20,1,Generic,IEC C13 mains cord,External supply cord,Local approved cord;earth conductor intact,Specification selection,,7
@@ -23,9 +23,9 @@ E21,1,Generic,Latching mushroom stop two NC contacts,Motor stop plus isolated Pi
 E22,1,Generic,12VDC coil relay with30A DC NO contact and socket,Hardware motor supply disconnect,Coil<=200mA;NO contacts>=15A at12VDC;socket16AWG,Specify actual DC rating before purchase,,12
 E23,1,Generic,1N4007 diode,Relay coil flyback,Stripe/cathode to coil positive,Design choice,,0.10
 E24,1,Generic,15A DC fuse and holder,Main12V input branch,Holder and connector rated>=15A,Design choice,,3
-E25,4,Generic,3A time-delay DC fuse and holder,Individual servoV+ feeds,18AWG star feeds;one fuse per servo,Design choice,,3
+E25,4,Generic,3A time-delay DC fuse and holder,Individual6V servo feeds,18AWG star feeds;one fuse per DS3218,Design choice,,3
 E26,1,Generic,2A DC fuse and holder,Buck12V input branch,LED firmware capped20percent,Design choice,,3
-E27,1,Generic,1A DC fuse and holder,Bus adapter power branch,Do not run servo group current through adapter jack,Design choice,,3
+E27,1,Generic,7.5A time-delay DC fuse and holder,Servo regulator12V input branch,Between motor relay output and6V regulator VIN;16AWG,Design choice,,3
 E28,1,Generic,0.5A DC fuse and holder,Relay coil branch,NC1 switches coil only,Design choice,,3
 E29,1,Generic,3A DC fuse and holder,5V LED output branch,ProtectsLED18-22AWG harness,Design choice,,3
 E30,1,Adafruit,3369 mini USB speaker,Spoken Hi,USB audio;84x43x32mm;73.6g;keep volume modest,Vendor documented,https://www.adafruit.com/product/3369,12.50
@@ -35,6 +35,8 @@ E33,1,Generic,16AWG /18AWG silicone wire and rated distribution terminals,Power 
 E34,1,Generic,Small perfboard and DIP14 socket,Level shifter assembly,Insulate underside;strain relief all wires,Design choice,,5
 E35,1,Generic,Pi4 heatsink and ventilation hardware,Thermal management,Check CPU temperature after assembled operation,Specification selection,,7
 E36,1,Generic,10kohm resistor,External E-stop sense pullup,BCM27 to3.3V;open NC2 means asserted,Design choice,,0.10
+E37,1,Pololu,D42V110F6 item5673,Servo rail step-down regulator,"6V output;11A nominal;6-60V input;31.8x43.2x9mm;four2.2mm mounting holes",Vendor documented; verify6V before connecting servos,https://www.pololu.com/product/5673,59.95
+E38,1,Generic,2200uF 10V low-ESR electrolytic,Servo rail bulk capacitor,Across6V star after regulator;observe polarity;voltage rating at least10V,Design choice guided by PCA9685 vendor power notes,https://learn.adafruit.com/16-channel-pwm-servo-driver/hooking-it-up,3
 D01,1,Waveshare,4inch DSI LCD (C),Optional head display,Round720x720 IPS DSI;126mm outline;101.52mm active;6mm case;four M4 rear bosses on75x75;includes two50mm 15-pin FPC,Vendor documented,https://www.waveshare.com/4inch-dsi-lcd-c.htm,45
 D02,1,Generic,15-pin 1.0mm pitch FFC type A 800mm,Pi DSI to optional head,Same-side contacts;0.3mm thick;800mm nominal from Pi DSI connector through both arm cable ports;bench-verify signal integrity before closing the arm,Measure route before buying,,8
 D03,1,Generic,2-conductor 22AWG silicone lead with2.0mm pitch 4-pin plug,Optional head5V feed,Pi header5V/GND to LCD HP2.0 4-pin;SDA/SCL contacts left empty;800mm,Match plug to purchased LCD connector,,4

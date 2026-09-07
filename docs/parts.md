@@ -1,6 +1,6 @@
 # Parts and purchasing
 
-Planning allowance for the standard build below: **US $777.98** before shipping and tax. The optional 4-inch DSI head adds **US $61.10** of purchased parts and removes the 1.85-inch display, the inner RGBW ring and their fasteners (about US $68.35). Figures are budgeting allowances, not checked-out prices. Filament and any workshop tools are included only where explicitly listed. Reuse of existing supplies can change the total substantially.
+Planning allowance for the standard build below: **US $750.07** before shipping and tax. The optional 4-inch DSI head adds **US $60.80** of purchased parts and removes the 1.85-inch display, the inner RGBW ring and their fasteners (about US $68.35). Figures are budgeting allowances, not checked-out prices. Filament and any workshop tools are included only where explicitly listed. Reuse of existing supplies can change the total substantially.
 
 Order the exact display and voltage variant specified. Generic fasteners, connector harnesses, relay contacts and wire must meet the listed dimensions and electrical ratings. Buy the servo horns and their screws with the servos; verify their actual thread and engagement before ordering extras.
 
@@ -23,8 +23,8 @@ Order the exact display and voltage variant specified. Generic fasteners, connec
 | E13 / 2 | Generic 1000uF 10V electrolytic | LED ring supply reservoir. Observe polarity;one each ring | $1.00 |
 | E14 / 1 | Generic 100nF ceramic | 74AHCT125 decoupling. Across DIP14 and DIP7 at socket | $0.10 |
 | E15 / 1 | [Pololu D24V50F5 item2851](https://www.pololu.com/product/2851) | LED5V buck converter. 5V5A typical thermal-limited;17.8x20.3x8.8mm | $32.95 |
-| E16 / 4 | [Waveshare ST3215 30kg.cm@12V](https://www.waveshare.com/product/modules/st3215-servo.htm) | Four joint bus servos. 12V version;4096ticks/rev;2.7A stall each;1Mbps default | $22.00 |
-| E17 / 1 | [Waveshare Bus Servo Adapter A SKU25514](https://docs.waveshare.com/Bus_Servo_Adapter_A) | USB to TTL half-duplex bus adapter. ST selected;USB mode;separate low-current12V branch | $10.00 |
+| E16 / 4 | [Miuzei DS3218MG 20kg 270-degree](https://images-na.ssl-images-amazon.com/images/I/81Lbgu%2BnG6L.pdf) | Four inventory joint servos. 4.8-6.8V; PWM500-2500us;1500us neutral;50-330Hz;2.2A stall and21.5kg-cm at6.8V;40x20x40.5mm | $0.00 |
+| E17 / 1 | [Generic PCA9685 16-channel PWM board](https://learn.adafruit.com/16-channel-pwm-servo-driver) | Operator-selected four-servo controller. I2C address0x40;50Hz;channels0-3;3.3V logic VCC;servo V+ supplied separately | $0.00 |
 | E18 / 1 | [Mean Well GST220A12-R7B](https://www.meanwell.com/Upload/PDF/GST220A/GST220A-SPEC.PDF) | External enclosed motor/LED supply. 12V15A model;R7B powerDIN;keep outside printed enclosure | $95.00 |
 | E19 / 1 | Generic Matching R7B powerDIN harness | DC supply breakout. Correct polarity;all specified parallel contacts;15A aggregate rated | $15.00 |
 | E20 / 1 | Generic IEC C13 mains cord | External supply cord. Local approved cord;earth conductor intact | $7.00 |
@@ -32,9 +32,9 @@ Order the exact display and voltage variant specified. Generic fasteners, connec
 | E22 / 1 | Generic 12VDC coil relay with30A DC NO contact and socket | Hardware motor supply disconnect. Coil<=200mA;NO contacts>=15A at12VDC;socket16AWG | $12.00 |
 | E23 / 1 | Generic 1N4007 diode | Relay coil flyback. Stripe/cathode to coil positive | $0.10 |
 | E24 / 1 | Generic 15A DC fuse and holder | Main12V input branch. Holder and connector rated>=15A | $3.00 |
-| E25 / 4 | Generic 3A time-delay DC fuse and holder | Individual servoV+ feeds. 18AWG star feeds;one fuse per servo | $3.00 |
+| E25 / 4 | Generic 3A time-delay DC fuse and holder | Individual6V servo feeds. 18AWG star feeds;one fuse per DS3218 | $3.00 |
 | E26 / 1 | Generic 2A DC fuse and holder | Buck12V input branch. LED firmware capped20percent | $3.00 |
-| E27 / 1 | Generic 1A DC fuse and holder | Bus adapter power branch. Do not run servo group current through adapter jack | $3.00 |
+| E27 / 1 | Generic 7.5A time-delay DC fuse and holder | Servo regulator12V input branch. Between motor relay output and6V regulator VIN;16AWG | $3.00 |
 | E28 / 1 | Generic 0.5A DC fuse and holder | Relay coil branch. NC1 switches coil only | $3.00 |
 | E29 / 1 | Generic 3A DC fuse and holder | 5V LED output branch. ProtectsLED18-22AWG harness | $3.00 |
 | E30 / 1 | [Adafruit 3369 mini USB speaker](https://www.adafruit.com/product/3369) | Spoken Hi. USB audio;84x43x32mm;73.6g;keep volume modest | $12.50 |
@@ -44,6 +44,8 @@ Order the exact display and voltage variant specified. Generic fasteners, connec
 | E34 / 1 | Generic Small perfboard and DIP14 socket | Level shifter assembly. Insulate underside;strain relief all wires | $5.00 |
 | E35 / 1 | Generic Pi4 heatsink and ventilation hardware | Thermal management. Check CPU temperature after assembled operation | $7.00 |
 | E36 / 1 | Generic 10kohm resistor | External E-stop sense pullup. BCM27 to3.3V;open NC2 means asserted | $0.10 |
+| E37 / 1 | [Pololu D42V110F6 item5673](https://www.pololu.com/product/5673) | Servo rail step-down regulator. 6V output;11A nominal;6-60V input;31.8x43.2x9mm;four2.2mm mounting holes | $59.95 |
+| E38 / 1 | [Generic 2200uF 10V low-ESR electrolytic](https://learn.adafruit.com/16-channel-pwm-servo-driver/hooking-it-up) | Servo rail bulk capacitor. Across6V star after regulator;observe polarity;voltage rating at least10V | $3.00 |
 
 ## Mechanical hardware and consumables
 
@@ -56,34 +58,34 @@ Order the exact display and voltage variant specified. Generic fasteners, connec
 | M05 / 4 | [Generic M4 nut]( ) | M4 lock nuts. ISO metric nyloc | $0.12 |
 | M06 / 8 | [Generic M4 washer]( ) | M4 load spreading washers. OD12 minimum | $0.06 |
 | M07 / 4 | Generic M3x16 | Yaw cradle through bolts. Through printed cradle3 steel6 and base3; nuts below base; tray has7mm head access | $0.16 |
-| M08 / 2 | Generic M3x45 | Yaw rear body clamp bolts. Through bottom3 + body35 + keeper2.6; do not overtighten case | $0.30 |
-| M09 / 2 | [Generic M3x50]( ) | Shoulder clamp bolts. Clamp through44mm tower width plus nuts | $0.30 |
+| M08 / 2 | Generic M3x50 | Yaw rear body clamp bolts. Through bottom3 + body40.5 + keeper2.6; do not overtighten case | $0.30 |
+| M09 / 2 | [Generic M3x60]( ) | Shoulder clamp bolts. Clamp through the52mm tower width and keeper plus nuts | $0.40 |
 | M10 / 4 | [Generic M3x16]( ) | Shoulder foot bolts. 6mm tower foot plus6mm platform plus nuts | $0.16 |
-| M11 / 6 | Generic M3x60 | Arm link through bolts. 5+44+5mm stack plus nut; 3 per link: proximal boss at X35 and the two servo block ears; the halves clamp the servo | $0.40 |
-| M12 / 24 | [Generic M3x10 nominal](https://www.waveshare.net/wiki/ST3215_Servo) | Pitch horn attachment screws. Nominal M3; 5mm link plate +3.3mm spacer leaves1.7mm horn engagement; confirm vendor horn thread | $0.15 |
-| M13 / 4 | [Generic M3x6 nominal](https://www.waveshare.net/wiki/ST3215_Servo) | Yaw horn attachment screws. 3mm web plus1mm washer leaves2mm engagement; confirm vendor horn thread | $0.15 |
+| M11 / 6 | Generic M3x70 | Arm link through bolts. 5+52+5mm stack plus nut;3 per link at X35 and around each servo block | $0.45 |
+| M12 / 8 | [Generic M3x12 nominal with matching nuts](https://images-na.ssl-images-amazon.com/images/I/81Lbgu%2BnG6L.pdf) | DS3218 straight-horn attachment sets. Two per joint through adjustable printed slots; actual supplied horn hole size and thread are not documented | $0.25 |
 | M14 / 6 | [Generic M3x12]( ) | Base lid screws. Into2.8mm plastic-thread-forming printed pilots | $0.15 |
 | M15 / 4 | Generic M3x12 | Head yoke screws. 6mm fork mounting face +3mm shell floor; nuts on inside | $0.15 |
 | M16 / 8 | Generic M3x10 | Outer bezel screws. 4mm bezel +1mm shim;2.8mm plastic-thread-forming pilot | $0.15 |
 | M17 / 4 | Generic M3x12 | Central face screws. 4mm plate +1mm shim;2.8mm plastic-thread-forming pilot | $0.15 |
 | M18 / 4 | Generic M3x10 | White ring carrier screws. 2mm carrier on dedicated radius45 bosses at z32.5 | $0.15 |
 | M19 / 4 | Generic M3x25 | LCD cradle and retaining plate screws. 3mm retainer +15mm cradle; thread into head pillar at z14 | $0.20 |
-| M20 / 16 | Generic M3x1 shim | Precision axial shims. M3 bore; thickness1mm; 12 underface/bezel plus4 yawhorn washers | $0.12 |
-| M21 / 10 | [Generic M3x10]( ) | Sensor pod attachment bolts. 2 per pod through shell or frontplate | $0.15 |
-| M22 / 10 | [Generic M2x14]( ) | Sensor edge frame screws. 2 per pod; pilot2.2 through holes; nuts | $0.15 |
-| M23 / 10 | [Generic M2 nut]( ) | Sensor retainer nuts. ISO metric M2 | $0.08 |
-| M24 / 30 | [Generic M3 nut]( ) | General M3 nuts. Include spare quantities for clamps sensorpods and platform | $0.10 |
+| M20 / 12 | Generic M3x1 shim | Precision axial shims. M3 bore; thickness1mm;12 under face and bezel | $0.12 |
+| M21 / 20 | Generic M2.5x6 | Pedestal sensor board screws. Four per Adafruit3967 board into2.1mm blind pilots;20.32x12.70mm pattern | $0.12 |
+| M24 / 30 | [Generic M3 nut]( ) | General M3 nuts. Include spare quantities for clamps horn interfaces and platform | $0.10 |
 | M25 / 50 | [Generic M3 washer]( ) | General M3 flat washers. Nominal0.5mm; not replacement for1mm axial shims | $0.05 |
 | M26 / 4 | Generic M2.5x6 | Raspberry Pi fasteners. Pi4 four mounting holes; printed standoffs may be tappedM2.5 | $0.12 |
 | M27 / 4 | Generic Rubber feet | Adhesive anti slip feet. 20mm diameter x5mm high minimum; place radius90 | $0.40 |
 | M28 / 1 | Generic Translucent PETG | Frosted optical printing filament. Natural/translucent; approximately60g including trials; solid1.2mm optical skin | $20.00 |
 | M29 / 1 | Generic PETG | Structural filament. Approx1kg roll; actual slicer mass varies;6 walls on the arm link halves | $22.00 |
-| M30 / 1 | Generic Neutral cure silicone | Small adhesive tube. 3 small removable dots for inner diffuser and edgefoam; electronics compatible | $6.00 |
+| M30 / 1 | Generic Neutral cure silicone | Small adhesive tube. 3 small removable dots for inner diffuser; electronics compatible | $6.00 |
 | M31 / 1 | Generic Thin PCB foam | Closed cell foam tape. 0.5 and1mm thickness; LCD edge preload only | $4.00 |
 | M32 / 1 | [Generic LED retaining tape]( ) | Electronics compatible thin adhesive strips. Attach LED ring PCB on support posts without covering LED optics | $3.00 |
 | M33 / 1 | Generic Desk clamp | Optional commercial padded desk clamp. Use only if assembly reach/mass exceeds validated stable envelope; not a printed load bearing clamp | $12.00 |
 | M34 / 12 | [Generic M2.5x12]( ) | Optional harness clip screws. For6 printed cable saddles; use selftapped pilots or cableties | $0.12 |
-| M35 / 10 | Generic Soft closed-cell foam strip | Required ToF edge preload strips. 18x2x6mm each; compress gently to5.4mm between PCB edge and retaining frame;2 per sensor | $0.20 |
+| M35 / 3 | Generic 625-2RS | Pitch-joint idler bearings. 5mm bore x16mm OD x5mm width; sealed | $3.00 |
+| M36 / 3 | Generic M5x16 shoulder bolt or precision-shank bolt | Pitch-joint idler axles. Smooth5mm shank across each625 inner race; one shoulder elbow wrist | $0.80 |
+| M37 / 3 | Generic M5 nyloc nut | Pitch-joint captive idler nuts. ISO metric; one in each printed hex trap | $0.20 |
+| M38 / 6 | Generic M5 washer | Idler bearing thrust washers. One each side of every625 inner race; thin hardened steel | $0.12 |
 
 ## Optional 4-inch DSI head (not in the standard total)
 
@@ -97,12 +99,11 @@ Buy these only for the optional head described in the mechanical chapter. With t
 | D10 / 4 | Generic M4x8 | Optional LCD carrier to display screws. Through5mm carrier pad into the4mm deep M4 case bosses; longer screws bottom out | $0.15 |
 | D11 / 4 | Generic M3x8 | Optional carrier to shell screws. Into2.8mm printed pilots at(+/-55,+/-38) top20.5 | $0.15 |
 | D12 / 4 | Generic M3x12 | Optional face ring screws. 4mm ring +1mm shim;2.8mm pilots at radius67.8 | $0.15 |
-| D13 / 2 | Generic M3x10 | Optional brow bracket bolts. Through3mm bracket base +3mm shell wall; nuts inside the shell | $0.15 |
 | D14 / 1 | Generic Thin closed cell foam tape | Optional LCD rim preload. 0.5mm between the display case rim and the face ring; also under the carrier pads if the boss ends are not coplanar | $2.00 |
 
 ## Printable part schedule
 
-26 unique STL files; 44 printed pieces for the standard build, including the fit coupon and optional cable clips. Quantities control the print run. The drawing index uses the same part order.
+24 unique STL files; 31 printed pieces for the standard build, including the fit coupon and optional cable clips. Quantities control the print run. The drawing index uses the same part order.
 
 | Drawing / qty | STL identifier | Material / print orientation |
 | --- | --- | --- |
@@ -118,7 +119,7 @@ Buy these only for the optional head described in the mechanical chapter. With t
 | P10 / 1 | `upper_arm_right` | PETG; plate down |
 | P11 / 1 | `forearm_left` | PETG; plate down |
 | P12 / 1 | `forearm_right` | PETG; plate down |
-| P13 / 6 | `horn_spacer` | PETG; flat down |
+| P13 / 3 | `horn_spacer` | PETG; flat down |
 | P14 / 1 | `head_yoke` | PETG; rear mounting plate on bed; rotate180X |
 | P15 / 1 | `head_shell` | PETG; rear disc down |
 | P16 / 1 | `outer_bezel` | PETG; front lip down |
@@ -128,17 +129,14 @@ Buy these only for the optional head described in the mechanical chapter. With t
 | P20 / 1 | `lcd_retainer` | black PETG; flat down |
 | P21 / 1 | `outer_diffuser` | natural/translucent PETG; smooth optical face on bed |
 | P22 / 1 | `inner_diffuser` | natural/translucent PETG; smooth optical face on bed |
-| P23 / 5 | `sensor_pod` | PETG; rear flange down |
-| P24 / 5 | `sensor_retainer` | PETG; flat down |
-| P25 / 6 | `cable_clip` | PETG; flat down |
-| P26 / 1 | `fit_coupon` | PETG; flat down |
+| P23 / 6 | `cable_clip` | PETG; flat down |
+| P24 / 1 | `fit_coupon` | PETG; flat down |
 
-The optional 4-inch DSI head prints 4 additional files (4 pieces) and omits `head_shell`, `face_center`, `white_carrier`, `inner_diffuser`, `lcd_cradle`, `lcd_retainer` from the list above.
+The optional 4-inch DSI head prints 3 additional files (3 pieces) and omits `head_shell`, `face_center`, `white_carrier`, `inner_diffuser`, `lcd_cradle`, `lcd_retainer` from the list above.
 
 | Drawing / qty | STL identifier | Material / print orientation |
 | --- | --- | --- |
-| P27 / 1 | `head_shell_dsi` | PETG; rear disc down |
-| P28 / 1 | `lcd4_carrier` | PETG; flat down |
-| P29 / 1 | `face_ring_dsi` | black PETG; flat front down |
-| P30 / 1 | `brow_bracket` | PETG; base plate down |
+| P25 / 1 | `head_shell_dsi` | PETG; rear disc down |
+| P26 / 1 | `lcd4_carrier` | PETG; flat down |
+| P27 / 1 | `face_ring_dsi` | black PETG; flat front down |
 

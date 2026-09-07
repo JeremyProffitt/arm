@@ -1,6 +1,6 @@
 # LUMA Pi4 controller and face firmware
 
-The project includes a deterministic simulator and Raspberry Pi adapters for five ranging sensors, four ST3215 bus servos, two independent LED rings, USB face display and local spoken Hi. The simulation needs only Python3.11 or later.
+The project includes a deterministic simulator and Raspberry Pi adapters for five pedestal ranging sensors, four Miuzei DS3218MG servos through a PCA9685, two independent LED rings, USB face display and local spoken Hi. The simulation needs Python3.11 or later.
 
 ```console
 cd software
@@ -32,30 +32,38 @@ ls -l /dev/serial/by-id/
 aplay -l
 ```
 
-Enter the actual servo/display `/dev/serial/by-id/` paths in `config.json`. Select the USB speaker as the system default ALSA output, or set `audio_device` to the ALSA identifier listed by `aplay -L` (for example `plughw:CARD=Device,DEV=0`; actual name varies). Test speech at low volume. Three USB devices share Pi4's downstream USB power budget; verify measured total current, and use a separately powered hub if the selected speaker/display exceed it. The LED rings never take power from Pi USB or GPIO.
+Enter the actual display `/dev/serial/by-id/` path in `config.json`. The PCA9685 is I2C address64 (`0x40`), with yaw/shoulder/elbow/wrist on channels0/1/2/3. Select the USB speaker as the ALSA output or set `audio_device` to the identifier from `aplay -L`. The standard display and speaker share Pi4 USB power; use a powered hub if measurement requires it. Motors and LEDs never take power from Pi USB or GPIO.
 
-Before connecting motor power, test the sensor chain and flashed display independently. These commands never instantiate the servo bus or LED drivers and do not require a calibrated configuration:
+Before connecting motor power, test the sensor chain and display independently. These commands do not instantiate the PCA9685 or LED drivers and do not require calibrated joints:
 
 ```console
 .venv/bin/python -m luma.bench sensors --seconds 10
 .venv/bin/python -m luma.bench display --port /dev/serial/by-id/YOUR_DISPLAY_DEVICE --scene all --seconds 10
 ```
 
-The sensor check reports millimeters, sample age and physical mux channel for all five sensors. Present a matte target within range to each optical port; a missing/out-of-range return is not treated as clear space. `near` means a valid reading below100mm: the communication check can pass, but armed motion would fault. The display check cycles idle/wink/Hi/happy and checks real firmware replies; its pass result verifies communication, not correct pixels. Inspect the screen yourself. Exit status0 means the final check passed,1 means failed,130 means interrupted. Sensor tests require the configured I2C permissions (normally Pi OS's `i2c` group); USB serial requires `dialout` access. Diagnose an access error before using sudo indiscriminately.
+The sensor check reports millimeters, age and mux channel in front/front-left/rear-left/rear-right/front-right order. Present a matte target at each pedestal aperture. `near` means a valid value below100mm: communication can pass, but armed motion would fault. The display check cycles idle/wink/Hi/happy and checks firmware replies. Inspect the pixels yourself. Exit status0 is pass,1 fail and130 interrupted. I2C normally needs membership in the `i2c` group; USB serial normally needs `dialout`.
 
-The PWM-backed NeoPixel library requires access normally provided by root on Pi4, so the explicit hardware command uses the virtual environment's interpreter with sudo. Leave `calibrated=false` while wiring/testing. Hardware mode without `--arm` still requires powered servo feedback but does not send movement commands. Use the separate bench checks above when motors are unpowered.
+Center only one disconnected, unloaded servo at a time. Keep its straight horn off the arm and keep the physical stop in reach. The command is capped at10seconds, disables the other three PCA9685 channels, and removes the selected PWM pulse when it exits:
+
+```console
+.venv/bin/python -m luma.bench servo --joint yaw --pulse-us 1500 --seconds 2 --confirm-unloaded
+```
+
+Repeat with `shoulder`, `elbow` and `wrist`. Power off before installing each horn. The DS3218 datasheet gives500-2500µs over270° with1500µs nominal neutral. Record the actual mechanical neutral in `neutral_pulse_us`; do not use this command on a loaded joint.
+
+The PWM-backed NeoPixel library normally requires root on Pi4, so the full hardware command uses the virtual environment interpreter with sudo. Leave `calibrated=false` while wiring/testing. Hardware mode without `--arm` requires PCA9685 communication but leaves all four PWM outputs disabled; the separate6V motor rail can remain off.
 
 ```console
 sudo .venv/bin/python -m luma.app --hardware --scene hi --seconds 6
 ```
 
-Complete the commissioning procedure in `../electronics/architecture.md`, including supported neutral indexing, polarity/sign checks, physical stop tests and five valid ranges. Only then set `calibrated=true`. Start each run from within3° of the indexed neutral pose:
+Complete the commissioning procedure in `../electronics/architecture.md`, including unloaded neutral indexing, polarity/sign checks, physical stop tests and five valid pedestal ranges. Only then set `calibrated=true`. Support the arm in its indexed pose before every armed start; software cannot read its physical angles:
 
 ```console
 sudo .venv/bin/python -m luma.app --hardware --arm --scene happy --seconds 6
 ```
 
-Any fault latches for that process. Inspect the logged reason, support the arm, remove the cause, return to the indexed pose and restart explicitly. Normal exit leaves servos holding. Motor supply interruption releases them. The software has no unattended boot/auto-arm service.
+Any fault latches for that process. It stops new targets and leaves the PCA9685 at the last pulse widths. Inspect the reason, support the arm, remove the cause and restart explicitly. PCA9685 health proves I2C communication only, not servo movement or position. The physical motor stop removes6V holding power. There is no unattended boot or auto-arm service.
 
 ## Display firmware
 
@@ -108,6 +116,6 @@ Bench-check the head on its own, the same way as the USB face board:
 
 ## Source/verification notes
 
-`luma/servo_bus.py` implements only checked position reads and volatile sync writes; no runtime EEPROM changes. Register addresses and little-endian packet arrangement were compared with the [Waveshare ST/SC Python SDK](https://files.waveshare.com/wiki/Bus-Servo-Adapter-(A)/STServo_Python.zip), `scservo_sdk/sms_sts.py` and `protocol_packet_handler.py`. Controller tests cover all scene travel/speed envelopes, five-sensor requirements, stale/NaN/no-return data, obstruction hold, stop/display/servo faults, speech event debouncing and malformed servo packets. Hardware paths have not been exercised on a physical Pi/arm.
+`luma/servo_pwm.py` uses the maintained Adafruit CircuitPython PCA9685 library at50Hz. It converts calibrated angles through the DS3218's documented500-2500µs/270° range, starts with all four outputs disabled, and checks controller registers over I2C. The bounded bench path enables one unloaded channel only. Tests cover the duty conversion, channel isolation, config validation, scene limits, five renamed sensor inputs and fault behavior. Hardware paths have not been exercised on a physical Pi/arm.
 
 The pinned firmware toolchain is self-contained in `platformio.ini`; downloaded SDK/toolchain caches are development artifacts and do not need redistribution. Python hardware dependency versions are bounded for installation flexibility, not a physical acceptance-tested lockfile. Record actual installed versions with `pip freeze` when commissioning the Pi.

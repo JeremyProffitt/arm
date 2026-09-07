@@ -7,9 +7,10 @@
   {"id":"S06","title":"Adafruit RGBW 24-pixel ring — product 2862","url":"https://www.adafruit.com/product/2862","use":"Inner white-light ring, RGBW format and mechanical envelope."},
   {"id":"S07","title":"Adafruit 60-pixel RGB ring quarter — product 1768","url":"https://www.adafruit.com/product/1768","use":"Four supported arcs form the outer RGB halo."},
   {"id":"S08","title":"Adafruit NeoPixel rings guide","url":"https://learn.adafruit.com/adafruit-neopixel-uberguide/neopixel-rings","use":"Ring diameter reference."},
-  {"id":"S09","title":"Waveshare ST3215 servo documentation","url":"https://www.waveshare.com/wiki/ST3215_Servo","use":"12V servo dimensions, bus control and mechanical drawing."},
-  {"id":"S10","title":"Waveshare ST3215 servo product specification","url":"https://www.waveshare.com/product/modules/st3215-servo.htm","use":"30 kg·cm stall rating at 12V, current and encoder resolution."},
-  {"id":"S11","title":"Waveshare Bus Servo Adapter (A)","url":"https://www.waveshare.com/wiki/Bus_Servo_Adapter_(A)","use":"USB connection from Pi to serial servo bus."},
+  {"id":"S09","title":"Miuzei DS3218 6V 20kg servo datasheet","url":"https://images-na.ssl-images-amazon.com/images/I/81Lbgu%2BnG6L.pdf","use":"Inventory servo body dimensions, voltage, current, torque, PWM pulse range and 270-degree option."},
+  {"id":"S10","title":"Adafruit PCA9685 16-channel PWM/servo driver guide","url":"https://learn.adafruit.com/16-channel-pwm-servo-driver","use":"User-selected PCA9685 control topology, separate VCC/V+ power and Python driver."},
+  {"id":"S11","title":"Pololu D42V110F6 6V 11A regulator","url":"https://www.pololu.com/product/5673","use":"Regulated 6V servo rail, current capability, dimensions and mounting holes."},
   {"id":"S12","title":"Adafruit PCA9548 STEMMA QT multiplexer — product 5626","url":"https://www.adafruit.com/product/5626","use":"Independent channels for five sensors with identical addresses."},
-  {"id":"S13","title":"Waveshare 4inch DSI LCD (C) — round 720×720 DSI display","url":"https://www.waveshare.com/4inch-dsi-lcd-c.htm","use":"Optional head display: outline, case thickness, M4 boss pattern and PCB envelope from the vendor drawing and STEP model; config.txt overlays from the vendor wiki."}
+  {"id":"S13","title":"Waveshare 4inch DSI LCD (C) — round 720×720 DSI display","url":"https://www.waveshare.com/4inch-dsi-lcd-c.htm","use":"Optional head display: outline, case thickness, M4 boss pattern and PCB envelope from the vendor drawing and STEP model; config.txt overlays from the vendor wiki."},
+  {"id":"S14","title":"Adafruit VL53L1X PCB source","url":"https://github.com/adafruit/Adafruit-VL53L1X-PCB","use":"Exact25.40×17.78mm board outline and four2.5mm holes on20.32×12.70mm centers."}
 ]

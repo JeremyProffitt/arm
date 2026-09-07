@@ -2,7 +2,7 @@ import argparse
 import math
 import unittest
 
-from luma.bench import duration, sensor_snapshot
+from luma.bench import build_parser, duration, pulse_width, sensor_snapshot, servo_duration
 from luma.control import Reading, SENSOR_NAMES
 
 
@@ -29,6 +29,15 @@ class BenchTests(unittest.TestCase):
             with self.assertRaises(argparse.ArgumentTypeError):
                 duration(value)
         self.assertEqual(duration("10"), 10)
+
+    def test_servo_check_is_bounded_and_requires_explicit_confirmation(self):
+        for value in ("0","11","nan"):
+            with self.assertRaises(argparse.ArgumentTypeError): servo_duration(value)
+        for value in ("499","2501"):
+            with self.assertRaises(argparse.ArgumentTypeError): pulse_width(value)
+        args=build_parser().parse_args(["servo","--joint","yaw","--confirm-unloaded"])
+        self.assertTrue(args.confirm_unloaded)
+        self.assertEqual(args.pulse_us,1500)
 
 
 if __name__ == "__main__":

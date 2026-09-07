@@ -2,9 +2,9 @@
 
 ## Verify before enclosing
 
-Power and exercise the display, rings and each sensor on the bench. Confirm that the large ring shows the intended colors, the small ring uses only its white channel during lamp operation and every sensor is associated with its labeled multiplexer port. This makes a reversed ring or swapped cable easy to locate while it is still accessible.
+Power and exercise the display, rings and each pedestal sensor on the bench. Confirm that the large ring shows the intended colors, the small ring uses only its white channel during lamp operation, and every wall direction is associated with its labeled multiplexer port.
 
-Connect each motor individually to set its unique ID. Confirm the servo voltage variant and the expected operating mode before attaching the horn. Mark the calibrated neutral pose on the fixed and moving brackets. Save the calibration with the assembled unit rather than assuming a replacement motor will have the same zero offset.
+Connect one unloaded DS3218MG at a time to its fused6V feed and PCA9685 channel. Use the bounded one-channel command in the software guide to center it at1500µs, then remove power before attaching the horn. Save each measured neutral pulse and direction with the assembled unit. PWM servos have no readable shaft position.
 
 ## Mechanical acceptance record
 
@@ -17,18 +17,20 @@ Connect each motor individually to set its unique ID. Confirm the servo voltage 
 | Stability | Base secured as specified; verify measured mass and center of gravity at the maximum allowed reach. |
 | Head mass | Weigh the completed head and replace assumed mass in the torque calculation. |
 | Horns | Metal horns secured with the servo's correct center screw; no printed spline substitutes. |
-| Enclosed links | Servo seated on the pocket floor with its rear connector in the notch; halves meet at the mid-plane without crushing the case; harness passes the wall port with slack; open clevis clears the previous block and keeper through the commissioned travel. |
+| Pitch idlers | Three625 bearings square in their pockets; M5 smooth shanks load only inner races; captive nuts seated; no axial bind or play. |
+| Pedestal sensors | Five boards on four screws each; component face outward; apertures open; one strain-relieved STEMMA QT cable per board. |
+| Enclosed links | DS3218 case seated in the41.2 ×20.7mm pocket; halves meet without crushing it; harness has slack; horn, idler and servo tab clear the commissioned travel. |
 | Optional DSI head | Carrier pads bear on all four display bosses; face ring bears on the foam rim only, never on the glass; FFC bend radius above 10 mm at every turn; picture stable at full backlight for 30 minutes with the arm closed. |
 
 ## Electrical and motion acceptance
 
 Start with the arm supported and a single joint enabled at reduced speed. Move a few degrees about the calibrated neutral position, verify the sign of rotation, then return to neutral. Repeat for each joint before a coordinated expression. A wrong sign or zero offset must be corrected before enlarging the motion range.
 
-Confirm that the hardware motor-power disconnect removes motor power independently of software. Support the head when testing a power cut: these joints are not self-locking. Verify the software fault response for a missing sensor, invalid range, lost motor connection and lost display connection using the documented tests and a controlled bench check.
+Confirm that the hardware motor-power disconnect removes the regulated6V rail independently of software. Support the head when testing a power cut. Verify the software fault response for a missing sensor, invalid range, lost PCA9685 communication and lost display connection. A live PCA9685 does not prove that a servo moved.
 
-Run the normal white-light and RGB settings with the head assembled. Record temperatures at 5, 15 and 30 minutes at the LED support, near the screen and at the most heavily loaded servo. For the first PETG build, use 45 °C on an accessible printed enclosure surface as a conservative investigation threshold; it is a project test criterion, not a material or product certification. If temperature continues to rise, reduce brightness or load and improve the relevant airflow before extending the test.
+Run the normal white-light and RGB settings with the head assembled. Record temperatures at5,15 and30 minutes at the LED support, screen,6V regulator and most heavily loaded servo. The DS3218 gives no telemetry, so measure accessible surfaces directly. Use45°C on a printed enclosure surface as a conservative investigation threshold for the first PETG build, not as a product certification.
 
-Verify the five optical directions with a matte target at several distances. Record ranges and reject invalid readings rather than treating them as open space. Check for reflections from the diffuser, desk and nearby arm components. These five sensors do not cover every direction around the mechanism, and the behavior must stay inside the commissioned motion envelope.
+Verify front, front-left, rear-left, rear-right and front-right with a matte target at several distances. Record ranges and reject invalid readings rather than treating them as open space. Check for wall-edge reflections. These five horizontal cones do not cover every direction or arm pinch point.
 
 ## Verification worksheet
 
@@ -40,10 +42,11 @@ Verify the five optical directions with a matte target at several distances. Rec
 | Completed head mass | __________________________________ |
 | Base / ballast mass | __________________________________ |
 | Motor supply at motion peak | __________________________________ |
+| Regulated servo rail / PCA9685 check | __________________________________ |
 | LED supply at normal brightness | __________________________________ |
 | Pi undervoltage check | __________________________________ |
-| Maximum observed enclosure temperature | __________________________________ |
-| Mechanical travel limits and zero offsets | __________________________________ |
+| Maximum observed enclosure / servo / regulator temperature | __________________________________ |
+| Mechanical travel limits and neutral pulse widths | __________________________________ |
 | Sensor directions and valid range test | __________________________________ |
 | Hardware power-cut test | __________________________________ |
 

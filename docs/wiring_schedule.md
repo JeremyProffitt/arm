@@ -8,11 +8,16 @@ Use these connection names together with the electrical chapter. Physical Raspbe
 | GND_LOGIC | Raspberry Pi4: physical6 GND → Mux5626: GND | STEMMAQT upstream black. Connect DCSTARground also |
 | I2C_SDA | Raspberry Pi4: physical3 BCM2 → Mux5626: SDA | STEMMAQT upstream blue. I2C bus1 at100kHz |
 | I2C_SCL | Raspberry Pi4: physical5 BCM3 → Mux5626: SCL | STEMMAQT upstream yellow. I2C bus1 at100kHz |
-| TOF_FRONT | Mux5626: port0 → VL53L1X front: STEMMAQT4pin | 4conductor JSTSH. Address0x29 isolated on channel0 |
-| TOF_LEFT | Mux5626: port1 → VL53L1X left: STEMMAQT4pin | 4conductor JSTSH. Left as seen by lamp facing user |
-| TOF_RIGHT | Mux5626: port2 → VL53L1X right: STEMMAQT4pin | 4conductor JSTSH. No sensor shares mux channel |
-| TOF_REAR | Mux5626: port3 → VL53L1X rear: STEMMAQT4pin | 4conductor JSTSH. Leave sensor optical aperture clear |
-| TOF_DOWN | Mux5626: port4 → VL53L1X down: STEMMAQT4pin | 4conductor JSTSH. Nominal desk range must remain above100mm |
+| TOF_FRONT | Mux5626: port0 → VL53L1X front pedestal: STEMMAQT4pin | 4conductor JSTSH. Address0x29 isolated on channel0; wall angle90deg |
+| TOF_FRONT_LEFT | Mux5626: port1 → VL53L1X front-left pedestal: STEMMAQT4pin | 4conductor JSTSH. Wall angle162deg |
+| TOF_REAR_LEFT | Mux5626: port2 → VL53L1X rear-left pedestal: STEMMAQT4pin | 4conductor JSTSH. Wall angle234deg |
+| TOF_REAR_RIGHT | Mux5626: port3 → VL53L1X rear-right pedestal: STEMMAQT4pin | 4conductor JSTSH. Wall angle306deg |
+| TOF_FRONT_RIGHT | Mux5626: port4 → VL53L1X front-right pedestal: STEMMAQT4pin | 4conductor JSTSH. Wall angle18deg; leave every optical aperture clear |
+| PWM_VCC | Raspberry Pi4: physical1 3V3 → PCA9685: VCC | 22AWG. Powers controller logic only; never powers a servo |
+| PWM_GROUND | DCstar: GND → PCA9685: GND | 18AWG. Common reference to Pi sensor bus and all servo signal returns |
+| PWM_SDA | Raspberry Pi4: physical3 BCM2 → PCA9685: SDA | 26AWG. Shared upstream I2C bus; address0x40 |
+| PWM_SCL | Raspberry Pi4: physical5 BCM3 → PCA9685: SCL | 26AWG. Shared upstream I2C bus;50Hz PWM configured in software |
+| PWM_ENABLE | DCstar: GND → PCA9685: /OE | 26AWG. Active-low output enable held low |
 | RGB_DATA3V3 | Raspberry Pi4: physical19 BCM10 MOSI → 74AHCT125: DIP2 1A | 26AWG. Do not connect SPI clock to ring |
 | RGB_DATA5V | 74AHCT125: DIP3 1Y → RGB ring quadrant1: DIN via330ohm | 26AWG. Resistor at first ring input |
 | RGB_CHAIN1 | RGB quadrant1: DOUT → RGB quadrant2: DIN | solder jumper. Connect common5V andGND at all quadrants |
@@ -28,7 +33,6 @@ Use these connection names together with the electrical chapter. Physical Raspbe
 | PI_GROUND | Raspberry Pi4: physical9 GND → DCstar: GND | 22AWG. Common ground only; never tie5VLED toPi5V |
 | PI_POWER | Pi official supply: USB-C5.1V3A → Raspberry Pi4: USB-Cpower | factory cable. Independent from motor12V |
 | FACE_USB | Raspberry Pi4: USB-Aport1 → DisplaySKU28514: USB-C | data cable. Do not add a second5V power feed |
-| SERVO_USB | Raspberry Pi4: USB-Aport2 → BusAdapterA: USB | data cable. ST mode;USB bridge mode |
 | AUDIO_USB | Raspberry Pi4: USB-Aport3 → USB speaker3369: USB | captive cable. LimitUSB total current toPi specification |
 | DC_INPUT | MeanWellGST220A12: R7B+12V → Main15Afuse: input | 16AWG. Use correctparallel contacts from supply drawing |
 | DC_MAIN | Main15Afuse: output → DC12Vdistribution: +12V | 16AWG. Supply remains outside printed enclosure |
@@ -38,15 +42,19 @@ Use these connection names together with the electrical chapter. Physical Raspbe
 | STOP_COIL_PLUS | StopNC1: NC → Relay: coilpositive | 22AWG. Diodecathode stripe here |
 | STOP_COIL_MINUS | Relay: coilnegative → DCstar: GND | 22AWG. Diodeanode here |
 | MOTOR_RELAY_IN | DC12Vdistribution: +12V → Relay: COM highcurrent | 16AWG. NOcontact>=15A12VDC |
-| MOTOR_RELAY_OUT | Relay: NO highcurrent → Servo4way fusedstar: input | 16AWG. StopopensallmotorV+independentofsoftware |
-| SERVO_POWER1 | Servo3Afuse1: output → YawservoID1: V+ | 18AWG. Separatefeed not powered through adapter |
-| SERVO_POWER2 | Servo3Afuse2: output → ShoulderservoID2: V+ | 18AWG. Separatefeed |
-| SERVO_POWER3 | Servo3Afuse3: output → ElbowservoID3: V+ | 18AWG. Separatefeed |
-| SERVO_POWER4 | Servo3Afuse4: output → WristservoID4: V+ | 18AWG. Separatefeed |
-| SERVO_GROUNDS | Allfourservos: GND → DCstar: GND | 18AWG. One return per servo |
-| ADAPTER_POWER | DC12Vdistribution: +12V via1Afuse → BusAdapterA: DC5.5x2.1mm positive | 22AWG. Adapterpoweronly;detachV+ fromdataharness |
-| ADAPTER_GROUND | BusAdapterA: DCnegative/GND → DCstar: GND | 22AWG. ReferenceforDATA |
-| SERVO_DATA | BusAdapterA: STDATA → Servos1-4: DATA daisy-chain | 26AWG. Preservegroundreference;do not bridge separateV+ feeds |
+| MOTOR_RELAY_OUT | Relay: NO highcurrent → Servo regulator7.5Afuse: input | 16AWG. Stop removes regulator input and all motor V+ independent of software |
+| SERVO_REG_INPUT | Servo regulator7.5Afuse: output → PololuD42V110F6: VIN | 16AWG. 12V nominal input; mount with airflow |
+| SERVO_6V | PololuD42V110F6: VOUT6V → Servo4way fusedstar: input | 16AWG. Verify6V and polarity before connecting any servo |
+| SERVO_BULK | Servo6Vstar: +6V/GND → 2200uF10Vcapacitor: +/- | short18AWG. Observe polarity and place near star distribution |
+| SERVO_POWER1 | Servo3Afuse1: output → YawDS3218MG: V+ | 18AWG. Separate6V feed; do not carry power through PCA9685 traces |
+| SERVO_POWER2 | Servo3Afuse2: output → ShoulderDS3218MG: V+ | 18AWG. Separate6V feed |
+| SERVO_POWER3 | Servo3Afuse3: output → ElbowDS3218MG: V+ | 18AWG. Separate6V feed |
+| SERVO_POWER4 | Servo3Afuse4: output → WristDS3218MG: V+ | 18AWG. Separate6V feed |
+| SERVO_GROUNDS | AllfourDS3218MG: GND → DCstar: GND | 18AWG. One power return per servo; common with PCA9685 logic ground |
+| SERVO_PWM1 | PCA9685: channel0 signal → YawDS3218MG: PWM | 26AWG. 500-2500us range;1500us nominal neutral; signal and ground only at controller |
+| SERVO_PWM2 | PCA9685: channel1 signal → ShoulderDS3218MG: PWM | 26AWG. Confirm direction before fitting loaded horn |
+| SERVO_PWM3 | PCA9685: channel2 signal → ElbowDS3218MG: PWM | 26AWG. Confirm direction before fitting loaded horn |
+| SERVO_PWM4 | PCA9685: channel3 signal → WristDS3218MG: PWM | 26AWG. Confirm direction before fitting loaded horn |
 | STOP_SENSE | Raspberry Pi4: physical13 BCM27 → StopNC2: COM | 26AWG. External10kohm toPi3.3V |
 | STOP_SENSE_RETURN | StopNC2: NC → Raspberry Pi4: physical14 GND | 26AWG. Opencontact orbrokenwire readsstop |
 | BUCK_INPUT | DC12Vdistribution: +12V via2Afuse → PololuD24V50F5: VIN | 22AWG. ENleftunconnected |

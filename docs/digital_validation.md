@@ -4,15 +4,15 @@ The included validation files record what was checked on the development compute
 
 ## Executed host software checks
 
-The controller, bench diagnostic, servo packet and face-renderer test suite passed 34 tests. The checks exercise all three expressions over repeated control frames, joint angle and slew limits, the requirement for five sensor readings, stale and invalid measurements, a close-object hold, latched faults, physical stop polarity, lost display or servo feedback, and the one-shot spoken greeting.
+The controller, bench diagnostic, PWM and face-renderer suite passed37 tests. It exercises all three expressions, angle/slew limits, the five pedestal channel names and order, stale/invalid/near ranges, latched faults, stop polarity, lost display or PCA9685 communication, and the one-shot greeting.
 
-Additional tests verify that the inner ring receives only white-channel data at its cap, that servo status packets have the right ID and checksum, that uncalibrated motion is refused, and that a stop uses measured position with a defined fallback when feedback cannot be refreshed. The revision B tests draw the Pi-rendered face for the optional DSI head onto an off-screen surface and check eye, blush, mouth and fault pixels for every expression, run the DSI display adapter against SDL's dummy driver, and prove that the behaviour code never imports the graphics library unless that head is selected. The simulator was exercised without activating any hardware.
+Additional tests verify the500-2500µs/270° conversion, a known PCA9685 duty value, one-channel commissioning with the other channels disabled, neutral calibration gating, and white-channel limits. Face tests render the optional DSI output off-screen and check expression/fault pixels. The simulator and tests activate no physical hardware.
 
 ## Meshes and assembly
 
-`cad/validation.json` records STL properties from the exporter. `validation/assembly_check.json` records an independent mesh check and static boolean intersection check on the assembled printed solids of both assemblies: 30 printable types are watertight single bodies that fit a 220 mm bed; the standard assembly (37 printed instances) and the optional DSI-head assembly (35 printed instances) show no printed-part overlap above 0.5 mm³ at the indexed neutral pose. `cad/purchased_fit.json` records that the servo envelopes, the 55 mm display envelope and the measured 4-inch display envelope do not intersect any printed part in either assembly.
+`cad/validation.json` records exporter mesh properties. `validation/assembly_check.json` covers27 printable types and reports zero printed-part overlaps above0.5mm³ in the standard24-instance and DSI21-instance assemblies. `cad/purchased_fit.json` reports no intersection for four DS3218MG case/tab envelopes, five Adafruit3967 pedestal-board envelopes, and either display envelope.
 
-The intersection check is limited to the indexed neutral pose and the printed components represented in the assembly. It does not establish moving-cable clearance, exact purchased-component fit or a fully collision-free operating envelope; in particular the enclosed links' open clevis has been checked digitally only at neutral, and the 4-inch display's DSI connector position in the envelope comes from a vendor photograph. Follow the manual's supported movement check with the actual hardware before using the programmed expressions.
+The intersection check is limited to the indexed pose. It excludes real horns/splines,625 bearings, screws and moving cables. It cannot prove the supplied straight-horn hole pattern, physical sensor alignment, or a collision-free moving envelope. The4-inch DSI connector position remains estimated from a vendor photograph.
 
 ## PDF and media
 
@@ -24,4 +24,4 @@ The firmware source includes the exact-board pin mapping and the vendor's two pa
 
 ## Physical work still required
 
-Actual Raspberry Pi GPIO and USB operation, screen operation, screw engagement, motor holding ability, electrical continuity, stop-relay behavior, sensor optics, light diffusion, stability and enclosed temperatures have not been tested on a physical unit. Neither has the 800 mm DSI cable run of the optional head, nor the servo temperature inside the enclosed links. The specification-based parts and the prototype clearances are intended for a first fit-and-function build. Record the measured results and any revisions on the verification worksheet.
+Actual Raspberry Pi GPIO/I2C/USB operation, PCA9685 output,6V regulator cooling, horn/idler fit, servo holding ability, electrical continuity, stop behavior, sensor optics, light diffusion, stability and enclosed temperatures have not been tested on a physical unit. The DS3218 servos expose no position/current/temperature telemetry. The800mm optional DSI cable is also untested. Record all first-build results on the worksheet.

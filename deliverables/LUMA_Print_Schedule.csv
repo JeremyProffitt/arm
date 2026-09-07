@@ -1,18 +1,18 @@
 ﻿drawing,quantity,variant,stl,name,material,orientation,layer_mm,walls,infill_percent
-P01,1,standard,stl/base_tub.stl,Weighted base enclosure,PETG,floor down,0.2,4,25
+P01,1,standard,stl/base_tub.stl,Weighted base enclosure with five internal ToF mounts,PETG,floor down,0.2,4,25
 P02,1,standard,stl/base_lid.stl,Vented base lid and yaw bearing seat,PETG,flat annulus down,0.2,4,25
 P03,1,standard,stl/electronics_tray.stl,Universal electronics tray with Pi4 standoffs,PETG,plate down,0.2,4,25
-P04,1,standard,stl/yaw_mount.stl,Yaw servo rear body cradle,PETG,base down,0.2,4,25
+P04,1,standard,stl/yaw_mount.stl,DS3218MG yaw servo rear-body cradle,PETG,base down,0.2,4,25
 P05,1,standard,stl/yaw_cap.stl,Yaw clamp keeper,PETG,flat down,0.2,4,25
-P06,1,standard,stl/turntable.stl,Bearing supported yaw turntable,PETG,neck down,0.2,4,25
-P07,1,standard,stl/shoulder_tower.stl,Shoulder servo body tower,PETG,foot down,0.2,4,25
+P06,1,standard,stl/turntable.stl,Bearing-supported yaw turntable for straight servo arm,PETG,neck down,0.2,4,25
+P07,1,standard,stl/shoulder_tower.stl,DS3218MG shoulder body tower with idler support,PETG,foot down,0.2,4,25
 P08,1,standard,stl/shoulder_cap.stl,Shoulder clamp keeper,PETG,flat down,0.2,4,25
-P09,1,standard,stl/upper_arm_left.stl,"Upper arm enclosed link, left half",PETG,plate down,0.2,6,40
-P10,1,standard,stl/upper_arm_right.stl,"Upper arm enclosed link, right half",PETG,plate down,0.2,6,40
-P11,1,standard,stl/forearm_left.stl,"Forearm enclosed link, left half",PETG,plate down,0.2,6,40
-P12,1,standard,stl/forearm_right.stl,"Forearm enclosed link, right half",PETG,plate down,0.2,6,40
-P13,6,standard,stl/horn_spacer.stl,Metal horn to link stand off,PETG,flat down,0.2,4,25
-P14,1,standard,stl/head_yoke.stl,Head tilt fork and rear mount,PETG,rear mounting plate on bed; rotate180X,0.2,4,25
+P09,1,standard,stl/upper_arm_left.stl,"Upper arm enclosed link, idler half",PETG,plate down,0.2,6,40
+P10,1,standard,stl/upper_arm_right.stl,"Upper arm enclosed link, driven half",PETG,plate down,0.2,6,40
+P11,1,standard,stl/forearm_left.stl,"Forearm enclosed link, idler half",PETG,plate down,0.2,6,40
+P12,1,standard,stl/forearm_right.stl,"Forearm enclosed link, driven half",PETG,plate down,0.2,6,40
+P13,3,standard,stl/horn_spacer.stl,DS3218 straight-horn to driven-link spacer,PETG,flat down,0.2,4,25
+P14,1,standard,stl/head_yoke.stl,Head tilt fork with driven and 625-idler ears,PETG,rear mounting plate on bed; rotate180X,0.2,4,25
 P15,1,standard,stl/head_shell.stl,Optical head rear enclosure,PETG,rear disc down,0.2,4,25
 P16,1,standard,stl/outer_bezel.stl,Outer RGB diffuser retaining bezel,PETG,front lip down,0.2,4,25
 P17,1,standard,stl/face_center.stl,Central optical baffle plate,black PETG,flat front down,0.2,4,25
@@ -21,11 +21,8 @@ P19,1,standard,stl/lcd_cradle.stl,55 mm LCD edge cradle,PETG,flat base down,0.2,
 P20,1,standard,stl/lcd_retainer.stl,LCD PCB corner retaining plate,black PETG,flat down,0.2,4,25
 P21,1,standard,stl/outer_diffuser.stl,Frosted outer RGB annular diffuser,natural/translucent PETG,smooth optical face on bed,0.15,3,100
 P22,1,standard,stl/inner_diffuser.stl,Frosted inner RGBW light diffuser,natural/translucent PETG,smooth optical face on bed,0.15,3,100
-P23,5,standard,stl/sensor_pod.stl,Open optical ToF sensor body,PETG,rear flange down,0.2,4,25
-P24,5,standard,stl/sensor_retainer.stl,ToF board edge retaining frame,PETG,flat down,0.2,4,25
-P25,6,standard,stl/cable_clip.stl,Harness saddle clip,PETG,flat down,0.2,4,25
-P26,1,standard,stl/fit_coupon.stl,Horn and bolt clearance coupons,PETG,flat down,0.2,4,25
-P27,1,dsi-head,stl/head_shell_dsi.stl,Optional DSI head rear enclosure,PETG,rear disc down,0.2,4,25
-P28,1,dsi-head,stl/lcd4_carrier.stl,Optional 4 inch LCD carrier plate,PETG,flat down,0.2,4,25
-P29,1,dsi-head,stl/face_ring_dsi.stl,Optional DSI face ring,black PETG,flat front down,0.2,4,25
-P30,1,dsi-head,stl/brow_bracket.stl,Optional forward sensor brow bracket,PETG,base plate down,0.2,4,25
+P23,6,standard,stl/cable_clip.stl,Harness saddle clip,PETG,flat down,0.2,4,25
+P24,1,standard,stl/fit_coupon.stl,"Fastener, 625 bearing and horn-slot clearance coupon",PETG,flat down,0.2,4,25
+P25,1,dsi-head,stl/head_shell_dsi.stl,Optional DSI head rear enclosure,PETG,rear disc down,0.2,4,25
+P26,1,dsi-head,stl/lcd4_carrier.stl,Optional 4 inch LCD carrier plate,PETG,flat down,0.2,4,25
+P27,1,dsi-head,stl/face_ring_dsi.stl,Optional DSI face ring,black PETG,flat front down,0.2,4,25

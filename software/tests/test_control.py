@@ -2,7 +2,7 @@ import math
 import unittest
 from luma.control import Controller, Reading, SENSOR_NAMES, LIMITS
 from luma.hardware import validate_config, white_pixel, Hardware
-from luma.servo_pwm import angles_to_pulses, pulse_to_duty_cycle
+from luma.servo_pwm import ServoPwm, angles_to_pulses, pulse_to_duty_cycle
 from types import SimpleNamespace
 
 
@@ -77,6 +77,15 @@ class PwmTests(unittest.TestCase):
     def test_angles_map_across_270_degree_servo_span(self):
         self.assertEqual(angles_to_pulses([1500]*4,[1,-1,1,-1],[27,27,-13.5,-13.5]),
                          [1700,1300,1400,1600])
+
+    def test_one_joint_check_disables_other_pwm_channels(self):
+        channels=[SimpleNamespace(duty_cycle=99) for _ in range(4)]
+        pwm=ServoPwm.__new__(ServoPwm)
+        pwm.channels=(0,1,2,3)
+        pwm.pca=SimpleNamespace(channels=channels)
+        pwm.move_one(2,1500)
+        self.assertEqual([c.duty_cycle for c in channels],
+                         [0,0,pulse_to_duty_cycle(1500),0])
 
     def test_config_refuses_uncalibrated_motion(self):
         c={"calibrated":False,"neutral_pulse_us":[1500]*4,"joint_signs":[1]*4,

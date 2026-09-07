@@ -1,12 +1,14 @@
-"""Motor-independent sensor and USB face checks. Never opens the servo bus."""
+"""Focused hardware checks; servo output requires an explicit unloaded confirmation."""
 import argparse
 import json
 import math
+from pathlib import Path
 import sys
 import time
 
-from .control import SCENES, SENSOR_NAMES
+from .control import JOINT_NAMES, SCENES, SENSOR_NAMES
 from .hardware import Display, Ranging
+from .servo_pwm import MAX_PULSE_US, MIN_PULSE_US, ServoPwm
 
 
 def duration(value):
@@ -14,6 +16,20 @@ def duration(value):
     if not math.isfinite(seconds) or not 0 < seconds <= 600:
         raise argparse.ArgumentTypeError("seconds must be finite and between 0 and 600")
     return seconds
+
+
+def servo_duration(value):
+    seconds = float(value)
+    if not math.isfinite(seconds) or not 0 < seconds <= 10:
+        raise argparse.ArgumentTypeError("servo seconds must be finite and between0 and10")
+    return seconds
+
+
+def pulse_width(value):
+    pulse = int(value)
+    if not MIN_PULSE_US <= pulse <= MAX_PULSE_US:
+        raise argparse.ArgumentTypeError("pulse must be between500 and2500us")
+    return pulse
 
 
 def sensor_snapshot(samples, now):
@@ -83,6 +99,31 @@ def display(port, seconds, scene, kind="usb_serial"):
         screen.close()
 
 
+def servo(config_path, joint, pulse_us, seconds):
+    import board
+    config = json.loads(config_path.read_text())
+    i2c = board.I2C()
+    controller = None
+    try:
+        controller = ServoPwm(i2c, config["servo_channels"], config["pca9685_address"])
+        index = JOINT_NAMES.index(joint)
+        controller.move_one(index, pulse_us)
+        print(json.dumps({"check":"servo","joint":joint,"channel":config["servo_channels"][index],
+                          "pulse_us":pulse_us,"seconds":seconds,"warning":"unloaded output active"}),flush=True)
+        time.sleep(seconds)
+        return 0
+    finally:
+        try:
+            if controller is not None:
+                controller.disable()
+        finally:
+            try:
+                if controller is not None:
+                    controller.close()
+            finally:
+                i2c.deinit()
+
+
 def build_parser():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -95,6 +136,14 @@ def build_parser():
         help="usb_serial talks to the ESP32 face board; dsi renders locally on the Waveshare panel")
     display_parser.add_argument("--seconds", type=duration, default=10.0)
     display_parser.add_argument("--scene", choices=("all", *SCENES, "fault"), default="all")
+    servo_parser = commands.add_parser("servo", help="Center one unloaded DS3218MG through the PCA9685")
+    servo_parser.add_argument("--config", type=Path,
+        default=Path(__file__).resolve().parents[1]/"config.json")
+    servo_parser.add_argument("--joint", choices=JOINT_NAMES, required=True)
+    servo_parser.add_argument("--pulse-us", type=pulse_width, default=1500)
+    servo_parser.add_argument("--seconds", type=servo_duration, default=2.0)
+    servo_parser.add_argument("--confirm-unloaded", action="store_true",
+        help="required: servo horn is disconnected from the arm and the motor stop is in reach")
     return parser
 
 
@@ -103,10 +152,14 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.command == "display" and args.kind == "usb_serial" and not args.port:
         parser.error("--port is required when --kind usb_serial")
+    if args.command == "servo" and not args.confirm_unloaded:
+        parser.error("servo check requires --confirm-unloaded")
     try:
         if args.command == "sensors":
             return sensors(args.seconds)
-        return display(args.port, args.seconds, args.scene, args.kind)
+        if args.command == "display":
+            return display(args.port, args.seconds, args.scene, args.kind)
+        return servo(args.config, args.joint, args.pulse_us, args.seconds)
     except KeyboardInterrupt:
         return 130
     except Exception as exc:

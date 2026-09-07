@@ -14,8 +14,8 @@ E12,2,Generic,330ohm 0.25W resistor,LED input series resistors,One per independe
 E13,2,Generic,1000uF 10V electrolytic,LED ring supply reservoir,Observe polarity;one each ring,Design choice,,1
 E14,1,Generic,100nF ceramic,74AHCT125 decoupling,Across DIP14 and DIP7 at socket,Design choice,,0.10
 E15,1,Pololu,D24V50F5 item2851,LED5V buck converter,5V5A typical thermal-limited;17.8x20.3x8.8mm,Vendor documented,https://www.pololu.com/product/2851,32.95
-E16,4,Waveshare,ST3215 30kg.cm@12V,Four joint bus servos,12V version;4096ticks/rev;2.7A stall each;1Mbps default,Vendor documented,https://www.waveshare.com/product/modules/st3215-servo.htm,22
-E17,1,Waveshare,Bus Servo Adapter A SKU25514,USB to TTL half-duplex bus adapter,ST selected;USB mode;separate low-current12V branch,Vendor documented,https://docs.waveshare.com/Bus_Servo_Adapter_A,10
+E16,4,Miuzei,DS3218MG 20kg 270-degree,Four inventory joint servos,4.8-6.8V; PWM500-2500us;1500us neutral;50-330Hz;2.2A stall and21.5kg-cm at6.8V;40x20x40.5mm,Vendor datasheet; operator has8,https://images-na.ssl-images-amazon.com/images/I/81Lbgu%2BnG6L.pdf,0
+E17,1,Generic,PCA9685 16-channel PWM board,Operator-selected four-servo controller,I2C address0x40;50Hz;channels0-3;3.3V logic VCC;servo V+ supplied separately,Controller selected by operator; measure exact board before fastening,https://learn.adafruit.com/16-channel-pwm-servo-driver,0
 E18,1,Mean Well,GST220A12-R7B,External enclosed motor/LED supply,12V15A model;R7B powerDIN;keep outside printed enclosure,Vendor documented,https://www.meanwell.com/Upload/PDF/GST220A/GST220A-SPEC.PDF,95
 E19,1,Generic,Matching R7B powerDIN harness,DC supply breakout,Correct polarity;all specified parallel contacts;15A aggregate rated,Must match selected supply connector drawing,,15
 E20,1,Generic,IEC C13 mains cord,External supply cord,Local approved cord;earth conductor intact,Specification selection,,7
@@ -23,9 +23,9 @@ E21,1,Generic,Latching mushroom stop two NC contacts,Motor stop plus isolated Pi
 E22,1,Generic,12VDC coil relay with30A DC NO contact and socket,Hardware motor supply disconnect,Coil<=200mA;NO contacts>=15A at12VDC;socket16AWG,Specify actual DC rating before purchase,,12
 E23,1,Generic,1N4007 diode,Relay coil flyback,Stripe/cathode to coil positive,Design choice,,0.10
 E24,1,Generic,15A DC fuse and holder,Main12V input branch,Holder and connector rated>=15A,Design choice,,3
-E25,4,Generic,3A time-delay DC fuse and holder,Individual servoV+ feeds,18AWG star feeds;one fuse per servo,Design choice,,3
+E25,4,Generic,3A time-delay DC fuse and holder,Individual6V servo feeds,18AWG star feeds;one fuse per DS3218,Design choice,,3
 E26,1,Generic,2A DC fuse and holder,Buck12V input branch,LED firmware capped20percent,Design choice,,3
-E27,1,Generic,1A DC fuse and holder,Bus adapter power branch,Do not run servo group current through adapter jack,Design choice,,3
+E27,1,Generic,7.5A time-delay DC fuse and holder,Servo regulator12V input branch,Between motor relay output and6V regulator VIN;16AWG,Design choice,,3
 E28,1,Generic,0.5A DC fuse and holder,Relay coil branch,NC1 switches coil only,Design choice,,3
 E29,1,Generic,3A DC fuse and holder,5V LED output branch,ProtectsLED18-22AWG harness,Design choice,,3
 E30,1,Adafruit,3369 mini USB speaker,Spoken Hi,USB audio;84x43x32mm;73.6g;keep volume modest,Vendor documented,https://www.adafruit.com/product/3369,12.50
@@ -35,6 +35,8 @@ E33,1,Generic,16AWG /18AWG silicone wire and rated distribution terminals,Power 
 E34,1,Generic,Small perfboard and DIP14 socket,Level shifter assembly,Insulate underside;strain relief all wires,Design choice,,5
 E35,1,Generic,Pi4 heatsink and ventilation hardware,Thermal management,Check CPU temperature after assembled operation,Specification selection,,7
 E36,1,Generic,10kohm resistor,External E-stop sense pullup,BCM27 to3.3V;open NC2 means asserted,Design choice,,0.10
+E37,1,Pololu,D42V110F6 item5673,Servo rail step-down regulator,6V output;11A nominal;6-60V input;31.8x43.2x9mm;four2.2mm mounting holes,Vendor documented; verify6V before connecting servos,https://www.pololu.com/product/5673,59.95
+E38,1,Generic,2200uF 10V low-ESR electrolytic,Servo rail bulk capacitor,Across6V star after regulator;observe polarity;voltage rating at least10V,Design choice guided by PCA9685 vendor power notes,https://learn.adafruit.com/16-channel-pwm-servo-driver/hooking-it-up,3
 D01,1,Waveshare,4inch DSI LCD (C),Optional head display,Round720x720 IPS DSI;126mm outline;101.52mm active;6mm case;four M4 rear bosses on75x75;includes two50mm 15-pin FPC,Vendor documented,https://www.waveshare.com/4inch-dsi-lcd-c.htm,45
 D02,1,Generic,15-pin 1.0mm pitch FFC type A 800mm,Pi DSI to optional head,Same-side contacts;0.3mm thick;800mm nominal from Pi DSI connector through both arm cable ports;bench-verify signal integrity before closing the arm,Measure route before buying,,8
 D03,1,Generic,2-conductor 22AWG silicone lead with2.0mm pitch 4-pin plug,Optional head5V feed,Pi header5V/GND to LCD HP2.0 4-pin;SDA/SCL contacts left empty;800mm,Match plug to purchased LCD connector,,4
@@ -45,36 +47,35 @@ M04,4,Generic,M4x5 spacer,Tray standoffs,Metal spacer5mm length; 4.3mm bore; OD8
 M05,4,Generic,M4 nut,M4 lock nuts,ISO metric nyloc,, ,0.12
 M06,8,Generic,M4 washer,M4 load spreading washers,OD12 minimum,, ,0.06
 M07,4,Generic,M3x16,Yaw cradle through bolts,Through printed cradle3 steel6 and base3; nuts below base; tray has7mm head access,Check underside clearance to desk,,0.16
-M08,2,Generic,M3x45,Yaw rear body clamp bolts,Through bottom3 + body35 + keeper2.6; do not overtighten case,Body clamp avoids undocumented case threads,,0.3
-M09,2,Generic,M3x50,Shoulder clamp bolts,Clamp through44mm tower width plus nuts,, ,0.3
+M08,2,Generic,M3x50,Yaw rear body clamp bolts,Through bottom3 + body40.5 + keeper2.6; do not overtighten case,Body clamp avoids loading the servo mounting ears,,0.3
+M09,2,Generic,M3x60,Shoulder clamp bolts,Clamp through the52mm tower width and keeper plus nuts,, ,0.4
 M10,4,Generic,M3x16,Shoulder foot bolts,6mm tower foot plus6mm platform plus nuts,, ,0.16
-M11,6,Generic,M3x60,Arm link through bolts,5+44+5mm stack plus nut; 3 per link: proximal boss at X35 and the two servo block ears; the halves clamp the servo,All threads clear rotating hardware,,0.4
-M12,24,Generic,M3x10 nominal,Pitch horn attachment screws,Nominal M3; 5mm link plate +3.3mm spacer leaves1.7mm horn engagement; confirm vendor horn thread,Measure purchased horn thread and screw bottoming before power,https://www.waveshare.net/wiki/ST3215_Servo,0.15
-M13,4,Generic,M3x6 nominal,Yaw horn attachment screws,3mm web plus1mm washer leaves2mm engagement; confirm vendor horn thread,Do not allow tips to contact servo case,https://www.waveshare.net/wiki/ST3215_Servo,0.15
+M11,6,Generic,M3x70,Arm link through bolts,5+52+5mm stack plus nut;3 per link at X35 and around each servo block,All threads clear rotating hardware,,0.45
+M12,8,Generic,M3x12 nominal with matching nuts,DS3218 straight-horn attachment sets,Two per joint through adjustable printed slots; actual supplied horn hole size and thread are not documented,Measure each inventory horn before selecting final diameter length and nut arrangement,https://images-na.ssl-images-amazon.com/images/I/81Lbgu%2BnG6L.pdf,0.25
 M14,6,Generic,M3x12,Base lid screws,Into2.8mm plastic-thread-forming printed pilots,, ,0.15
 M15,4,Generic,M3x12,Head yoke screws,6mm fork mounting face +3mm shell floor; nuts on inside,Check rear boss screw clearance,,0.15
 M16,8,Generic,M3x10,Outer bezel screws,4mm bezel +1mm shim;2.8mm plastic-thread-forming pilot,Tighten evenly to avoid diffuser distortion,,0.15
 M17,4,Generic,M3x12,Central face screws,4mm plate +1mm shim;2.8mm plastic-thread-forming pilot,Keep flange captured with0.2mm clearance,,0.15
 M18,4,Generic,M3x10,White ring carrier screws,2mm carrier on dedicated radius45 bosses at z32.5,No shared LCD post intersections,,0.15
 M19,4,Generic,M3x25,LCD cradle and retaining plate screws,3mm retainer +15mm cradle; thread into head pillar at z14,Use foam only on PCB edges; avoid display glass pressure,,0.2
-M20,16,Generic,M3x1 shim,Precision axial shims,M3 bore; thickness1mm; 12 underface/bezel plus4 yawhorn washers,Thickness controls axial stack,,0.12
-M21,10,Generic,M3x10,Sensor pod attachment bolts,2 per pod through shell or frontplate,, ,0.15
-M22,10,Generic,M2x14,Sensor edge frame screws,2 per pod; pilot2.2 through holes; nuts,, ,0.15
-M23,10,Generic,M2 nut,Sensor retainer nuts,ISO metric M2,, ,0.08
-M24,30,Generic,M3 nut,General M3 nuts,Include spare quantities for clamps sensorpods and platform,, ,0.1
+M20,12,Generic,M3x1 shim,Precision axial shims,M3 bore; thickness1mm;12 under face and bezel,Thickness controls axial stack,,0.12
+M21,20,Generic,M2.5x6,Pedestal sensor board screws,Four per Adafruit3967 board into2.1mm blind pilots;20.32x12.70mm pattern,Start by hand and stop before the PCB bends,,0.12
+M24,30,Generic,M3 nut,General M3 nuts,Include spare quantities for clamps horn interfaces and platform,, ,0.1
 M25,50,Generic,M3 washer,General M3 flat washers,Nominal0.5mm; not replacement for1mm axial shims,, ,0.05
 M26,4,Generic,M2.5x6,Raspberry Pi fasteners,Pi4 four mounting holes; printed standoffs may be tappedM2.5,Do not force screws against board components,,0.12
 M27,4,Generic,Rubber feet,Adhesive anti slip feet,20mm diameter x5mm high minimum; place radius90,Provides underside fastener clearance,,0.4
 M28,1,Generic,Translucent PETG,Frosted optical printing filament,Natural/translucent; approximately60g including trials; solid1.2mm optical skin,Sand600-1000grit and test diffusion,,20
 M29,1,Generic,PETG,Structural filament,Approx1kg roll; actual slicer mass varies;6 walls on the arm link halves,Do not substitute brittle resin on structural joints,,22
-M30,1,Generic,Neutral cure silicone,Small adhesive tube,3 small removable dots for inner diffuser and edgefoam; electronics compatible,Do not cover ToF optical aperture,,6
+M30,1,Generic,Neutral cure silicone,Small adhesive tube,3 small removable dots for inner diffuser; electronics compatible,Do not cover any optical aperture,,6
 M31,1,Generic,Thin PCB foam,Closed cell foam tape,0.5 and1mm thickness; LCD edge preload only,Set LCD stack with measured sample,,4
 M32,1,Generic,LED retaining tape,Electronics compatible thin adhesive strips,Attach LED ring PCB on support posts without covering LED optics,, ,3
 M33,1,Generic,Desk clamp,Optional commercial padded desk clamp,Use only if assembly reach/mass exceeds validated stable envelope; not a printed load bearing clamp,Clamp base rim without crushing printed walls,,12
 M34,12,Generic,M2.5x12,Optional harness clip screws,For6 printed cable saddles; use selftapped pilots or cableties,, ,0.12
-M35,10,Generic,Soft closed-cell foam strip,Required ToF edge preload strips,18x2x6mm each; compress gently to5.4mm between PCB edge and retaining frame;2 per sensor,Keep clear of centered sensor optics and side QT connectors,,0.2
+M35,3,Generic,625-2RS,Pitch-joint idler bearings,5mm bore x16mm OD x5mm width; sealed,Press into16.2mm coupon and link/yoke pockets without loading the inner race,,3
+M36,3,Generic,M5x16 shoulder bolt or precision-shank bolt,Pitch-joint idler axles,Smooth5mm shank across each625 inner race; one shoulder elbow wrist,Confirm shank and thread lengths against actual bearing and captive nut,,0.8
+M37,3,Generic,M5 nyloc nut,Pitch-joint captive idler nuts,ISO metric; one in each printed hex trap,Must seat fully without splitting printed boss,,0.2
+M38,6,Generic,M5 washer,Idler bearing thrust washers,One each side of every625 inner race; thin hardened steel,Must not rub bearing outer race,,0.12
 D10,4,Generic,M4x8,Optional LCD carrier to display screws,Through5mm carrier pad into the4mm deep M4 case bosses; longer screws bottom out,Do not exceed8mm; check engagement on the purchased display,,0.15
 D11,4,Generic,M3x8,Optional carrier to shell screws,"Into2.8mm printed pilots at(+/-55,+/-38) top20.5",Accessible from the front with the display fitted,,0.15
 D12,4,Generic,M3x12,Optional face ring screws,4mm ring +1mm shim;2.8mm pilots at radius67.8,Keep flange captured with0.2mm clearance,,0.15
-D13,2,Generic,M3x10,Optional brow bracket bolts,Through3mm bracket base +3mm shell wall; nuts inside the shell,Uses the fourth wall pod mount at the top of the DSI shell,,0.15
 D14,1,Generic,Thin closed cell foam tape,Optional LCD rim preload,0.5mm between the display case rim and the face ring; also under the carrier pads if the boss ends are not coplanar,Set with the purchased display,,2

@@ -1,9 +1,9 @@
 {
-  "purchase_line_items": 79,
-  "budget_usd": 777.98,
-  "optional_dsi_head_budget_usd": 61.1,
-  "unique_prints": 26,
-  "print_quantity": 44,
-  "optional_dsi_head_prints": 4,
-  "optional_dsi_head_print_quantity": 4
+  "purchase_line_items": 80,
+  "budget_usd": 750.07,
+  "optional_dsi_head_budget_usd": 60.8,
+  "unique_prints": 24,
+  "print_quantity": 31,
+  "optional_dsi_head_prints": 3,
+  "optional_dsi_head_print_quantity": 3
 }

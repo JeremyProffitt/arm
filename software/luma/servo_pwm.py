@@ -49,9 +49,8 @@ class ServoPwm:
         try:
             self.pca = PCA9685(i2c, address=address)
             self.pca.frequency = PWM_FREQUENCY_HZ
-            for channel in self.channels:
-                self.pca.channels[channel].duty_cycle = 0
-        except (OSError, ValueError) as error:
+            self.disable()
+        except (OSError, ValueError, ServoError) as error:
             if self.pca is not None:
                 self.pca.deinit()
             raise ServoError(f"PCA9685 initialization failed: {error}") from error
@@ -65,6 +64,23 @@ class ServoPwm:
                 self.pca.channels[channel].duty_cycle = duty
         except OSError as error:
             raise ServoError(f"PCA9685 write failed: {error}") from error
+
+    def move_one(self, joint_index, pulse_us):
+        if type(joint_index) is not int or not 0 <= joint_index < SERVO_COUNT:
+            raise ValueError("joint index must be0 through3")
+        duty = pulse_to_duty_cycle(pulse_us)
+        self.disable()
+        try:
+            self.pca.channels[self.channels[joint_index]].duty_cycle = duty
+        except OSError as error:
+            raise ServoError(f"PCA9685 write failed: {error}") from error
+
+    def disable(self):
+        try:
+            for channel in self.channels:
+                self.pca.channels[channel].duty_cycle = 0
+        except OSError as error:
+            raise ServoError(f"PCA9685 disable failed: {error}") from error
 
     def healthy(self):
         try:

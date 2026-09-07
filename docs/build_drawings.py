@@ -49,7 +49,7 @@ def border(c,title,number,subtitle=""):
     text(c,40,63,"UNITS mm  ·  THIRD-ANGLE PART VIEWS  ·  NUMERICAL DIMENSIONS CONTROL",8,"Luma-Bold")
     text(c,40,47,"Views fitted to sheet. Do not measure this PDF. Digital prototype; check physical fit before batch printing.",7.4,color=MUTED)
     text(c,W-246,62,number,15,"Luma-Bold")
-    text(c,W-246,43,"REV B  |  05 SEP 2026  |  A3",8,color=MUTED)
+    text(c,W-246,43,"REV C  |  07 SEP 2026  |  A3",8,color=MUTED)
     c.bookmarkPage(number);c.addOutlineEntry(f"{number} — {title}",number,0,False)
 
 
@@ -154,7 +154,7 @@ def main():
     assembly=json.loads((CAD/"assembly.json").read_text())
     target=OUT/"LUMA_Engineering_Drawings.pdf"
     c=canvas.Canvas(str(target),pagesize=(W,H),pageCompression=1)
-    c.setTitle("LUMA — Dimensioned engineering drawing set, revision A")
+    c.setTitle("LUMA — Dimensioned engineering drawing set, revision C")
     c.setAuthor("LUMA project")
     full=assembly_mesh(assembly)
     face_normal=np.array(assembly['face']['normal'],float)
@@ -171,6 +171,7 @@ def main():
     notes(c,["Four axes: yaw about Z; shoulder, elbow and wrist about local X. Datum is the base underside at Z=0.",
              "Nominal linkage pitches: shoulder–elbow 140 mm; elbow–wrist 120 mm. The illustrated height is a pose dimension, not a motion envelope.",
              f"Neutral: shoulder link {assembly['neutral']['shoulder_world_deg']}° above horizontal; forearm {assembly['neutral']['forearm_world_deg']}° above horizontal; face directed toward {'+Y' if face_normal[1]>0 else '-Y'}. Follow indexed calibration in the manual.",
+             "Five Adafruit3967 boards mount inside the pedestal wall. Four DS3218MG servos use driven straight horns and opposite625 supports at pitch joints.",
              "Do not infer screw lengths from the illustration. Fasteners and service loops are specified in the assembly chapter."],y=164)
     c.showPage()
     border(c,"Head / layered assembly study","G02","Exploded positions expose the optical parts; displacements are illustrative and are not insertion paths.")
@@ -189,20 +190,20 @@ def main():
         c.line(*point,782,y+2);c.setFillColor(TEAL);c.circle(*point,2,stroke=0,fill=1)
         for line in textwrap.wrap(f'{i:02d}  {item["name"]}',37):text(c,800,y,line,8.4);y-=15
     notes(c,["Central LCD board is behind the inner white ring. Keep all optical components at their documented axial heights.",
-             "Use natural PETG for both light diffusers and opaque PETG for the optical baffle. Leave LCD glass and all ToF apertures clear.",
+             "Use natural PETG for both light diffusers and opaque PETG for the optical baffle. Leave LCD glass clear; all ToF apertures are in the pedestal.",
              "The four outer ring PCB quarters require continuous mechanical support. Solder joints are electrical connections only.",
              "Refer to the head assembly chapter for screw order, spacers, wire relief and board retention. Purchased LEDs are not printable parts."],y=164)
     c.showPage()
     dsi=json.loads((CAD/"assembly_dsi.json").read_text())
-    border(c,"Optional 4-inch DSI head / indexed neutral pose","G03","Same base, arm links and fork as G01. Head shell, carrier, face ring and brow bracket are the optional-variant parts; the display envelope is measured from the vendor STEP.")
+    border(c,"Optional 4-inch DSI head / indexed neutral pose","G03","Same sensor-equipped pedestal, arm links and fork as G01. Head shell, carrier and face ring are the optional parts; the display envelope is measured from the vendor STEP.")
     dsi_full=assembly_mesh(dsi)
     project(c,dsi_full,face_view,(55,225,390,475),"FRONT / LCD FACING VIEW")
     project(c,dsi_full,VIEWS["RIGHT / YZ"],(450,225,350,475),"RIGHT SIDE / NEUTRAL POSE")
     dsi_head=assembly_mesh(dsi,"head",True)
     project(c,dsi_head,head_iso,(820,300,305,400),"EXPLODED DSI HEAD",dimensions=False,shaded=True)
     notes(c,["Waveshare 4inch DSI LCD (C): Ø126 case, 6 mm thick, four M4 bosses on a 75 × 75 pattern. Rim front at head Z35.5; carrier plate Z20.5–23.5 with pads to the boss ends at Z25.5.",
-             "Face ring opening Ø108 chamfered to Ø116 leaves a 3 mm black rim around the Ø101.5 active area. Outer 60-RGB halo, bezel, diffuser, fork and pods are shared with the standard head.",
-             "No inner white ring on this head: the halo provides the white lamp function at its capped brightness. The front ToF pod sits on the brow bracket above the rim, facing forward.",
+             "Face ring opening Ø108 chamfered to Ø116 leaves a 3 mm black rim around the Ø101.5 active area. Outer60-RGB halo, bezel, diffuser and fork are shared with the standard head.",
+             "No inner white ring on this head: the halo provides capped white output. Revision C has no head-mounted sensors or brow bracket.",
              "Cables: 15-pin DSI FFC plus 5 V/GND leave through the 26 × 8 slot in the shell floor and fork plate, then run inside the enclosed links through their wall ports."],y=164)
     c.showPage()
     schematic=ROOT/'electronics/wiring_overview.svg'

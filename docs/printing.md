@@ -8,11 +8,11 @@ The part manifest gives quantities, material and orientation. The STL orientatio
 
 ## Structural material
 
-Use PETG for the first functional build. For the four enclosed arm link halves and load-carrying brackets, start with 0.20 mm layers, six perimeters, six top/bottom layers and 40% gyroid infill. Increase local solid infill around fasteners if your slicer supports modifier volumes. Print each link half with its 5 mm plate on the bed so the length lies in the XY plane; the 22 mm walls, the servo block and the through-bolt boss then print vertically without support, and the small cable port and connector notch are short self-supporting bridges. Left and right halves are mirror images and are separate STL files; print one of each per link.
+Use PETG for the first functional build. For the four enclosed arm halves and load-carrying brackets, start with0.20mm layers, six perimeters, six top/bottom layers and40% gyroid infill. Print each half with its5mm plate on the bed. The26mm walls, servo block and through-bolt boss then rise vertically. The idler halves include16.2mm 625 pockets and distal captive-nut bosses; inspect their slicer paths and use local solid infill. Print one idler half and one driven half per link.
 
 For non-load-bearing covers, start with four perimeters, 0.20 mm layers and 20% infill. Use the orientation and support notes specific to each part. Remove supports without gouging bearing seats or the surfaces that locate circuit boards.
 
-The optional 4-inch DSI head adds four files: `head_shell_dsi` (rear disc down, like the standard shell), `lcd4_carrier` and `face_ring_dsi` (flat), and `brow_bracket` (base plate down; its two gussets are 45° overhangs that need no support). Print them only if you build that head, and leave out the six standard-head parts the schedule lists as omitted.
+The optional4-inch DSI head adds three files: `head_shell_dsi`, `lcd4_carrier` and `face_ring_dsi`. Print them only for that head and omit the six standard-head parts listed in the schedule. Revision C has no `brow_bracket`, `sensor_pod` or `sensor_retainer` print.
 
 PLA can be useful for quick dimension checks, but warm motors, LED boards and sustained joint loads make it a poor default for the final load-carrying structure. A material change also changes shrinkage and fit; repeat the coupon.
 
@@ -28,7 +28,7 @@ Keep the opaque separator between the two light paths. A black or charcoal separ
 
 ## Fasteners and tolerance
 
-Use the specified metal nuts, washers and servo horns. Deburr holes before insertion. A bolt should enter a clearance hole by hand without driving threads into the plastic. Seat the head and washer firmly, then stop before the printed layers visibly deform. Tighten opposing fasteners alternately to prevent distorting a PCB cradle or joint bracket.
+Use the specified metal nuts, washers,625 bearings and servo horns. Deburr holes before insertion. Test the16.2mm pocket and horn slots on `fit_coupon`. A bolt must enter a clearance hole by hand. The M5 idler bolt must clamp the bearing inner race without rubbing the outer race. Tighten opposing fasteners alternately and stop before printed layers or a PCB deform.
 
 If a heat-set insert is specified, test the insert type and soldering-iron temperature on scrap from the same filament. Support the boss while inserting it, allow it to cool completely, and confirm the insert is perpendicular. Do not add heat-set inserts to a design location intended for a through-bolt and captive nut.
 
@@ -38,7 +38,7 @@ Press bearing outer races squarely into their stated seats. Apply force to the r
 
 Make a service loop at each joint, and move the unpowered mechanism through its intended travel while watching the loop. The wire must not become taut, rub a sharp printed edge, enter a gear/horn gap or prevent the joint from reaching its limit. Fit the provided cable guides and add soft sleeving where the harness moves against a surface.
 
-Use flexible stranded wire for moving runs. Keep the I2C wiring short, route power and motor wiring away from it where practical, and retain the sensor cables so their small connectors do not take bending loads. A STEMMA QT connector is a signal interconnect, not a high-current power distribution connector.
+Use flexible stranded wire for moving runs. The five short sensor branches remain fixed in the pedestal. Keep their I2C wiring away from the6V servo distribution and strain-relieve each small connector. A STEMMA QT connector is a signal interconnect, not a high-current power connector.
 
 ## Record the first print
 

@@ -113,15 +113,15 @@ class Architecture(Flowable):
                 c.drawCentredString((p[0]+q[0])/2,(p[1]+q[1])/2+3,label)
         box("pi",183,128,126,64,"Raspberry Pi 4","Behavior + motion master")
         box("lcd",0,234,150,61,"Round face","ESP32-S3 / USB graphics")
-        box("mux",0,128,150,64,"I2C multiplexer","Five separate ToF channels\nFront · left · right · rear · down")
-        box("bus",183,234,126,61,"USB bus adapter","ST3215 motor data")
-        box("motors",347,234,CONTENT_W-347,61,"4 servo joints","Yaw / shoulder\nElbow / wrist")
+        box("mux",0,128,150,64,"I2C multiplexer","Five pedestal ToF channels\nFront · FL · RL · RR · FR")
+        box("bus",183,234,126,61,"PCA9685 PWM","I2C0x40 · 50Hz · ch0–3")
+        box("motors",347,234,CONTENT_W-347,61,"4 DS3218MG joints","Yaw / shoulder\nElbow / wrist · fused6V")
         box("rings",347,128,CONTENT_W-347,64,"Two light rings","60 RGB + 24 RGBW\nSeparate level-shifted data")
         box("pipsu",183,26,126,56,"Official Pi supply","5.1V USB-C")
         box("power",0,26,150,56,"External 12V supply","Fused motor-power disconnect")
         box("buck",347,26,CONTENT_W-347,56,"5V LED regulator","Separate fused LED rail")
-        link("pi","lcd","USB"); link("pi","bus","USB")
-        link("bus","motors","TTL data"); link("pi","mux","I2C")
+        link("pi","lcd","USB"); link("pi","bus","I2C")
+        link("bus","motors","PWM"); link("pi","mux","I2C")
         link("pi","rings","SPI / PWM"); link("pipsu","pi","Power",True)
         link("buck","rings","Power",True)
         c.setStrokeColor(MUTED); c.setLineWidth(1); c.setDash(3,2)
@@ -130,7 +130,7 @@ class Architecture(Flowable):
         c.lines([(75,82,75,99),(75,99,330,99),(330,99,330,265),(330,265,347,265),
                  (330,99,410,99),(410,99,410,82)])
         c.setDash(); c.setFont("Luma",6.7); c.setFillColor(MUTED)
-        c.drawString(90,102,"12V fused distribution")
+        c.drawString(90,102,"12V relay → regulated6V motor rail")
         c.setFillColor(MUTED); c.setFont("Luma",7.0)
         c.drawString(0,5,"Solid: data. Dashed: power. Wiring chapter defines grounds, fuses and the motor feed.")
 
@@ -162,7 +162,7 @@ class Manual(BaseDocTemplate):
         c.setFont("Luma-Bold",8); c.setFillColor(INK)
         c.drawString(18*mm,PAGE_H-13*mm,"LUMA  /  BUILD MANUAL")
         c.setFont("Luma",7); c.setFillColor(MUTED)
-        c.drawRightString(PAGE_W-18*mm,PAGE_H-13*mm,"REV B · 05 SEP 2026")
+        c.drawRightString(PAGE_W-18*mm,PAGE_H-13*mm,"REV C · 07 SEP 2026")
         c.setStrokeColor(LINE); c.line(18*mm,13*mm,PAGE_W-18*mm,13*mm)
         c.drawString(18*mm,8.5*mm,"Digital prototype · dimensions in mm · physical validation required")
         c.drawRightString(PAGE_W-18*mm,8.5*mm,f"{doc.page:02d}")
@@ -241,8 +241,8 @@ def main():
     hero=ROOT/cfg["hero"]
     if not hero.exists(): raise FileNotFoundError(hero)
     story.extend([picture(hero,330),Spacer(1,14),Paragraph("Illustrated assembly manual + engineering drawings",s["H2L"]),
-       Paragraph("Raspberry Pi 4 · four moving joints in enclosed arms · round animated LCD (1.85-inch, or optional 4-inch DSI head) · five distance sensors · white light + RGB halo",s["BodyL"]),
-       Paragraph("Revision B / September 2026 / Digital prototype release",s["SmallL"]),PageBreak(),
+       Paragraph("Raspberry Pi 4 · four DS3218MG/PCA9685 joints · round animated LCD (1.85-inch, or optional 4-inch DSI head) · five pedestal sensors · white light + RGB halo",s["BodyL"]),
+       Paragraph("Revision C / 07 September 2026 / Digital prototype release",s["SmallL"]),PageBreak(),
        Paragraph("Inside the build",s["H1L"])])
     toc=TableOfContents(); toc.levelStyles=[s["TOCL"]]; story.extend([toc,PageBreak()])
     for i,p in enumerate(chapters):
@@ -268,7 +268,7 @@ def main():
         toc.append([1,"Engineering drawings",start+1])
         for level,title,page in extra.get_toc(): toc.append([min(level+1,2),title,start+page])
         extra.close()
-    merged.set_toc(toc); merged.set_metadata({"title":"LUMA — Complete assembly manual and drawings","author":"LUMA project","subject":"Revision B digital prototype"})
+    merged.set_toc(toc); merged.set_metadata({"title":"LUMA — Complete assembly manual and drawings","author":"LUMA project","subject":"Revision C digital prototype"})
     merged.save(OUT/"LUMA_Assembly_Manual.pdf",garbage=4,deflate=True)
     pages=merged.page_count; merged.close()
     print(f"Manual: {pages} pages -> deliverables/LUMA_Assembly_Manual.pdf")
