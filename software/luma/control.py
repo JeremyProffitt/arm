@@ -6,7 +6,7 @@ Faults freeze commanded motion. A physical motor supply stop remains independent
 from dataclasses import dataclass
 import math
 
-SENSOR_NAMES = ("front", "left", "right", "rear", "down")
+SENSOR_NAMES = ("front", "front_left", "rear_left", "rear_right", "front_right")
 JOINT_NAMES = ("yaw", "shoulder", "elbow", "wrist")
 LIMITS = (25.0, 10.0, 10.0, 10.0)
 SCENES = ("idle", "wink", "hi", "happy")
@@ -60,7 +60,7 @@ class Controller:
         if not display_ok:
             self.trip("display heartbeat missing")
         if not servo_ok:
-            self.trip("servo feedback missing or outside limits")
+            self.trip("servo PWM controller communication lost")
         for name in SENSOR_NAMES:
             r = readings.get(name)
             if r is None or not math.isfinite(r.stamp) or not 0 <= now - r.stamp <= 0.65:
@@ -74,13 +74,13 @@ class Controller:
 
         if self.scene == "idle" and now - self.last_gesture > 8:
             # A hand at the rear requests a wink; a person in front requests Hi.
-            if readings["rear"].mm < 250:
+            if min(readings["rear_left"].mm, readings["rear_right"].mm) < 250:
                 self.play("wink", now)
                 self.last_gesture = now
             elif readings["front"].mm < 650:
                 self.play("hi", now)
                 self.last_gesture = now
-            elif min(readings["left"].mm, readings["right"].mm) < 350:
+            elif min(readings["front_left"].mm, readings["front_right"].mm) < 350:
                 self.play("happy", now)
                 self.last_gesture = now
         t = max(0.0, now - self.scene_start)

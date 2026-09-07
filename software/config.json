@@ -1,9 +1,10 @@
 {
   "calibrated": false,
-  "servo_port": "/dev/serial/by-id/SET_TO_BUS_ADAPTER_ID",
+  "pca9685_address": 64,
+  "servo_channels": [0, 1, 2, 3],
   "display_kind": "usb_serial",
   "display_port": "/dev/serial/by-id/SET_TO_WAVESHARE_DISPLAY_ID",
-  "neutral_ticks": [2048, 2048, 2048, 2048],
+  "neutral_pulse_us": [1500, 1500, 1500, 1500],
   "joint_signs": [1, 1, 1, 1],
   "audio_device": "default",
   "outer_brightness": 0.20,

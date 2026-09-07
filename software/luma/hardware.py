@@ -1,20 +1,32 @@
 """Raspberry Pi 4 adapters. Importing behavior code needs no hardware packages."""
-import math
 import subprocess
 import time
 from contextlib import ExitStack
 from .control import Reading, SENSOR_NAMES, LIMITS
-from .servo_bus import ServoBus, ServoError
+from .servo_pwm import (
+    MAX_PULSE_US, MIN_PULSE_US, US_PER_DEGREE,
+    ServoError, ServoPwm, angles_to_pulses,
+)
 
 
 def validate_config(config, arm):
-    for field in ("neutral_ticks", "joint_signs"):
+    for field in ("neutral_pulse_us", "joint_signs", "servo_channels"):
         if len(config.get(field, [])) != 4:
             raise ValueError(f"{field} must contain four values")
-    if any(type(v) is not int or not 400 <= v <= 3695 for v in config["neutral_ticks"]):
-        raise ValueError("neutral positions must leave room for limited motion")
+    if any(type(v) is not int for v in config["neutral_pulse_us"]):
+        raise ValueError("neutral pulse widths must be integers")
+    for neutral, limit in zip(config["neutral_pulse_us"], LIMITS):
+        margin = (limit + 4) * US_PER_DEGREE
+        if neutral - margin < MIN_PULSE_US or neutral + margin > MAX_PULSE_US:
+            raise ValueError("neutral pulse widths must leave room for limited motion")
     if any(v not in (-1, 1) for v in config["joint_signs"]):
         raise ValueError("joint_signs must be +1 or -1")
+    channels = config["servo_channels"]
+    if (len(set(channels)) != 4
+            or any(type(v) is not int or not 0 <= v < 16 for v in channels)):
+        raise ValueError("servo_channels must be four unique PCA9685 channels")
+    if type(config.get("pca9685_address")) is not int or not 0x08 <= config["pca9685_address"] <= 0x77:
+        raise ValueError("pca9685_address must be a usable 7-bit I2C address")
     if not 0 <= config["outer_brightness"] <= 0.20:
         raise ValueError("Outer RGB brightness is limited to 20%")
     if not 0 <= config["inner_brightness"] <= 1.0:
@@ -24,17 +36,15 @@ def validate_config(config, arm):
     display_kind = config.get("display_kind", "usb_serial")
     if display_kind not in ("usb_serial", "dsi"):
         raise ValueError(f"display_kind must be usb_serial or dsi, got {display_kind!r}")
-    for key in ("servo_port", "display_port"):
-        if key == "display_port" and display_kind != "usb_serial":
-            continue
-        if "SET_TO_" in config[key]:
-            raise ValueError(f"Set {key} to the actual /dev/serial/by-id device")
+    if display_kind == "usb_serial" and "SET_TO_" in config["display_port"]:
+        raise ValueError("Set display_port to the actual /dev/serial/by-id device")
 
 
 class Ranging:
-    def __init__(self):
+    def __init__(self, i2c=None):
         import board, adafruit_tca9548a, adafruit_vl53l1x
-        self.i2c = board.I2C()
+        self.i2c = i2c or board.I2C()
+        self.owns_i2c = i2c is None
         mux = adafruit_tca9548a.TCA9548A(self.i2c, address=0x70)
         self.devices = []
         try:
@@ -78,6 +88,8 @@ class Ranging:
                 sensor.stop_ranging()
             except OSError:
                 pass
+        if self.owns_i2c:
+            self.i2c.deinit()
 
 
 class Display:
@@ -118,8 +130,8 @@ class Hardware:
         self.cleanup = ExitStack()
         self.config = config
         self.armed = False
-        self.ticks = None
-        self.bus = None
+        self.pulses = None
+        self.servos = None
         self.audio = None
         self.speech = None
         try:
@@ -132,6 +144,8 @@ class Hardware:
         import board, neopixel, neopixel_spi
         from gpiozero import DigitalInputDevice
         config = self.config
+        self.i2c = board.I2C()
+        self.cleanup.callback(self.i2c.deinit)
         self.estop = DigitalInputDevice(27, pull_up=True)
         self.cleanup.callback(self.estop.close)
         self.outer = neopixel_spi.NeoPixel_SPI(board.SPI(), 60, bpp=3,
@@ -148,13 +162,13 @@ class Hardware:
         else:
             self.display = Display(config["display_port"])
         self.cleanup.callback(self.display.close)
-        self.bus = ServoBus(config["servo_port"])
-        self.cleanup.callback(self.bus.close)
-        self.ranging = Ranging()
+        self.servos = ServoPwm(self.i2c, config["servo_channels"], config["pca9685_address"])
+        self.cleanup.callback(self.servos.close)
+        self.ranging = Ranging(self.i2c)
         self.cleanup.callback(self.ranging.close)
-        self.last_feedback = 0
-        self.feedback_good = False
-        self._check_feedback(time.monotonic())
+        self.last_servo_check = 0
+        self.servo_good = False
+        self._check_servo_controller(time.monotonic())
 
     @staticmethod
     def _blank(strip, black):
@@ -170,32 +184,23 @@ class Hardware:
             raise RuntimeError("Joint calibration is not complete")
         if self.stop_open():
             raise RuntimeError("Motor stop circuit open")
-        self._check_feedback(time.monotonic())
-        if not self.feedback_good or any(abs(a-b)>34 for a,b in zip(self.ticks,self.config["neutral_ticks"])):
-            raise RuntimeError("Support arm and place within 3 degrees of indexed neutral before arming")
-        self.bus.move(self.ticks)
-        self.bus.torque(True)
+        self._check_servo_controller(time.monotonic())
+        if not self.servo_good:
+            raise RuntimeError("PCA9685 controller communication failed")
+        self.pulses = list(self.config["neutral_pulse_us"])
+        self.servos.move(self.pulses)
         self.armed = True
-        return tuple((t-n)*360/(4096*s) for t,n,s in
-                     zip(self.ticks,self.config["neutral_ticks"],self.config["joint_signs"]))
+        return (0.0,) * 4
 
     def hold(self):
         if self.armed:
-            try:
-                self.ticks = self.bus.positions()
-            except (ServoError, OSError):
-                pass
-            try:
-                if self.ticks is not None:
-                    self.bus.move(self.ticks)
-            finally:
-                self.armed = False
+            # Keep the PCA9685 at the last pulse widths. DS3218 servos have no
+            # readable position, so a fault cannot refresh from a measured pose.
+            self.armed = False
 
-    def _check_feedback(self, now):
-        self.ticks = self.bus.positions()
-        self.feedback_good = all(abs(t-n) <= (limit+4)*4096/360
-            for t,n,limit in zip(self.ticks,self.config["neutral_ticks"],LIMITS))
-        self.last_feedback = now
+    def _check_servo_controller(self, now):
+        self.servo_good = self.servos.healthy()
+        self.last_servo_check = now
 
     def stop_open(self):
         # gpiozero's .value is logical active-low when pull_up=True; read the
@@ -204,12 +209,9 @@ class Hardware:
 
     def poll(self, now):
         readings = self.ranging.poll(now)
-        if now - self.last_feedback > 0.1:
-            try:
-                self._check_feedback(now)
-            except (ServoError, OSError):
-                self.feedback_good = False
-        return readings, self.stop_open(), self.feedback_good
+        if now - self.last_servo_check > 0.1:
+            self._check_servo_controller(now)
+        return readings, self.stop_open(), self.servo_good
 
     def write(self, output, now):
         ok = self.display.update(now, output.face)
@@ -219,9 +221,13 @@ class Hardware:
             if output.fault:
                 self.hold()
             else:
-                ticks = [round(n+s*a*4096/360) for n,s,a in
-                    zip(self.config["neutral_ticks"], self.config["joint_signs"], output.angles)]
-                self.bus.move(ticks)
+                self.pulses = angles_to_pulses(
+                    self.config["neutral_pulse_us"], self.config["joint_signs"], output.angles)
+                try:
+                    self.servos.move(self.pulses)
+                except ServoError:
+                    self.servo_good = False
+                    self.armed = False
         if output.say_hi and (self.audio is None or self.audio.poll() is not None):
             # Direct argument vector: no shell expansion and no network TTS service.
             self.speech = subprocess.Popen(["espeak-ng", "--stdout", "-s", "155", "-p", "65", "Hi!"],

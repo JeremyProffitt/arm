@@ -15,6 +15,7 @@ hardware = [
   "Adafruit-Blinka>=8,<10",
   "adafruit-circuitpython-vl53l1x>=1,<2",
   "adafruit-circuitpython-tca9548a>=0.7,<1",
+  "adafruit-circuitpython-pca9685>=3,<4",
   "adafruit-circuitpython-neopixel-spi>=1,<2",
   "adafruit-circuitpython-neopixel>=6,<7",
   "rpi-ws281x>=5,<6",

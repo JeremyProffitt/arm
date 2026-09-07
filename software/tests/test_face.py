@@ -80,9 +80,9 @@ class DsiDisplayTests(unittest.TestCase):
 class ValidateConfigDisplayKindTests(unittest.TestCase):
     def base_config(self):
         return {
-            "calibrated": False, "neutral_ticks": [2048] * 4, "joint_signs": [1] * 4,
+            "calibrated": False, "neutral_pulse_us": [1500] * 4, "joint_signs": [1] * 4,
+            "servo_channels": [0, 1, 2, 3], "pca9685_address": 0x40,
             "outer_brightness": .2, "inner_brightness": .2,
-            "servo_port": "/dev/serial/by-id/actual-servo",
             "display_port": "/dev/serial/by-id/SET_TO_WAVESHARE_DISPLAY_ID",
         }
 

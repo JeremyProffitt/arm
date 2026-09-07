@@ -1,8 +1,8 @@
 import math
 import unittest
 from luma.control import Controller, Reading, SENSOR_NAMES, LIMITS
-from luma.servo_bus import packet, parse_status, ServoError
 from luma.hardware import validate_config, white_pixel, Hardware
+from luma.servo_pwm import angles_to_pulses, pulse_to_duty_cycle
 from types import SimpleNamespace
 
 
@@ -27,7 +27,7 @@ class ControllerTests(unittest.TestCase):
     def test_fault_latches_and_freezes(self):
         c = Controller(armed=True); c.play("hi",0)
         c.step(0,clear()); before = c.step(.02,clear(.02))
-        s = clear(.04); s["left"] = Reading(45,.04)
+        s = clear(.04); s["front_left"] = Reading(45,.04)
         out = c.step(.04,s)
         self.assertEqual(out.angles,before.angles)
         self.assertIn("obstruction",out.fault)
@@ -40,7 +40,7 @@ class ControllerTests(unittest.TestCase):
 
     def test_nan_none_and_stale_are_not_clear_space(self):
         for reading in (Reading(None,0),Reading(float("nan"),0),Reading(1000,-1),Reading(1000,1)):
-            s = clear(); s["down"] = reading
+            s = clear(); s["front_right"] = reading
             self.assertIsNotNone(Controller().step(0,s).fault)
 
     def test_estop_display_and_servo_faults(self):
@@ -56,25 +56,32 @@ class ControllerTests(unittest.TestCase):
         self.assertTrue(c.step(0,clear()).say_hi)
         self.assertFalse(c.step(.02,clear(.02)).say_hi)
 
+    def test_rear_pair_and_front_side_channels_drive_gestures(self):
+        rear = clear(); rear["rear_left"] = Reading(200,0)
+        self.assertEqual(Controller().step(0,rear).face,"wink")
+        side = clear(); side["front_right"] = Reading(300,0)
+        self.assertEqual(Controller().step(0,side).face,"happy")
+
     def test_unarmed_never_moves(self):
         c=Controller(); c.play("happy",0)
         for i in range(100):
             self.assertEqual(c.step(i/50,clear(i/50)).angles,(0,)*4)
 
 
-class ProtocolTests(unittest.TestCase):
-    def test_known_read_request(self):
-        self.assertEqual(packet(1,2,b"\x38\x02"), bytes.fromhex("ffff0104023802be"))
+class PwmTests(unittest.TestCase):
+    def test_known_pulse_conversion(self):
+        self.assertEqual(pulse_to_duty_cycle(1500), round(1500*50*65535/1_000_000))
+        for bad in (499,2501,float("nan"),True,"1500"):
+            with self.assertRaises(ValueError): pulse_to_duty_cycle(bad)
 
-    def test_checked_response(self):
-        frame=packet(1,0,b"\x00\x08")
-        self.assertEqual(parse_status(frame,1,2),b"\x00\x08")
-        for bad in (frame[:-1],frame[:-1]+b"\x00",packet(2,0,b"\x00\x08"),packet(1,4,b"\x00\x08")):
-            with self.assertRaises(ServoError): parse_status(bad,1,2)
+    def test_angles_map_across_270_degree_servo_span(self):
+        self.assertEqual(angles_to_pulses([1500]*4,[1,-1,1,-1],[27,27,-13.5,-13.5]),
+                         [1700,1300,1400,1600])
 
     def test_config_refuses_uncalibrated_motion(self):
-        c={"calibrated":False,"neutral_ticks":[2048]*4,"joint_signs":[1]*4,
-           "outer_brightness":.2,"inner_brightness":.2,"servo_port":"A","display_port":"B"}
+        c={"calibrated":False,"neutral_pulse_us":[1500]*4,"joint_signs":[1]*4,
+           "servo_channels":[0,1,2,3],"pca9685_address":0x40,
+           "outer_brightness":.2,"inner_brightness":.2,"display_port":"B"}
         validate_config(c,False)
         with self.assertRaises(ValueError): validate_config(c,True)
         c["calibrated"]=True; c["outer_brightness"]=.3
@@ -93,23 +100,22 @@ class ProtocolTests(unittest.TestCase):
         h.estop.pin.state=1
         self.assertTrue(h.stop_open())
 
-    def test_hold_reads_actual_pose_before_command(self):
+    def test_arm_commands_calibrated_neutral(self):
         h=Hardware.__new__(Hardware)
-        h.armed=True; h.ticks=[2048]*4
+        h.config={"calibrated":True,"neutral_pulse_us":[1490,1500,1510,1520]}
+        h.armed=False; h.servo_good=False
         commands=[]
-        h.bus=SimpleNamespace(positions=lambda:[2050,2060,2070,2080],move=commands.append)
-        h.hold()
-        self.assertEqual(commands,[[2050,2060,2070,2080]])
-        self.assertFalse(h.armed)
+        h.servos=SimpleNamespace(healthy=lambda:True,move=commands.append)
+        h.stop_open=lambda:False
+        self.assertEqual(h.arm(),(0.0,)*4)
+        self.assertEqual(commands,[[1490,1500,1510,1520]])
+        self.assertTrue(h.armed)
 
-    def test_hold_falls_back_to_last_feedback_on_read_failure(self):
-        def failed(): raise ServoError("timeout")
+    def test_hold_keeps_last_pwm_target(self):
         h=Hardware.__new__(Hardware)
-        h.armed=True; h.ticks=[2049]*4
-        commands=[]
-        h.bus=SimpleNamespace(positions=failed,move=commands.append)
+        h.armed=True; h.pulses=[1490,1500,1510,1520]
         h.hold()
-        self.assertEqual(commands,[[2049]*4])
+        self.assertEqual(h.pulses,[1490,1500,1510,1520])
         self.assertFalse(h.armed)
 
 

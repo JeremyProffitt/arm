@@ -12,17 +12,17 @@ class BenchTests(unittest.TestCase):
         result = sensor_snapshot(samples, 1.1)
         self.assertEqual([r["mux_channel"] for r in result.values()], list(range(5)))
         self.assertTrue(all(r["state"] == "ok" for r in result.values()))
-        self.assertEqual(result["rear"]["mux_channel"], 3)
+        self.assertEqual(result["rear_right"]["mux_channel"], 3)
 
     def test_missing_invalid_stale_and_near_are_explicit(self):
         samples = {
-            "left": Reading(None, 1), "right": Reading(1000, 0),
-            "rear": Reading(50, 1), "down": Reading(math.nan, 1),
+            "front_left": Reading(None, 1), "rear_left": Reading(1000, 0),
+            "rear_right": Reading(50, 1), "front_right": Reading(math.nan, 1),
         }
         result = sensor_snapshot(samples, 1)
         self.assertEqual([r["state"] for r in result.values()],
                          ["missing", "invalid", "stale", "near", "invalid"])
-        self.assertIsNone(result["down"]["mm"])
+        self.assertIsNone(result["front_right"]["mm"])
 
     def test_duration_rejects_nonfinite_and_out_of_bounds(self):
         for value in ("nan", "inf", "0", "-1", "601"):
