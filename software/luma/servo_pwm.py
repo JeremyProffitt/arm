@@ -18,14 +18,20 @@ class ServoError(RuntimeError):
     pass
 
 
-def pulse_to_duty_cycle(pulse_us, frequency_hz=PWM_FREQUENCY_HZ):
+def validate_servo_channels(channels):
+    if (not isinstance(channels, (list, tuple)) or len(channels) != SERVO_COUNT
+            or len(set(channels)) != SERVO_COUNT
+            or any(type(channel) is not int or not 0 <= channel < 16 for channel in channels)):
+        raise ValueError("servo channels must be four unique PCA9685 channels")
+    return tuple(channels)
+
+
+def pulse_to_duty_cycle(pulse_us):
     if isinstance(pulse_us, bool) or not isinstance(pulse_us, (int, float)):
         raise ValueError("pulse width must be a number")
     if not math.isfinite(pulse_us) or not MIN_PULSE_US <= pulse_us <= MAX_PULSE_US:
         raise ValueError("pulse width outside DS3218 range")
-    if not 1 <= frequency_hz <= 330:
-        raise ValueError("PWM frequency outside supported range")
-    return round(pulse_us * frequency_hz * 65535 / 1_000_000)
+    return round(pulse_us * PWM_FREQUENCY_HZ * 65535 / 1_000_000)
 
 
 def angles_to_pulses(neutral_pulse_us, joint_signs, angles):
@@ -40,11 +46,8 @@ def angles_to_pulses(neutral_pulse_us, joint_signs, angles):
 
 class ServoPwm:
     def __init__(self, i2c, channels, address=0x40):
-        if (len(channels) != SERVO_COUNT or len(set(channels)) != SERVO_COUNT
-                or any(type(channel) is not int or not 0 <= channel < 16 for channel in channels)):
-            raise ValueError("servo channels must be four unique PCA9685 channels")
         from adafruit_pca9685 import PCA9685
-        self.channels = tuple(channels)
+        self.channels = validate_servo_channels(channels)
         self.pca = None
         try:
             self.pca = PCA9685(i2c, address=address)

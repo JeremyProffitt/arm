@@ -9,12 +9,14 @@ OUT = ROOT / "deliverables"
 REQUIRED = ["README.md", "START_HERE.html", "deliverables/LUMA_Assembly_Manual.pdf",
             "media/videos/01_wink.mp4", "media/videos/02_hi.mp4", "media/videos/03_happy.mp4"]
 EXCLUDED_DIRS = {".venv", ".tools", ".pio", "__pycache__", ".git", "vendor"}
+LEGACY_SERVO_REFERENCES = {"dimension_sheet.png", "servo-size.jpg", "servo-page.html"}
 
 
 def include(path):
     rel = path.relative_to(ROOT)
     if any(p in EXCLUDED_DIRS for p in rel.parts): return False
     if rel.parts[0] == "references": return False  # inspection-only commercial product image
+    if any(part.startswith("ST3215") for part in rel.parts) or path.name in LEGACY_SERVO_REFERENCES: return False
     if path.suffix.lower() in (".zip", ".pyc", ".log", ".tmp"): return False
     if path.name in ("LUMA_Manual_Text.pdf", "SHA256SUMS.txt", "package_inventory.json", "fetch_display_reference.py"): return False
     if path.name.endswith("-page.html"): return False

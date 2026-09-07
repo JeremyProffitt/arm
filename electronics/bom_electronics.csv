@@ -30,7 +30,6 @@ E28,1,Generic,0.5A DC fuse and holder,Relay coil branch,NC1 switches coil only,D
 E29,1,Generic,3A DC fuse and holder,5V LED output branch,ProtectsLED18-22AWG harness,Design choice,,3
 E30,1,Adafruit,3369 mini USB speaker,Spoken Hi,USB audio;84x43x32mm;73.6g;keep volume modest,Vendor documented,https://www.adafruit.com/product/3369,12.50
 E31,1,Generic,USB-A to right-angle USB-C data cable,Pi to display,Flexible cable;strain relief;15mm rear plug envelope assumed,Measure selected cable,,7
-E32,1,Generic,USB data cable matching adapter,Pi to bus adapter,Use actual adapter USB connector type,Measure selected revision,,5
 E33,1,Generic,16AWG /18AWG silicone wire and rated distribution terminals,Power harness,16AWG trunk;18AWG motor branches;22AWGLED branches,Lengths from routing,,20
 E34,1,Generic,Small perfboard and DIP14 socket,Level shifter assembly,Insulate underside;strain relief all wires,Design choice,,5
 E35,1,Generic,Pi4 heatsink and ventilation hardware,Thermal management,Check CPU temperature after assembled operation,Specification selection,,7

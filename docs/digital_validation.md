@@ -4,7 +4,7 @@ The included validation files record what was checked on the development compute
 
 ## Executed host software checks
 
-The controller, bench diagnostic, PWM and face-renderer suite passed37 tests. It exercises all three expressions, angle/slew limits, the five pedestal channel names and order, stale/invalid/near ranges, latched faults, stop polarity, lost display or PCA9685 communication, and the one-shot greeting.
+The controller, bench diagnostic, PWM and face-renderer suite passed38 tests. It exercises all three expressions, angle/slew limits, the five pedestal channel names and order, stale/invalid/near ranges, latched faults, stop polarity, lost display or PCA9685 communication, and the one-shot greeting.
 
 Additional tests verify the500-2500µs/270° conversion, a known PCA9685 duty value, one-channel commissioning with the other channels disabled, neutral calibration gating, and white-channel limits. Face tests render the optional DSI output off-screen and check expression/fault pixels. The simulator and tests activate no physical hardware.
 

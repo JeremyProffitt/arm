@@ -2,7 +2,7 @@
 
 Date:2026-09-07. Development host:Windows, Python3.13.14.
 
-`python -m unittest discover -s tests -v`: **37 tests passed**. Coverage includes three-scene joint limits and12°/s slew, all five pedestal sensor names/order, stale/NaN/no-return/near faults, paired rear and front-side gestures, latched holds, motor-stop polarity, display/PCA9685 communication faults, one-shot speech, and RGBW white-only limits.
+`python -m unittest discover -s tests -v`: **38 tests passed**. Coverage includes three-scene joint limits and12°/s slew, all five pedestal sensor names/order, stale/NaN/no-return/near faults, paired rear and front-side gestures, latched holds, motor-stop polarity, display/PCA9685 communication faults, one-shot speech, and RGBW white-only limits.
 
 PWM tests cover the DS3218's500-2500µs/270° conversion, a known50Hz PCA9685 duty value, four unique configured channels, calibrated neutral gating, neutral command on arm, last-command hold semantics, and a one-channel commissioning command that disables the other three outputs. The PCA9685 driver is imported only when hardware is opened. Tests do not claim real PWM timing or servo motion.
 

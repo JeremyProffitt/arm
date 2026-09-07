@@ -2,7 +2,9 @@ import math
 import unittest
 from luma.control import Controller, Reading, SENSOR_NAMES, LIMITS
 from luma.hardware import validate_config, white_pixel, Hardware
-from luma.servo_pwm import ServoPwm, angles_to_pulses, pulse_to_duty_cycle
+from luma.servo_pwm import (
+    ServoPwm, angles_to_pulses, pulse_to_duty_cycle, validate_servo_channels,
+)
 from types import SimpleNamespace
 
 
@@ -73,6 +75,11 @@ class PwmTests(unittest.TestCase):
         self.assertEqual(pulse_to_duty_cycle(1500), round(1500*50*65535/1_000_000))
         for bad in (499,2501,float("nan"),True,"1500"):
             with self.assertRaises(ValueError): pulse_to_duty_cycle(bad)
+
+    def test_servo_channels_are_unique_pca9685_outputs(self):
+        self.assertEqual(validate_servo_channels([0,1,2,3]),(0,1,2,3))
+        for bad in ([0,1,2,2],[0,1,2,16],[0,1,2,True],None):
+            with self.assertRaises(ValueError): validate_servo_channels(bad)
 
     def test_angles_map_across_270_degree_servo_span(self):
         self.assertEqual(angles_to_pulses([1500]*4,[1,-1,1,-1],[27,27,-13.5,-13.5]),

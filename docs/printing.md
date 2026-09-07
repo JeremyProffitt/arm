@@ -42,6 +42,6 @@ Use flexible stranded wire for moving runs. The five short sensor branches remai
 
 ## Record the first print
 
-Record printer, nozzle, material brand, layer height, wall count, infill, measured coupon hole sizes and any CAD clearance change. Weigh the completed head with its display, sensors, screws and wiring. Use the measured head mass when reviewing the arm torque calculation.
+Record printer, nozzle, material brand, layer height, wall count, infill, measured coupon hole sizes and any CAD clearance change. Weigh the completed head with its display, lights, screws and wiring. Use the measured head mass when reviewing the arm torque calculation; record the five fixed pedestal sensors with the base mass.
 
 Estimated print duration and filament mass depend on the slicer and printer. The CAD validation report includes geometric volume; the slicer's estimate after applying the actual walls and infill is the useful production estimate.

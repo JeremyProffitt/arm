@@ -5,7 +5,7 @@ from contextlib import ExitStack
 from .control import Reading, SENSOR_NAMES, LIMITS
 from .servo_pwm import (
     MAX_PULSE_US, MIN_PULSE_US, US_PER_DEGREE,
-    ServoError, ServoPwm, angles_to_pulses,
+    ServoError, ServoPwm, angles_to_pulses, validate_servo_channels,
 )
 
 
@@ -21,10 +21,7 @@ def validate_config(config, arm):
             raise ValueError("neutral pulse widths must leave room for limited motion")
     if any(v not in (-1, 1) for v in config["joint_signs"]):
         raise ValueError("joint_signs must be +1 or -1")
-    channels = config["servo_channels"]
-    if (len(set(channels)) != 4
-            or any(type(v) is not int or not 0 <= v < 16 for v in channels)):
-        raise ValueError("servo_channels must be four unique PCA9685 channels")
+    validate_servo_channels(config["servo_channels"])
     if type(config.get("pca9685_address")) is not int or not 0x08 <= config["pca9685_address"] <= 0x77:
         raise ValueError("pca9685_address must be a usable 7-bit I2C address")
     if not 0 <= config["outer_brightness"] <= 0.20:

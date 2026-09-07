@@ -87,31 +87,6 @@
       "sha256": "762ff5fba0537d79fcb7ca5253e09e13ea7b1f84c244c33e5a21742126bfb5da"
     },
     {
-      "file": "cad/references/dimension_sheet.png",
-      "bytes": 105234,
-      "sha256": "70b49e36a9d08845e4563aa30dabce1d88102205213aca20477e41a78067faae"
-    },
-    {
-      "file": "cad/references/servo-size.jpg",
-      "bytes": 120306,
-      "sha256": "7405207972e0fd4d2160413355aa414fd67a7f6a5f5e0ee454556b37b31ae652"
-    },
-    {
-      "file": "cad/references/ST3215-2D/ST3215.dxf",
-      "bytes": 458208,
-      "sha256": "b5fdce6c6bdce84ec6d47aff86dbbbe5abe919e18ebe6517c5413e4c276e0644"
-    },
-    {
-      "file": "cad/references/ST3215-2D/ST3215.pdf",
-      "bytes": 114506,
-      "sha256": "3f28841c73dd21c4dc757bc25c40fc2a9f71f30a4cbf77a4d9a3546ccf35afa1"
-    },
-    {
-      "file": "cad/references/ST3215-3D/ST3215.step",
-      "bytes": 3025101,
-      "sha256": "58e38e4dc49f97df738c5f229f9aa8a7dce64a0a1d01335486a52d53e6017e8a"
-    },
-    {
       "file": "cad/refresh_validation.py",
       "bytes": 1511,
       "sha256": "af0e8afbb2de4ecc2801bbabe15cf9b6f3280ab9452f314108f37ec8dfd39a09"
@@ -289,12 +264,12 @@
     {
       "file": "deliverables/bom_summary.json",
       "bytes": 224,
-      "sha256": "2fc4eb3b7e1c0f47ce627925bedd187504c6ca10263765c3bfe181f768d26b48"
+      "sha256": "386f47e196908154051d740a5684dfb41ff88cd1cbe72d9188b0a007d0f4e317"
     },
     {
       "file": "deliverables/LUMA_Assembly_Manual.pdf",
-      "bytes": 19594157,
-      "sha256": "04271b051f6328f268746052449666f391216036d26a7cdcbfcc0cd02c0c0ee5"
+      "bytes": 19594105,
+      "sha256": "ca021c0313e0fe906553235e767040c0bdcb8cebb33f4c0dd3b907e63d1d71c4"
     },
     {
       "file": "deliverables/LUMA_Engineering_Drawings.pdf",
@@ -308,8 +283,8 @@
     },
     {
       "file": "deliverables/LUMA_Purchased_Parts.csv",
-      "bytes": 13039,
-      "sha256": "ea50505aaa03ad2f4299ff313702facdbf3ae3af3baf7b91456d46962e1ce91b"
+      "bytes": 12907,
+      "sha256": "58b3c0f8ad0475ba6311f213f63108145c92de576fc55d140c50404d62ab788c"
     },
     {
       "file": "docs/build_bom.py",
@@ -329,7 +304,7 @@
     {
       "file": "docs/digital_validation.md",
       "bytes": 3150,
-      "sha256": "c237aea8cd57c877f8113c22f18b86a45b0285a4e630f0c7a86171ed4521925a"
+      "sha256": "b12e2f6634ff55a5734203b0f9127c38948e145f5461db5b04bda2fac137c35c"
     },
     {
       "file": "docs/manual_sections.json",
@@ -348,18 +323,18 @@
     },
     {
       "file": "docs/package_project.py",
-      "bytes": 3110,
-      "sha256": "d72c05ecbe626b5c099ffce41dfdaa9a20b709d288826b91cdf822d71efeab3c"
+      "bytes": 3311,
+      "sha256": "451cc7fc5d0f3947cef5d1b95c90d372ff613640d552179380301b6e17f8d6f7"
     },
     {
       "file": "docs/parts.md",
-      "bytes": 15393,
-      "sha256": "c4d71e9cd2b992b2eedb08e16618fa752e9fab604cfd08c7e752d7bd42b720ba"
+      "bytes": 15271,
+      "sha256": "ceb420fe5620e277843ba9242cb0c497fcc8e713a12ccec06e1083f91d6c57ec"
     },
     {
       "file": "docs/printing.md",
-      "bytes": 5416,
-      "sha256": "aad2470b9a1394bec05776e8ba29303ebf21c1b0be857022e291b0e75e44d1cb"
+      "bytes": 5474,
+      "sha256": "2cedb3c45711b6a142a403135f966ed60c1dfa92c279adb27771c6a82274a97a"
     },
     {
       "file": "docs/requirements.txt",
@@ -388,8 +363,8 @@
     },
     {
       "file": "electronics/bom_electronics.csv",
-      "bytes": 6848,
-      "sha256": "a0410d308ce378503d3c4c1b2ae427b61cdcb223458f204c7de86c15d835e9f6"
+      "bytes": 6717,
+      "sha256": "fa5fd3f99bff321e0247c939573f2ceafb6ce9d57543d54f5e6a01c83374f553"
     },
     {
       "file": "electronics/wiring.csv",
@@ -623,8 +598,8 @@
     },
     {
       "file": "plan.md",
-      "bytes": 16809,
-      "sha256": "942bc2697293b4f49e5f54f160b988af347f74e160068515a2e6e65a680686f5"
+      "bytes": 21240,
+      "sha256": "1e152bab7ff62886a2ba8747114dc8bca5d5d3bae38902d5044ca6e9bf1fa64f"
     },
     {
       "file": "README.md",
@@ -688,13 +663,13 @@
     },
     {
       "file": "software/luma/hardware.py",
-      "bytes": 10422,
-      "sha256": "6710f66d41ff58c442dec027d975e7b5a655ad7e72d8aedf3fbc80984b2470f0"
+      "bytes": 10271,
+      "sha256": "9dc6f163f982b63e093a8f039b296a3a93df613fc52e4959b27fed86eb25e715"
     },
     {
       "file": "software/luma/servo_pwm.py",
-      "bytes": 3728,
-      "sha256": "e1aecad9cfe635c001ec771b39d7cf26f4cf8c810cee7b8624805c7cee5a68fe"
+      "bytes": 3727,
+      "sha256": "8a44d378be3d472f784ad33c728413add5cf470b86a01f8fbce709bbc2cc0358"
     },
     {
       "file": "software/pyproject.toml",
@@ -713,8 +688,8 @@
     },
     {
       "file": "software/tests/test_control.py",
-      "bytes": 5521,
-      "sha256": "191aa6e459ef7cd17debf80375482d639b2b5b7ba964ae980141d8e1be891f7c"
+      "bytes": 5827,
+      "sha256": "de5804364fc4a4d9079876c55770aa3e9c1f10780d4834afa333762d9843a312"
     },
     {
       "file": "software/tests/test_face.py",
@@ -724,7 +699,7 @@
     {
       "file": "software/VERIFICATION.md",
       "bytes": 2754,
-      "sha256": "7b53453f14080804931c970956c26cd3e16909c658148a1bbba623da196c0df9"
+      "sha256": "ab8e319fd4880e7ba99b1f3393b52efc4512e03b7836eafb2c85f419be9cbecb"
     },
     {
       "file": "START_HERE.html",
@@ -743,13 +718,13 @@
     },
     {
       "file": "validation/final_report.json",
-      "bytes": 17482,
-      "sha256": "6c8fd9bdf293e2925f60984041d8a3d1f9fe8fed2cb2e3935f7fc734009f61d7"
+      "bytes": 17608,
+      "sha256": "44b81333761e30c29688cee136e95aa57eb5aba7ee19beb7dbade03fcc0ccca3"
     },
     {
       "file": "validation/manual_contact_sheet.jpg",
-      "bytes": 541935,
-      "sha256": "d51a7316b55b862a7d544e7a6cadc810d8b928f9974e79f5ff7b0a570050f94e"
+      "bytes": 541735,
+      "sha256": "6955cfba91609228cbfe2b1ce942abb16831a8bfdaaba534e1c7d0ef803a5c86"
     },
     {
       "file": "validation/verify_project.py",

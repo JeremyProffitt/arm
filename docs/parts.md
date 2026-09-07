@@ -1,6 +1,6 @@
 # Parts and purchasing
 
-Planning allowance for the standard build below: **US $750.07** before shipping and tax. The optional 4-inch DSI head adds **US $60.80** of purchased parts and removes the 1.85-inch display, the inner RGBW ring and their fasteners (about US $68.35). Figures are budgeting allowances, not checked-out prices. Filament and any workshop tools are included only where explicitly listed. Reuse of existing supplies can change the total substantially.
+Planning allowance for the standard build below: **US $745.07** before shipping and tax. The optional 4-inch DSI head adds **US $60.80** of purchased parts and removes the 1.85-inch display, the inner RGBW ring and their fasteners (about US $68.35). Figures are budgeting allowances, not checked-out prices. Filament and any workshop tools are included only where explicitly listed. Reuse of existing supplies can change the total substantially.
 
 Order the exact display and voltage variant specified. Generic fasteners, connector harnesses, relay contacts and wire must meet the listed dimensions and electrical ratings. Buy the servo horns and their screws with the servos; verify their actual thread and engagement before ordering extras.
 
@@ -39,7 +39,6 @@ Order the exact display and voltage variant specified. Generic fasteners, connec
 | E29 / 1 | Generic 3A DC fuse and holder | 5V LED output branch. ProtectsLED18-22AWG harness | $3.00 |
 | E30 / 1 | [Adafruit 3369 mini USB speaker](https://www.adafruit.com/product/3369) | Spoken Hi. USB audio;84x43x32mm;73.6g;keep volume modest | $12.50 |
 | E31 / 1 | Generic USB-A to right-angle USB-C data cable | Pi to display. Flexible cable;strain relief;15mm rear plug envelope assumed | $7.00 |
-| E32 / 1 | Generic USB data cable matching adapter | Pi to bus adapter. Use actual adapter USB connector type | $5.00 |
 | E33 / 1 | Generic 16AWG /18AWG silicone wire and rated distribution terminals | Power harness. 16AWG trunk;18AWG motor branches;22AWGLED branches | $20.00 |
 | E34 / 1 | Generic Small perfboard and DIP14 socket | Level shifter assembly. Insulate underside;strain relief all wires | $5.00 |
 | E35 / 1 | Generic Pi4 heatsink and ventilation hardware | Thermal management. Check CPU temperature after assembled operation | $7.00 |
