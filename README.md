@@ -1,10 +1,43 @@
 # LUMA — printable robotic desk companion
 
+<p align="center">
+  <img src="media/renders/hero_cycles.png" alt="LUMA robotic desk companion hero render" width="760">
+</p>
+
+<p align="center"><em>A little light. A little motion. A lot of personality.</em></p>
+
 Open [START_HERE.html](START_HERE.html) for the illustrated project browser and three promotional videos. The complete build reference is [LUMA_Assembly_Manual.pdf](deliverables/LUMA_Assembly_Manual.pdf).
 
 This original prototype is inspired by the [Autonomous Lamp](https://www.autonomous.ai/lamp). It has a Raspberry Pi4 master, four inventory Miuzei DS3218MG joints controlled by a PCA9685, five Adafruit VL53L1X STEMMA QT sensors mounted inside the pedestal wall, a circular animated display, a white light ring, and a larger RGB halo.
 
 Revision C (7 September 2026) moves all five sensors into direct four-screw mounts behind pedestal apertures. It replaces the former bus servos with the on-hand DS3218MG 270° units, widens the enclosed links for single-horn/625-bearing joints, and adds PCA9685 PWM plus a regulated6V servo rail. The standard head uses the **Waveshare ESP32-S3-Touch-LCD-1.85, SKU 28514**. The optional head uses the **Waveshare 4inch DSI LCD (C)** driven directly by the Pi.
+
+## Meet LUMA
+
+Click a scene to watch the full animation.
+
+<p align="center">
+  <a href="media/videos/01_wink.mp4"><img src="media/renders/wink_132.jpg" alt="LUMA winking" width="32%"></a>
+  <a href="media/videos/02_hi.mp4"><img src="media/renders/hi_132.jpg" alt="LUMA saying hello" width="32%"></a>
+  <a href="media/videos/03_happy.mp4"><img src="media/renders/happy_132.jpg" alt="LUMA showing a happy expression" width="32%"></a>
+</p>
+
+<p align="center"><sub>Wink · Say hello · Happy</sub></p>
+
+## Designed to be built
+
+<p align="center">
+  <img src="media/renders/exploded_cycles.png" alt="Exploded render of LUMA's printable structure and electronics" width="49%">
+  <img src="media/renders/hero_dsi_cycles.png" alt="LUMA with the optional four-inch DSI display head" width="49%">
+</p>
+
+<p align="center"><sub>Exploded standard assembly · Optional four-inch DSI display head</sub></p>
+
+<p align="center">
+  <img src="media/renders/front.png" alt="Front orthographic view of LUMA" width="32%">
+  <img src="media/renders/side.png" alt="Right orthographic view of LUMA" width="32%">
+  <img src="media/renders/top.png" alt="Top orthographic view of LUMA" width="32%">
+</p>
 
 ## Deliverables
 
